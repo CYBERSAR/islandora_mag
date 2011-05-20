@@ -1,0 +1,7 @@
+; $Id$
+name = Islandora MAG extension
+dependencies[] = fedora_repository
+description = An extension for Islandora to add the MAG support
+package = Fedora Repository
+core = 6.x
+version = 6.1dev

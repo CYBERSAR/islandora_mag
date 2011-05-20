@@ -1,0 +1,28 @@
+<?php
+// $Id$
+
+/**
+ * @file
+ * Adds the support for the italian standard MAG.
+ *
+ */
+
+
+/**
+ * This module exposes a fews hooks. Till now the only hooks are:
+ *  
+ * hook_fedora_after_ingest; 
+ * hook_fedora_alter_ingest;
+ * hook_fedora_alter_edit;
+ * 
+ * in naming hooks we can add at the end "_object" to refear to the fedora object
+ *  
+ * /
+
+/**
+ * Implements hook fedora_alter_content_models_path
+ * @return an addition path to our content models
+ */
+function islandora_mag_fedora_alter_content_models_path() {
+	return drupal_get_path('module','islandora_mag') . '/content_models';
+}

@@ -1,0 +1,292 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<content_model xmlns="http://www.islandora.ca" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="standard_qt" xsi:schemaLocation="http://www.islandora.ca http://localhost/islandoracm.xsd">
+  <mimetypes>
+    <type>video/quicktime</type>
+    <type>video/mp4</type>
+    <type>video/x-flv</type>
+    <type>video/x-msvideo</type>
+  </mimetypes>
+  <ingest_rules>
+    <rule>
+      <applies_to>video/quicktime</applies_to>
+      <applies_to>video/mp4</applies_to>
+      <applies_to>video/x-flv</applies_to>
+      <applies_to>video/x-msvideo</applies_to>
+      <ingest_methods>
+        <ingest_method file="plugins/Exiftool.inc" class="Exiftool" method="extractMetadata" dsid="OBJ_EXIFTOOL" modified_files_ext="">
+          <parameters></parameters>
+        </ingest_method>
+        <ingest_method class="Ffmpeg" dsid="FULL_SIZE" file="plugins/Ffmpeg.inc" method="extract_thumbnail" modified_files_ext="jpg">
+          <parameters>
+          </parameters>
+        </ingest_method>
+        <ingest_method class="Ffmpeg" dsid="TN" file="plugins/Ffmpeg.inc" method="extract_thumbnail" modified_files_ext="jpg">
+          <parameters>
+            <parameter name="s">92x92</parameter>
+          </parameters>
+        </ingest_method>
+      </ingest_methods>
+    </rule>
+  </ingest_rules>
+  <datastreams>
+    <datastream dsid="OBJ">
+      <display_method class="ShowQtStreamsInFieldSets" file="plugins/qt_viewer.inc" method="showQt" module=""/>
+      <display_method class="MagShowStreamsInFieldSets" file="plugins/MagShowStreamsInFieldSets.inc" method="showMag" module="islandora_mag"/>
+    </datastream>
+    <datastream dsid="PROXY"></datastream>
+    <datastream dsid="OBJ_EXIFTOOL"></datastream>
+    <datastream dsid="TN"></datastream>
+    <datastream dsid="FULL_SIZE"></datastream>
+    <datastream dsid="QDC">
+      <display_method class="ShowStreamsInFieldSets" file="plugins/ShowStreamsInFieldSets.inc" method="showQdc" module=""></display_method>
+    </datastream>
+  </datastreams>
+  <ingest_form dsid="MAG" page="2">
+    <form_builder_method class="MagFormBuilder" file="plugins/MagFormBuilder.inc" handler="handleXMLForm" method="magBuildForm" module="islandora_mag"/>
+      <form_elements>
+
+<!-- BIB -->
+      <element label="Title/Caption/Object Name" name="metadigit][bib][dc:title" required="true" type="textfield">
+        <description>The name given to the resource</description>
+      </element>
+      <element label="Creator/Photographer/Author" name="metadigit][bib][dc:creator" type="textfield">
+        <description>An entity primarily responsible for making the content of the resource such as a person, organization or service.</description>
+      </element>
+      <element label="Subject" name="metadigit][bib][dc:subject" type="select">
+        <description>An entity primarily responsible for making the content of the resource such as a person, organization or service.</description>
+        <authoritative_list>
+          <item>experiment session</item>
+          <item>home recording</item>
+          <item>image</item>
+          <item>meeting</item>
+          <item>presentation</item>
+          <item>sound</item>
+          <item>text</item>
+        </authoritative_list>
+      </element>
+      <element label="Description" name="metadigit][bib][dc:description" required="true" type="textarea">
+        <description>Examples include an abstract, table of contents, or free-text account of the content of the resource.</description>
+      </element>
+      <element label="Publisher" name="metadigit][bib][dc:publisher" type="textfield">
+        <description>An entity, (including persons, organizations, or services), responsible for making the resource available.</description>
+      </element>
+      <element label="Contributor" name="metadigit][bib][dc:contributor" type="textfield">
+        <description>An entity responsible for contributing to the content of the resource such as a person, organization or service.</description>
+      </element>
+      <element label="Date" name="metadigit][bib][dc:date" type="textfield">
+        <description>Temporal scope of the content if known. Date format is YYYY-MM-DD (e.g. 1890,1910-10,or 2007-10-23)</description>
+      </element>
+      <element label="Resource Type" name="metadigit][bib][dc:type" type="select">
+        <description>Genre of the content of the resource. Examples include: home page, novel, poem, working paper, technical report, essay, dictionary.</description>
+        <authoritative_list>
+          <item>none</item>
+          <item>collection</item>
+          <item>dataset</item>
+          <item>event</item>
+          <item>image</item>
+          <item>interactive resource</item>
+          <item>model</item>
+          <item>party</item>
+          <item>physical object</item>
+          <item>place</item>
+          <item>service</item>
+          <item>software</item>
+          <item>sound</item>
+          <item>text</item>
+        </authoritative_list>
+      </element>
+      <element label="Source" name="metadigit][bib][dc:source" type="textfield">
+        <description>A reference to a resource from which the present resource is derived.</description>
+      </element>
+      <element label="Identifier" name="metadigit][bib][dc:identifier" type="hidden">
+        <description>A unique reference to the resource; In this instance, the accession number or collection number.</description>
+      </element>
+      <element label="Language" name="metadigit][bib][dc:language" type="select">
+        <description>The language of the intellectual content of the resource.</description>
+        <authoritative_list>
+          <item field="eng">English</item>
+          <item field="fre">French</item>
+        </authoritative_list>
+      </element>
+      <element label="Relation" name="metadigit][bib][dc:relation" type="textfield">
+        <description>Reference to a related resource.</description>
+      </element>
+      <element label="Rights Management" name="metadigit][bib][dc:rights" type="textarea">
+        <description>Information about intellectual property rights, copyright, and various property rights.</description>
+      </element>
+      
+<!-- GEN -->
+      <element label="Sito dell'organizzazione che ha digitalizzato l'oggetto" name="metadigit][gen][mag:gen:stprog" required="true" type="textfield">
+        <description>Contiene la URI dove è possibile trovare la documentazione relativa la progetto di digitalizzazione. Tipicamente si tratta della pagina web in cui sono specificate le scelte relative alla digitalizzazione del progetto; in alternativa si suggerisce di puntare alla home page dell'istituzione responsabile del progetto.</description>
+      </element>
+      <element label="Nome dell'organizzazione che ha digitalizzato l'oggetto" name="metadigit][gen][mag:gen:agency" required="true" type="textfield">
+        <description>contiene il nome dell'istituzione responsabile del progetto di digitalizzazione. Si raccomanda di usare la sintassi UNIMARC definita per il campo 801, cioè cod. paese (due caratteri):codice Agenzia per intero, per esempio: IT:BNCF. In alternativa è possibile usare una sigla riconosciuta, per esempio dall'Anagrafe biblioteche italiane: http://anagrafe.iccu.sbn.it/, per esempio: IT:VE0049 o IT:RM1316.</description>
+      </element>
+      <element label="Riferimento alla collezione di cui la risorsa digitale farà parte" name="metadigit][gen][mag:gen:collection" type="textfield">
+        <description>Contiene la URI (tipicamente l'indirizzo di una pagina web) di un documento in cui viene specificata la collezione cui fa parte la risorsa o le risorse digitalizzate.</description>
+      </element>
+      <element label="Condizioni di accesso all'oggetto descritto nella sezione BIB" name="metadigit][gen][mag:gen:access_rights" required="true" type="select">
+        <description>Dichiara le condizioni di accessibilità dell'oggetto descritto nella sezione BIB.</description>
+        <authoritative_list>
+          <item>Uso riservato all'interno dell'istituzione</item>
+          <item>Uso pubblico</item>
+        </authoritative_list>
+      </element>
+      <element label="Completezza della digitalizzazione." name="metadigit][gen][mag:gen:completeness" required="true" type="select">
+        <description>Dichiara la completezza della digitalizzazione.</description>
+        <authoritative_list>
+          <item>Digitalizzazione completa</item>
+          <item>Digitalizzazione incompleta</item>
+        </authoritative_list>
+      </element>
+
+<!-- VIDEO -->
+      <element label="Numero di sequenza" name="metadigit][video][mag:video:sequence_number" type="textfield">
+        <description>Ciascun stream video descritto all'interno di MAG viene identificato univocamente grazie a questo elemento. Il suo contenuto è un numero positivo. Se non specificato il suo valore di default è 1.</description>
+      </element>
+      <element label="Denominazione o titolo" name="metadigit][video][mag:video:nomenclature" required="true" type="textfield">
+        <description>A ciascuno stream video deve inoltre essere attribuita una denominazione, per esempio Canzonissima '52, Fiorella Mannoia live, ecc.</description>
+      </element>
+      
+      <element label="Proxies" name="metadigit][video][mag:video:proxies" type="hidden">
+       <description>Descrizione dello stream video.</description>
+       
+       <element label="Ambito d'uso" name="metadigit][video][mag:video:proxies:usage" type="select">
+        <description>La finalita' dello stream video. Selezionare una delle seguenti per favorire la portabilita' del file.</description>
+        <authoritative_list>
+          <item>Non specificato</item>
+          <item>Master</item>
+          <item>Alta qualità</item>
+          <item>Bassa qualità</item>
+          <item>Preview</item>
+          <item>-- il repository non ha il copyright dell'oggetto digitale</item>
+          <item>-- il repository ha il copyright dell'oggetto digitale</item>
+        </authoritative_list>
+      </element>
+      
+      <element label="Localizzazione fisica" name="metadigit][video][mag:video:proxies:file" type="hidden">
+        <description>Localizzare il file video mediante un link.</description>
+      </element>
+      
+      <element label="Impronta digitale MD5" name="metadigit][video][mag:video:proxies:md5" type="hidden">
+        <description>32 caratteri rilevati automaticamente che consentono di verificare l'integrita' del contenuto.</description>
+      </element>
+      
+      <element label="Grandezza (Byte)" name="metadigit][video][mag:video:proxies:filesize" type="hidden">
+        <description>Grandezza del file video espressa in Byte.</description>
+      </element>
+      
+      <element label="Dimensioni" name="metadigit][video][mag:video:proxies:video_dimentions" type="hidden">
+        <description>Definisce le dimensioni dello stream video.</description>
+        
+        <element label="Durata (h:m:s)" name="metadigit][video][mag:video:proxies:video_dimentions:duration" type="hidden">
+          <description>Durata espressa in ora:minuti:secondi.</description>
+        </element>
+        
+      </element>
+      
+      <element label="Caratteristiche tecniche" name="metadigit][video][mag:video:proxies:video_metrics" type="hidden">
+        <description>Definisce le caratteristiche tecniche dello stream video.</description>
+        
+        <element label="Dimensioni (larghezza x altezza)" name="metadigit][video][mag:video:proxies:video_metrics:videosize" type="hidden">
+          <description>Definizione del frame misurato in pixel.</description>
+        </element>
+        <element label="Proporzioni (larghezza:altezza)" name="metadigit][video][mag:video:proxies:video_metrics:aspectratio" type="hidden">
+          <description>Formato dell'immagine come rapporto tra larghezza e altezza.</description>
+        </element>
+        <element label="Frequenza fotogrammi" name="metadigit][video][mag:video:proxies:video_metrics:framerate" type="hidden">
+          <description>Numero di quadri al secondo del flusso video.</description>
+        </element>
+        
+      </element>
+      
+       <element label="Formato" name="metadigit][video][mag:video:proxies:format" type="hidden">
+        <description>Formato degli stream video.</description>
+        
+        <element label="Nome del formato" name="metadigit][video][mag:video:proxies:format:name" type="hidden">
+          <description>Nome del formato; si usi l'estensione del file.</description>
+        </element>
+        <element label="MIME type" name="metadigit][video][mag:video:proxies:format:mime" type="hidden">
+          <description>Tipo mime dello stream video.</description>
+        </element>
+        <element label="Standard video" name="metadigit][video][mag:video:proxies:format:videoformat" type="select">
+          <description>Specificare lo standard video adottatato.</description>
+          <authoritative_list>
+            <item>Non specificato</item>
+	          <item>Component</item>
+	          <item>NTCS</item>
+	          <item>PAL</item>
+	          <item>SECAM</item>
+	        </authoritative_list>
+        </element>
+        <element label="Codifica" name="metadigit][video][mag:video:proxies:format:encode" type="select">
+          <description>Specificare lo standard video adottatato.</description>
+          <authoritative_list>
+            <item>Non specificato</item>
+            <item>Interlacciato</item>
+            <item>Non-interlacciato</item>
+          </authoritative_list>
+        </element>
+        <element label="Tipo di stream" name="metadigit][video][mag:video:proxies:format:streamtype" type="select">
+          <description>Specificare lo standard video adottatato.</description>
+          <authoritative_list>
+            <item>Non compresso</item>
+            <item>MPEG-1</item>
+            <item>MPEG-2</item>
+            <item>MPEG-4</item>
+          </authoritative_list>
+        </element>
+        <element label="Codec" name="metadigit][video][mag:video:proxies:format:codec" type="hidden">
+          <description>Tipo di codec dello stream video.</description>
+        </element>
+        
+      </element>
+      
+      <element label="Digitalizzazione" name="metadigit][video][mag:video:proxies:digitisation" type="hidden">
+        <description>Modalità della creazione dello stream video digitale.</description>
+        
+        <element label="Fonte analogica" name="metadigit][video][mag:video:proxies:digitisation:sourcetype" type="select">
+          <description>Descrive il tipo di fonte analogica utilizzata per l'acquisizione dello stream video.</description>
+          <authoritative_list>
+            <item>Altro</item>
+            <item>Filmato</item>
+            <item>Videoregistrazione</item>
+            <item>Videocartuccia</item>
+            <item>Videodisco</item>
+            <item>Videocassetta</item>
+            <item>Bobina video</item>
+            <item>Videoregistrazione elettronica (EVR)</item>
+            <item>Materiale da proiettare</item>
+            <item>Diapositiva, set di diapositive, stereografo</item>
+            <item>DVD</item>
+          </authoritative_list>
+        </element>
+        <element label="Traccia audio creata da" name="metadigit][video][mag:video:proxies:digitisation:transcriptionagency" type="textfield">
+          <description>Il nome dell'istituzione che ha effettuato la digitalizzazione della traccia audio; è utile nel caso la digitalizzazione non sia stata effettuata direttamente dall'istituzione responsabile del processo di digitalizzazione.</description>
+        </element>
+        <element label="Dispositivo utilizzato per la digitalizzazione" name="metadigit][video][mag:video:proxies:digitisation:devicesource" type="select">
+          <description>La tipologia dell'apparecchiatura usata per realizzare la digitalizzazione.</description>
+          <authoritative_list>
+            <item>Sconosciuto</item>
+            <item>Dispositivo di lettura video</item>
+            <item>Videoregistratore</item>
+            <item>Scheda di acquisizione video</item>
+            <item>Dispositivo telecinema</item>
+          </authoritative_list>
+        </element>        
+      </element>
+      
+      <element label="Data e ora di creazione" name="metadigit][video][mag:video:proxies:datetimecreated" type="hidden">
+        <description>Registra la data e l'ora di creazione del file digitale.</description>
+      </element>
+      
+      </element> <!-- end proxies -->
+      
+      <element label="Annotazioni" name="metadigit][video][mag:video:note" type="textarea">
+        <description>Eventuali ulteriori annotazioni sull'oggetto.</description>
+      </element>
+      
+    </form_elements>
+  </ingest_form>
+  <edit_metadata_method class="MagFormBuilder" dsid="MAG" file="plugins/MagFormBuilder.inc" handler="magHandleEditMetadataForm" method="magBuildEditMetadataForm" module="islandora_mag"/>
+</content_model>

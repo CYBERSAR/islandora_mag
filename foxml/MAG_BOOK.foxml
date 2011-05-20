@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<foxml:digitalObject PID="epistemetec:mag_book" VERSION="1.1" xmlns:foxml="info:fedora/fedora-system:def/foxml#" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="info:fedora/fedora-system:def/foxml# http://www.fedora.info/definitions/1/0/foxml1-1.xsd">
+  <foxml:objectProperties>
+    <foxml:property NAME="info:fedora/fedora-system:def/model#state" VALUE="Active"/>
+    <foxml:property NAME="info:fedora/fedora-system:def/model#label" VALUE="epistemetec:mag_book"/>
+    <foxml:property NAME="info:fedora/fedora-system:def/model#ownerId" VALUE="fedoraAdmin"/>
+    <foxml:property NAME="info:fedora/fedora-system:def/model#createdDate" VALUE="2008-12-14T00:12:52.636Z"/>
+    <foxml:property NAME="info:fedora/fedora-system:def/view#lastModifiedDate" VALUE="2011-03-24T11:25:23.651Z"/>
+  </foxml:objectProperties>
+  <foxml:datastream CONTROL_GROUP="X" ID="AUDIT" STATE="A" VERSIONABLE="false">
+    <foxml:datastreamVersion CREATED="2008-12-14T00:12:52.636Z" FORMAT_URI="info:fedora/fedora-system:format/xml.fedora.audit" ID="AUDIT.0" LABEL="Audit Trail for this object" MIMETYPE="text/xml">
+      <foxml:xmlContent>
+        <audit:auditTrail xmlns:audit="info:fedora/fedora-system:def/audit#">
+          <audit:record ID="AUDREC1">
+            <audit:process type="Fedora API-M"/>
+            <audit:action>ingest</audit:action>
+            <audit:componentID/>
+            <audit:responsibility>fedoraAdmin</audit:responsibility>
+            <audit:date>2009-11-12T14:56:58.331Z</audit:date>
+            <audit:justification>Ingested from local file /Users/aoneill/dev/iiv/iiv/etc/fedora-objects/ilives_bookCModel.xml</audit:justification>
+          </audit:record>
+        </audit:auditTrail>
+      </foxml:xmlContent>
+    </foxml:datastreamVersion>
+  </foxml:datastream>
+  <foxml:datastream CONTROL_GROUP="X" ID="RELS-EXT" STATE="A" VERSIONABLE="false">
+    <foxml:datastreamVersion CREATED="2009-05-18T19:58:26.781Z" FORMAT_URI="info:fedora/fedora-system:FedoraRELSExt-1.0" ID="RELS-EXT.0" LABEL="RDF Statements about this object" MIMETYPE="application/rdf+xml" SIZE="450">
+      <foxml:xmlContent>
+        <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+          <rdf:Description rdf:about="info:fedora/epistemetec:mag_book">
+            <hasModel rdf:resource="info:fedora/fedora-system:ContentModel-3.0" xmlns="info:fedora/fedora-system:def/model#"/>
+            <hasService rdf:resource="info:fedora/ilives:viewerSdef" xmlns="info:fedora/fedora-system:def/model#"/>
+          </rdf:Description>
+        </rdf:RDF>
+      </foxml:xmlContent>
+    </foxml:datastreamVersion>
+  </foxml:datastream>
+  <foxml:datastream CONTROL_GROUP="X" ID="DS-COMPOSITE-MODEL" STATE="A" VERSIONABLE="false">
+    <foxml:datastreamVersion CREATED="2009-03-11T19:16:18.656Z" FORMAT_URI="info:fedora/fedora-system:FedoraDSCompositeModel-1.0" ID="DS-COMPOSITE-MODEL.0" LABEL="Datastream Composite Model" MIMETYPE="text/xml" SIZE="2378">
+      <foxml:xmlContent>
+        <dsCompositeModel xmlns="info:fedora/fedora-system:def/dsCompositeModel#">
+          <comment xmlns="info:fedora/fedora-system:def/comment#">
+            This DS-COMPOSITE-MODEL datastream is included as a starting point to
+              assist in the creation of a content model. The DS-COMPOSITE-MODEL
+              should define the datastreams that are required for any objects
+              conforming to this content model.
+            For more information about content models, see:
+              http://fedora-commons.org/confluence/x/dgBI.
+            For examples of completed content model objects, see the demonstration
+              objects included with your Fedora distribution, such as:
+              demo:CMImage, demo:UVA_STD_IMAGE, demo:DualResImageCollection,
+              demo:TEI_TO_PDFDOC, and demo:XML_TO_HTMLDOC.
+            For more information about the demonstration objects, see:
+              http://fedora-commons.org/confluence/x/AwFI.
+          </comment>
+          <dsTypeModel ID="ABBYY_XML" ORDERED="false">
+            <form MIME="text/xml"/>
+          </dsTypeModel>
+          <dsTypeModel ID="ABBYY_OCR" ORDERED="false">
+            <form MIME="text/plain"/>
+          </dsTypeModel>
+          <dsTypeModel ID="TEI" ORDERED="false">
+            <form MIME="text/xml"/>
+          </dsTypeModel>
+          <dsTypeModel ID="MARCXML" ORDERED="false">
+            <form MIME="text/xml"/>
+          </dsTypeModel>
+          <dsTypeModel ID="METSRights" ORDERED="false">
+            <form MIME="text/xml"/>
+          </dsTypeModel>
+          <dsTypeModel ID="StructMap" ORDERED="false">
+            <form MIME="text/xml"/>
+          </dsTypeModel>
+          <dsTypeModel ID="PDF" ORDERED="false">
+            <form MIME="application/pdf"/>
+          </dsTypeModel>
+          <dsTypeModel ID="Correspondence" ORDERED="false">
+            <form MIME="application/pdf"/>
+          </dsTypeModel>
+          <dsTypeModel ID="Permission_Letter" ORDERED="false">
+            <form MIME="application/pdf"/>
+          </dsTypeModel>
+          <dsTypeModel ID="CoverTN" ORDERED="false">
+            <form MIME="image/JPG"/>
+          </dsTypeModel>
+        </dsCompositeModel>
+      </foxml:xmlContent>
+    </foxml:datastreamVersion>
+  </foxml:datastream>
+  <foxml:datastream CONTROL_GROUP="X" ID="DC" STATE="A" VERSIONABLE="false">
+    <foxml:datastreamVersion CREATED="2009-02-13T17:57:45.873Z" FORMAT_URI="http://www.openarchives.org/OAI/2.0/oai_dc/" ID="DC.0" LABEL="Dublin Core Record for this object" MIMETYPE="text/xml" SIZE="388">
+      <foxml:xmlContent>
+        <oai_dc:dc xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+          <dc:title>Book Content Model</dc:title>
+          <dc:identifier>epistemetec:mag_book</dc:identifier>
+        </oai_dc:dc>
+      </foxml:xmlContent>
+    </foxml:datastreamVersion>
+  </foxml:datastream>
+  <foxml:datastream CONTROL_GROUP="X" ID="ISLANDORACM" STATE="A" VERSIONABLE="true">
+    <foxml:datastreamVersion CREATED="2011-03-24T11:25:23.651Z" ID="ISLANDORACM.0" LABEL="Book"  MIMETYPE="application/xml" SIZE="8613">
+      <foxml:xmlContent>
+        <content_model name="MAG BOOK" xmlns="http://www.islandora.ca" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.islandora.ca http://localhost/islandoracm.xsd">
+          <mimetypes>
+            <type>text/xml</type>
+            <type>application/pdf</type>
+          </mimetypes>
+          <ingest_rules>
+            <rule>
+              <applies_to>text/xml</applies_to>
+              <ingest_methods>
+                <ingest_method class="IslandoraBook" dsid="MODS" file="book.inc" method="ingestBook" modified_files_ext="" module="fedora_ilives"/>
+              </ingest_methods>
+            </rule>
+          </ingest_rules>
+          <datastreams>
+             <datastream dsid="DC">
+              <display_method class="MagBook" file="plugins/MagBook.inc" method="showFieldSets" module="islandora_mag"/>
+            </datastream>
+            <datastream dsid="MAG">
+              <display_method class="MagShowStreamsInFieldSets" default="true" file="plugins/MagShowStreamsInFieldSets.inc" method="showMag" module="islandora_mag"/>
+            </datastream>
+            <datastream dsid="TN"/>
+          </datastreams>
+          <ingest_form dsid="MAG" hide_file_chooser="true" page="2">
+            <form_builder_method class="MagFormBuilder" file="plugins/MagFormBuilder.inc" handler="handleXMLForm" method="magBuildForm" module="islandora_mag"/>
+            <form_elements>
+              <element label="Title/Caption/Object Name" name="metadigit][bib][dc:title" required="true" type="textfield">
+                <description>The name given to the resource</description>
+              </element>
+              <element label="Creator/Photographer/Author" name="metadigit][bib][dc:creator" type="textfield">
+                <description>An entity primarily responsible for making the content of the resource such as a person, organization or service.</description>
+              </element>
+              <element label="Subject" name="metadigit][bib][dc:subject" type="select">
+                <description>An entity primarily responsible for making the content of the resource such as a person, organization or service.</description>
+                <authoritative_list>
+                  <item>experiment session</item>
+                  <item>home recording</item>
+                  <item>image</item>
+                  <item>meeting</item>
+                  <item>presentation</item>
+                  <item>sound</item>
+                  <item>text</item>
+                </authoritative_list>
+              </element>
+              <element label="Description" name="metadigit][bib][dc:description" required="true" type="textarea">
+                <description>Examples include an abstract, table of contents, or free-text account of the content of the resource.</description>
+              </element>
+              <element label="Publisher" name="metadigit][bib][dc:publisher" type="textfield">
+                <description>An entity, (including persons, organizations, or services), responsible for making the resource available.</description>
+              </element>
+              <element label="Contributor" name="metadigit][bib][dc:contributor" type="textfield">
+                <description>An entity responsible for contributing to the content of the resource such as a person, organization or service.</description>
+              </element>
+              <element label="Date" name="metadigit][bib][dc:date" type="textfield">
+                <description>Temporal scope of the content if known. Date format is YYYY-MM-DD (e.g. 1890,1910-10,or 2007-10-23)</description>
+              </element>
+              <element label="Resource Type" name="metadigit][bib][dc:type" type="select">
+                <description>Genre of the content of the resource. Examples include: home page, novel, poem, working paper, technical report, essay, dictionary.</description>
+                <authoritative_list>
+                  <item>none</item>
+                  <item>collection</item>
+                  <item>dataset</item>
+                  <item>event</item>
+                  <item>image</item>
+                  <item>interactive resource</item>
+                  <item>model</item>
+                  <item>party</item>
+                  <item>physical object</item>
+                  <item>place</item>
+                  <item>service</item>
+                  <item>software</item>
+                  <item>sound</item>
+                  <item>text</item>
+                </authoritative_list>
+              </element>
+              <element label="Source" name="metadigit][bib][dc:source" type="textfield">
+                <description>A reference to a resource from which the present resource is derived.</description>
+              </element>
+              <element label="Identifier" name="metadigit][bib][dc:identifier" type="hidden">
+                <description>A unique reference to the resource; In this instance, the accession number or collection number.</description>
+              </element>
+              <element label="Language" name="metadigit][bib][dc:language" type="select">
+                <description>The language of the intellectual content of the resource.</description>
+                <authoritative_list>
+                  <item field="eng">English</item>
+                  <item field="fre">French</item>
+                </authoritative_list>
+              </element>
+              <element label="Relation" name="metadigit][bib][dc:relation" type="textfield">
+                <description>Reference to a related resource.</description>
+              </element>
+              <element label="Rights Management" name="metadigit][bib][dc:rights" type="textarea">
+                <description>Information about intellectual property rights, copyright, and various property rights.</description>
+              </element>
+              <element label="Sito dell'organizzazione che ha digitalizzato l'oggetto"  name="metadigit][gen][mag:gen:stprog" required="true" type="textfield"/>
+              <element label="Nome dell'organizzazione che ha digitalizzato l'oggetto"  name="metadigit][gen][mag:gen:agency" required="true" type="textfield"/>
+       
+            </form_elements>
+          </ingest_form>
+          <edit_metadata_method class="MagFormBuilder" dsid="MAG" file="plugins/MagFormBuilder.inc" handler="magHandleEditMetadataForm" method="magBuildEditMetadataForm" module="islandora_mag"/>
+        </content_model>
+      </foxml:xmlContent>
+    </foxml:datastreamVersion>
+  </foxml:datastream>
+</foxml:digitalObject>

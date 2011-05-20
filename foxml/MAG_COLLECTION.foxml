@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<foxml:digitalObject PID="epistemetec:mag_collection" VERSION="1.1" xmlns:foxml="info:fedora/fedora-system:def/foxml#"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="info:fedora/fedora-system:def/foxml# http://www.fedora.info/definitions/1/0/foxml1-1.xsd">
+  <foxml:objectProperties>
+    <foxml:property NAME="info:fedora/fedora-system:def/model#state" VALUE="Active"/>
+    <foxml:property NAME="info:fedora/fedora-system:def/model#label" VALUE="epistemetec:mag_collection"/>
+    <foxml:property NAME="info:fedora/fedora-system:def/model#ownerId" VALUE="fedoraAdmin"/>
+    <foxml:property NAME="info:fedora/fedora-system:def/model#createdDate" VALUE="2011-03-30T11:19:26.119Z"/>
+    <foxml:property NAME="info:fedora/fedora-system:def/view#lastModifiedDate" VALUE="2011-03-30T11:20:11.233Z"/>
+  </foxml:objectProperties>
+  <foxml:datastream CONTROL_GROUP="X" ID="AUDIT" STATE="A" VERSIONABLE="false">
+    <foxml:datastreamVersion CREATED="2011-03-30T11:19:26.119Z"
+      FORMAT_URI="info:fedora/fedora-system:format/xml.fedora.audit" ID="AUDIT.0" LABEL="Audit Trail for this object" MIMETYPE="text/xml">
+      <foxml:xmlContent>
+        <audit:auditTrail xmlns:audit="info:fedora/fedora-system:def/audit#">
+          <audit:record ID="AUDREC1">
+            <audit:process type="Fedora API-M"/>
+            <audit:action>ingest</audit:action>
+            <audit:componentID/>
+            <audit:responsibility>admin</audit:responsibility>
+            <audit:date>2011-03-30T11:19:26.119Z</audit:date>
+            <audit:justification>Fedora Object Ingested</audit:justification>
+          </audit:record>
+        </audit:auditTrail>
+      </foxml:xmlContent>
+    </foxml:datastreamVersion>
+  </foxml:datastream>
+  <foxml:datastream CONTROL_GROUP="X" ID="DC" STATE="A" VERSIONABLE="true">
+    <foxml:datastreamVersion CREATED="2011-03-30T11:19:26.119Z" FORMAT_URI="http://www.openarchives.org/OAI/2.0/oai_dc/"
+      ID="DC1.0" LABEL="Dublin Core Record for this object" MIMETYPE="text/xml" SIZE="405">
+      <foxml:xmlContent>
+        <oai_dc:dc xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+          <dc:title>epistemetec:mag_collection</dc:title>
+          <dc:identifier>epistemetec:mag_collection</dc:identifier>
+        </oai_dc:dc>
+      </foxml:xmlContent>
+    </foxml:datastreamVersion>
+  </foxml:datastream>
+  <foxml:datastream CONTROL_GROUP="X" ID="RELS-EXT" STATE="A" VERSIONABLE="true">
+    <foxml:datastreamVersion CREATED="2011-03-30T11:19:29.432Z" ID="RELS-EXT.0"
+      LABEL="Fedora Object-to-Object Relationship Metadata" MIMETYPE="text/xml" SIZE="483">
+      <foxml:xmlContent>
+        <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+          <rdf:Description rdf:about="info:fedora/epistemetec:mag_collection">
+            <fedora-model:hasModel rdf:resource="info:fedora/islandora:collectionCModel" xmlns:fedora-model="info:fedora/fedora-system:def/model#"/>
+            <isMemberOfCollection rdf:resource="info:fedora/islandora:top" xmlns="info:fedora/fedora-system:def/relations-external#"/>
+          </rdf:Description>
+        </rdf:RDF>
+      </foxml:xmlContent>
+    </foxml:datastreamVersion>
+  </foxml:datastream>
+  <foxml:datastream CONTROL_GROUP="X" ID="COLLECTION_POLICY" STATE="A" VERSIONABLE="true">
+    <foxml:datastreamVersion CREATED="2011-03-30T11:19:30.525Z" ID="COLLECTION_POLICY.0"
+      LABEL="epistemetec:mag_collection" MIMETYPE="text/xml" SIZE="1443">
+      <foxml:xmlContent>
+        <collection_policy name="epistemetec:mag_collection" xmlns="http://www.islandora.ca"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.islandora.ca http://syn.lib.umanitoba.ca/collection_policy.xsd">
+          <content_models>
+            <content_model dsid="ISLANDORACM" name="MAG IMG" namespace="epistemetec:mag_img" pid="epistemetec:mag_img"/>
+            <content_model dsid="ISLANDORACM" name="MAG BIG-IMG" namespace="epistemetec:mag_big_img" pid="epistemetec:mag_big_img"/>
+            <content_model dsid="ISLANDORACM" name="MAG DOC" namespace="epistemetec:mag_doc" pid="epistemetec:mag_doc"/>
+            <content_model dsid="ISLANDORACM" name="MAG BOOK" namespace="epistemetec:mag_book" pid="epistemetec:mag_book"/>
+            <content_model dsid="ISLANDORACM" name="MAG AUDIO" namespace="epistemetec:mag_audio" pid="epistemetec:mag_audio"/>
+            <content_model dsid="ISLANDORACM" name="MAG VIDEO" namespace="epistemetec:mag_video" pid="epistemetec:mag_video"/>
+            <content_model dsid="ISLANDORACM" name="SUB COLLECTION" namespace="epistemetec:sub_collection" pid="epistemetec:sub_collection"/>
+          </content_models>
+          <search_terms>
+            <term field="dc.title">dc.title</term>
+            <term field="dc.creator">dc.creator</term>
+            <term default="true" field="dc.description">dc.description</term>
+            <term field="dc.date">dc.date</term>
+            <term field="dc.identifier">dc.identifier</term>
+            <term field="dc.language">dc.language</term>
+            <term field="dc.publisher">dc.publisher</term>
+            <term field="dc.rights">dc.rights</term>
+            <term field="dc.subject">dc.subject</term>
+            <term field="dc.relation">dc.relation</term>
+            <term field="dcterms.temporal">dcterms.temporal</term>
+            <term field="dcterms.spatial">dcterms.spatial</term>
+            <term field="fgs.DS.first.text">Full Text</term>
+          </search_terms>
+          <relationship>isMemberOfCollection</relationship>
+        </collection_policy>
+      </foxml:xmlContent>
+    </foxml:datastreamVersion>
+  </foxml:datastream>
+</foxml:digitalObject>

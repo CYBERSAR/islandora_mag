@@ -1,0 +1,175 @@
+<?xml version="1.0"?>
+<content_model xmlns="http://www.islandora.ca" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="epistemetec:mag_doc" xsi:schemaLocation="http://www.islandora.ca http://localhost/islandoracm.xsd">
+  <mimetypes>
+    <type>application/pdf</type>
+    <type>application/msword</type>
+  </mimetypes>
+  <ingest_rules>
+    <rule>
+      <applies_to>application/pdf</applies_to>
+      <ingest_methods>
+        <ingest_method class="ImageManipulation" dsid="TN" file="plugins/ImageManipulation.inc" method="createThumbnailFromPDF" modified_files_ext="jpg" module="">
+          <parameters>
+            <parameter name="width">100</parameter>
+            <parameter name="height">120</parameter>
+          </parameters>
+        </ingest_method>
+      </ingest_methods>
+    </rule>
+  </ingest_rules>
+  <datastreams>
+    <datastream dsid="TN">
+      <display_method class="ShowStreamsInFieldSets" file="plugins/ShowStreamsInFieldSets.inc" method="showPDFPreview" module=""/>
+    </datastream>
+    <datastream dsid="OBJ">
+      <add_datastream_method class="ImageManipulation" dsid="TN" file="plugins/ImageManipulation.inc" method="createThumbnailFromPDF" modified_files_ext="jpg" module="">
+        <parameters>
+          <parameter name="width">100</parameter>
+          <parameter name="height">120</parameter>
+        </parameters>
+      </add_datastream_method>
+      <display_method class="MagShowStreamsInFieldSets" file="plugins/MagShowStreamsInFieldSets.inc" method="showMag" module="islandora_mag"/>
+    </datastream>
+  </datastreams>
+  <ingest_form dsid="MAG" page="2">
+    <form_builder_method class="MagFormBuilder" file="plugins/MagFormBuilder.inc" handler="handleXMLForm" method="magBuildForm" module="islandora_mag"/>
+    <form_elements>
+ <!-- BIB -->
+      <element label="Title/Caption/Object Name" name="metadigit][bib][dc:title" required="true" type="textfield">
+        <description>The name given to the resource</description>
+      </element>
+      <element label="Creator/Photographer/Author" name="metadigit][bib][dc:creator" type="textfield">
+        <description>An entity primarily responsible for making the content of the resource such as a person, organization or service.</description>
+      </element>
+      <element label="Subject" name="metadigit][bib][dc:subject" type="select">
+        <description>An entity primarily responsible for making the content of the resource such as a person, organization or service.</description>
+        <authoritative_list>
+          <item>experiment session</item>
+          <item>home recording</item>
+          <item>image</item>
+          <item>meeting</item>
+          <item>presentation</item>
+          <item>sound</item>
+          <item>text</item>
+        </authoritative_list>
+      </element>
+      <element label="Description" name="metadigit][bib][dc:description" required="true" type="textarea">
+        <description>Examples include an abstract, table of contents, or free-text account of the content of the resource.</description>
+      </element>
+      <element label="Publisher" name="metadigit][bib][dc:publisher" type="textfield">
+        <description>An entity, (including persons, organizations, or services), responsible for making the resource available.</description>
+      </element>
+      <element label="Contributor" name="metadigit][bib][dc:contributor" type="textfield">
+        <description>An entity responsible for contributing to the content of the resource such as a person, organization or service.</description>
+      </element>
+      <element label="Date" name="metadigit][bib][dc:date" type="textfield">
+        <description>Temporal scope of the content if known. Date format is YYYY-MM-DD (e.g. 1890,1910-10,or 2007-10-23)</description>
+      </element>
+      <element label="Resource Type" name="metadigit][bib][dc:type" type="select">
+        <description>Genre of the content of the resource. Examples include: home page, novel, poem, working paper, technical report, essay, dictionary.</description>
+        <authoritative_list>
+          <item>none</item>
+          <item>collection</item>
+          <item>dataset</item>
+          <item>event</item>
+          <item>image</item>
+          <item>interactive resource</item>
+          <item>model</item>
+          <item>party</item>
+          <item>physical object</item>
+          <item>place</item>
+          <item>service</item>
+          <item>software</item>
+          <item>sound</item>
+          <item>text</item>
+        </authoritative_list>
+      </element>
+      <element label="Source" name="metadigit][bib][dc:source" type="textfield">
+        <description>A reference to a resource from which the present resource is derived.</description>
+      </element>
+      <element label="Identifier" name="metadigit][bib][dc:identifier" type="hidden">
+        <description>A unique reference to the resource; In this instance, the accession number or collection number.</description>
+      </element>
+      <element label="Language" name="metadigit][bib][dc:language" type="select">
+        <description>The language of the intellectual content of the resource.</description>
+        <authoritative_list>
+          <item field="eng">English</item>
+          <item field="fre">French</item>
+        </authoritative_list>
+      </element>
+      <element label="Relation" name="metadigit][bib][dc:relation" type="textfield">
+        <description>Reference to a related resource.</description>
+      </element>
+      <element label="Rights Management" name="metadigit][bib][dc:rights" type="textarea">
+        <description>Information about intellectual property rights, copyright, and various property rights.</description>
+      </element>
+<!-- GEN -->
+      <element label="Sito dell'organizzazione che ha digitalizzato l'oggetto" name="metadigit][gen][mag:gen:stprog" required="true" type="textfield">
+        <description>Contiene la URI dove è possibile trovare la documentazione relativa la progetto di digitalizzazione. Tipicamente si tratta della pagina web in cui sono specificate le scelte relative alla digitalizzazione del progetto; in alternativa si suggerisce di puntare alla home page dell'istituzione responsabile del progetto.</description>
+      </element>
+      <element label="Nome dell'organizzazione che ha digitalizzato l'oggetto" name="metadigit][gen][mag:gen:agency" required="true" type="textfield">
+        <description>contiene il nome dell'istituzione responsabile del progetto di digitalizzazione. Si raccomanda di usare la sintassi UNIMARC definita per il campo 801, cioè cod. paese (due caratteri):codice Agenzia per intero, per esempio: IT:BNCF. In alternativa è possibile usare una sigla riconosciuta, per esempio dall'Anagrafe biblioteche italiane: http://anagrafe.iccu.sbn.it/, per esempio: IT:VE0049 o IT:RM1316.</description>
+      </element>
+      <element label="Riferimento alla collezione di cui la risorsa digitale farà parte" name="metadigit][gen][mag:gen:collection" type="textfield">
+        <description>Contiene la URI (tipicamente l'indirizzo di una pagina web) di un documento in cui viene specificata la collezione cui fa parte la risorsa o le risorse digitalizzate.</description>
+      </element>
+      <element label="Condizioni di accesso all'oggetto descritto nella sezione BIB" name="metadigit][gen][mag:gen:access_rights" required="true" type="select">
+        <description>Dichiara le condizioni di accessibilità dell'oggetto descritto nella sezione BIB.</description>
+        <authoritative_list>
+          <item>Uso riservato all'interno dell'istituzione</item>
+          <item>Uso pubblico</item>
+        </authoritative_list>
+      </element>
+      <element label="Completezza della digitalizzazione." name="metadigit][gen][mag:gen:completeness" required="true" type="select">
+        <description>Dichiara la completezza della digitalizzazione.</description>
+        <authoritative_list>
+          <item>Digitalizzazione completa</item>
+          <item>Digitalizzazione incompleta</item>
+        </authoritative_list>
+      </element>
+<!-- DOC -->
+      <element label="Numero di sequenza" name="metadigit][doc][mag:doc:sequence_number" type="textfield">
+        <description>Ciascun file di testo descritto all'interno di MAG viene identificato univocamente grazie a questo elemento. Il suo contenuto è un numero positivo, di default è 1.</description>
+      </element>
+      <element label="Denominazione o titolo" name="metadigit][doc][mag:doc:nomenclature" required="true" type="textfield">
+        <description>Al file doc deve essere attribuita una denominazione, per esempio Pagina 1, Capitolo 1, ecc.</description>
+      </element>
+      <element label="Ambito d'uso" name="metadigit][doc][mag:doc:usage" type="select">
+        <description>La finalita' del file di testo. Selezionare una delle seguenti per favorire la portabilita' del file.</description>
+        <authoritative_list>
+          <item>Non specificato</item>
+          <item>il repository non ha il copyright dell'oggetto digitale</item>
+          <item>il repository ha il copyright dell'oggetto digitale</item>
+        </authoritative_list>
+      </element>
+      <element label="Localizzazione fisica" name="metadigit][doc][mag:doc:file" type="hidden">
+        <description>Localizzare il file di testo born digital mediante un link.</description>
+      </element>
+      <element label="Impronta digitale MD5" name="metadigit][doc][mag:doc:md5" type="hidden">
+        <description>32 caratteri rilevati automaticamente che consentono di verificare l'integrita' del contenuto.</description>
+      </element>
+      <element label="Dimensione (Byte)" name="metadigit][doc][mag:doc:filesize" type="hidden">
+        <description>Grandezza del file di testo espressa in Byte.</description>
+      </element>
+      <element label="Formato" name="metadigit][doc][mag:doc:format" type="hidden">
+        <description>Tipologia e modalità di compressione.</description>
+          <element label="Formato: nome" name="metadigit][doc][mag:doc:format:name" type="hidden">
+            <description>Contiene il formato del file testo.</description>
+          </element>
+           <element label="Formato: mime" name="metadigit][doc][mag:doc:format:mime" type="hidden">
+            <description>Contiene il tipo mime del file di testo.</description>
+          </element>
+           <element label="Formato: compression" name="metadigit][doc][mag:doc:format:compression" type="hidden">
+            <description>Dichiara il tipo di compressione applicato al file di testo.</description>
+          </element>
+      </element>
+      <element label="Data e ora di creazione" name="metadigit][doc][mag:doc:datetimecreated" type="hidden">
+        <description>Registra la data e l'ora di creazione del file digitale.</description>
+      </element>
+      <element label="Annotazioni" name="metadigit][doc][mag:doc:note" type="textarea">
+        <description>Eventuali ulteriori annotazioni sull'oggetto.</description>
+      </element>
+    </form_elements>
+  </ingest_form>
+  <edit_metadata_method class="MagFormBuilder" dsid="MAG" file="plugins/MagFormBuilder.inc" handler="magHandleEditMetadataForm" method="magBuildEditMetadataForm" module="islandora_mag"/>
+</content_model>
