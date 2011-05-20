@@ -11,9 +11,9 @@
 /**
  * This module exposes a fews hooks. Till now the only hooks are:
  *  
- * hook_fedora_after_ingest; 
- * hook_fedora_alter_ingest;
- * hook_fedora_alter_edit;
+ * hook_fedora_after_ingest; (in handleXMLForm info file: plugins/MagFormBuilder.inc)
+ * hook_fedora_alter_ingest; (in handleXMLForm info file: plugins/MagFormBuilder.inc)
+ * hook_fedora_alter_edit;   (in magHandleEditMetadataForm into file: plugins/MagFormBuilder.inc)
  * 
  * in naming hooks we can add at the end "_object" to refear to the fedora object
  *  
