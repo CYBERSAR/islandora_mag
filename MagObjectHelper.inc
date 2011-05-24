@@ -32,6 +32,7 @@ class MagObjectHelper extends ObjectHelper {
     
     module_load_include('inc', 'fedora_repository', 'ConnectionHelper');
 
+    # Documentazione del modulo. Questo e' documentazione di prova.
     $soapHelper = new ConnectionHelper();
     $client = $soapHelper->getSoapClient(variable_get('fedora_soap_url', 'http://localhost:8080/fedora/services/access?wsdl'));
 
@@ -58,6 +59,9 @@ class MagObjectHelper extends ObjectHelper {
       return;
     }
 
+    /*
+     * Altra modifica
+     */
     $proc->setParameter('', 'baseUrl', $base_url);
     $proc->setParameter('', 'path', $base_url . '/' . $path);
     $input = NULL;
