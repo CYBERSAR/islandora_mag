@@ -550,19 +550,26 @@ class MagFormBuilder extends FormBuilder {
       '#type' => 'fieldset',
       '#title' => t('Datastream MAG'),
     );
+     
     $form['indicator2']['metadigit']['bib'] = array(
 	      '#type' => 'fieldset',
 	      '#title' => t('Sezione BIB'),
     );
     
     $mag_section_name = $this->getContentModelType($action);
-    if (isset($mag_section_name) && in_array($mag_section_name, $this->mag_fields)) {
+    
+    //TODO esclude GEN dalla sub_collection, ma per questo tipo di oggetto
+    //forse sarebbe meglio non usare il mag 
+    if (strcmp($mag_section_name, "collection") != 0) {
 	    $form['indicator2']['metadigit']['gen'] = array(
 	      '#type' => 'fieldset',
 	      '#title' => t('Sezione GEN'),
 	    );
-
-	    $form['indicator2']['metadigit'][$mag_section_name] = array(
+    }  
+    
+    if (isset($mag_section_name) && in_array($mag_section_name, $this->mag_fields)) {
+	   
+            $form['indicator2']['metadigit'][$mag_section_name] = array(
 				'#type' => 'fieldset',
 			  '#title' => t('Sezione ' . strtoupper($mag_section_name)),
 			);
