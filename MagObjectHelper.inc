@@ -58,6 +58,10 @@ class MagObjectHelper extends ObjectHelper {
       return;
     }
 
+    /*
+     * Questo è il mio commento a questo blocco di codice.
+     * Non devi cambiare nulla in questo commendo mi raccomando.
+     */
     $proc->setParameter('', 'baseUrl', $base_url);
     $proc->setParameter('', 'path', $base_url . '/' . $path);
     $input = NULL;
