@@ -16,12 +16,13 @@
         <collection_policy name="epistemetec:sub_collection" xmlns="http://www.islandora.ca"
           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.islandora.ca http://syn.lib.umanitoba.ca/collection_policy.xsd">
           <content_models>
-            <content_model  dsid="ISLANDORACM"  name="MAG IMG"      namespace="epistemetec:mag_img"       pid="epistemetec:mag_img"     />
-            <content_model  dsid="ISLANDORACM"  name="MAG BIG-IMG"  namespace="epistemetec:mag_big_img"   pid="epistemetec:mag_big_img" />
-            <content_model  dsid="ISLANDORACM"  name="MAG DOC"      namespace="epistemetec:mag_doc"       pid="epistemetec:mag_doc"     />
-            <content_model  dsid="ISLANDORACM"  name="MAG BOOK"     namespace="epistemetec:mag_book"      pid="epistemetec:mag_book"    />
-            <content_model  dsid="ISLANDORACM"  name="MAG AUDIO"    namespace="epistemetec:mag_audio"     pid="epistemetec:mag_audio"   />
-            <content_model  dsid="ISLANDORACM"  name="MAG VIDEO"    namespace="epistemetec:mag_video"     pid="epistemetec:mag_video"   />
+            <content_model dsid="ISLANDORACM" name="Immagine (JPG)" namespace="epistemetec:mag_img" pid="epistemetec:mag_img"/>
+            <content_model dsid="ISLANDORACM" name="Immagine Alta Risoluzione (TIFF)" namespace="epistemetec:mag_big_img" pid="epistemetec:mag_big_img"/>
+            <content_model dsid="ISLANDORACM" name="Documento (PDF)" namespace="epistemetec:mag_doc" pid="epistemetec:mag_doc"/>
+            <content_model dsid="ISLANDORACM" name="Libro (TIFF)" namespace="epistemetec:mag_book" pid="epistemetec:mag_book"/>
+            <content_model dsid="ISLANDORACM" name="Audio (MP3)" namespace="epistemetec:mag_audio" pid="epistemetec:mag_audio"/>
+            <content_model dsid="ISLANDORACM" name="Video (FLV,MP4,AVI,MPEG)" namespace="epistemetec:mag_video" pid="epistemetec:mag_video"/>
+            <content_model dsid="ISLANDORACM" name="Sub-collezione" namespace="epistemetec:sub_collection" pid="epistemetec:sub_collection"/>
           </content_models>
           <search_terms>
             <term field="dc.title">dc.title</term>

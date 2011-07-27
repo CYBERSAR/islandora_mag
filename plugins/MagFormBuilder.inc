@@ -24,7 +24,7 @@ class MagFormBuilder extends FormBuilder {
   protected $cm;
   protected $item;
   protected $pid;
-  var $mag_fields = array("gen", "bib", "img", "doc", "audio", "video");
+  var $mag_fields = array("gen", "bib", "img", "doc", "audio", "video", "bigimg");
   
   function __construct($pid=null) {
     parent::__construct();
@@ -72,7 +72,12 @@ class MagFormBuilder extends FormBuilder {
 			}
 			
 			$content_model = explode("_", $content_model);
-	    $content_model = $content_model[sizeof($content_model)-1]; // img|audio|video|doc|book|collection
+			if ($content_model[sizeof($content_model)-2] == "big") {
+				$content_model = "bigimg";
+			}
+			else {
+	    	$content_model = $content_model[sizeof($content_model)-1]; // img|audio|video|doc|book|collection
+			}
 	    
 	    return $content_model;
 		}
@@ -153,6 +158,33 @@ class MagFormBuilder extends FormBuilder {
             $ele = $tags[0] . ":" . $tags[1];
             $previousElement = $dom->createElement($ele, $value);
             $bib->appendChild($previousElement);
+            
+            if ($ele == "dc:subject") {
+            	$term = taxonomy_get_term_by_name($value);
+            	$tid = $term[0]->tid;
+            	$parents = taxonomy_get_parents($tid);
+            	foreach ($parents as $parent) {
+            		$previousElement = $dom->createElement($ele, $parent->name);
+            		$bib->appendChild($previousElement);
+            	}
+            }
+            
+            break;
+          case "bib":
+          	if (!isset($bib)) {
+          		$bib = $dom->createElement("bib");
+    					$mag->appendChild($bib);
+          	}
+          	if (isset($tags[3])) {
+          		if (isset($holdings))	{
+	          		$previousElement = $dom->createElement($tags[3], $value);
+	            	$holdings->appendChild($previousElement);
+          		}
+          	}
+          	else {
+          		$holdings = $dom->createElement($tags[2]);
+	            $bib->appendChild($holdings);
+          	}
             break;
         }
       }
@@ -161,6 +193,9 @@ class MagFormBuilder extends FormBuilder {
     //Gets CM type and creates the right MAG section
     $mag_section_name = $this->getContentModelType($action);
     if (isset($mag_section_name) && in_array($mag_section_name, $this->mag_fields)) {
+    	if ($mag_section_name == "bigimg") {
+    		$mag_section_name = "img";
+    	}
 	    if ($mag_section_name == "img") {
 	    	//mag's image content model uses the "niso" namespace for some fields, so add it
     		$mag->setAttribute("xmlns:niso","http://www.niso.org/pdfs/DataDict.pdf");
@@ -177,7 +212,8 @@ class MagFormBuilder extends FormBuilder {
   
   
   /**
-   * Creates the section in the Metadigit datastream based on her name
+   * Creates the section in the Metadigit datastream based on her name.
+   * TODO: Create a class that allows to abstract the bash.
    * 
    * @param array $form_values
    * @param dom object $dom
@@ -246,13 +282,10 @@ class MagFormBuilder extends FormBuilder {
           		$depth = 0;
           	}
           	
-	          
 	          if ($action == "insert") {
-	          	
 	          	$ingested_file = $form_values["ingest-file-location"];
 	          	$ingested_file_escaped = str_replace(" ", "\ ", $ingested_file);
 	          	
-	          	//TODO creare metodi appropriati in Exiftool
 	          	$exiftool_opt_printOnlyValue = "-s -s -s";
 	          	$exiftool_filetype = exec('exiftool -FileType ' . $exiftool_opt_printOnlyValue . " " . $ingested_file_escaped);
 	          	
@@ -308,13 +341,9 @@ class MagFormBuilder extends FormBuilder {
 									
 								// Specific for the img section
 								case "niso:imagelength":
-									//list($width, $lenght, $type, $attr) = getimagesize($ingested_file);
-									//$value = $lenght;
 									$value = exec('exiftool -ImageHeight ' . $exiftool_opt_printOnlyValue . " " . $ingested_file_escaped);
 									break;
 								case "niso:imagewidth":
-									//list($width, $lenght, $type, $attr) = getimagesize($ingested_file);
-									//$value = $width;
 									$value = exec('exiftool -ImageWidth ' . $exiftool_opt_printOnlyValue . " " . $ingested_file_escaped);
 									break;
 								case "ppi":
@@ -373,7 +402,6 @@ class MagFormBuilder extends FormBuilder {
 								case "codec":
 									$value = exec('exiftool -CompressorID ' . $exiftool_opt_printOnlyValue . " " . $ingested_file_escaped);
 									break;
-	/* TODO creare una classe che permetta di astrarre i comandi */
 								// Specific for the audio section
 								case "samplingfrequency":
 									$value = exec('exiftool -SampleRate ' . $exiftool_opt_printOnlyValue . " " . $ingested_file_escaped);
@@ -444,6 +472,9 @@ class MagFormBuilder extends FormBuilder {
     $rootElement->setAttribute('xsi:schemaLocation', "info:fedora/fedora-system:def/foxml# http://www.fedora.info/definitions/1/0/foxml1-1.xsd");
     $dom->appendChild($rootElement);
     
+
+    $this->magWatermark($form_values);
+    
     // Create standard fedora stuff
     $this->createStandardFedoraStuff($form_values, $dom, $rootElement);
     
@@ -463,13 +494,11 @@ class MagFormBuilder extends FormBuilder {
     // Create MAG
     $form_values['dc:identifier'] = $pid;
     $this->createMAGStream($form_values, $dom, $rootElement);
-    
 
     if (!empty($form_values['ingest-file-location'])) {
       $this->createFedoraDataStreams($form_values, $dom, $rootElement);
     }
     $this->createPolicy($collectionPid, &$dom, &$rootElement);
-    
     
     // definition of fedora_alter_ingest hooks
 		$datastreams = Array();
@@ -503,8 +532,13 @@ class MagFormBuilder extends FormBuilder {
       			$image_book_path = drupal_get_path('module', 'islandora_mag') . "/images/cover-book.png";
 		     		$file_tn = variable_get('default_image_book', $image_book_path);
 		     		break;
+      		case "collection":
+      			$image_coll_path = drupal_get_path('module', 'islandora_mag') . "/images/cover-collection.jpg";
+		     		$file_tn = variable_get('default_image_collection', $image_coll_path);
+		     		$object->add_datastream_from_file($file_tn, "MEDIUM_SIZE", "Default Collection");
+		     		break;
       	}
-      	$object->add_datastream_from_file($file_tn, "TN", "Thumbnail");
+      	$object->add_datastream_from_file($file_tn, "TN", "Default Thumbnail");
       }
       
       /*
@@ -517,7 +551,6 @@ class MagFormBuilder extends FormBuilder {
      		$file_cp = variable_get('default_collection_policy', $collection_policy_path);
      		$object->add_datastream_from_file($file_cp, "COLLECTION_POLICY", "Collection Policy");
       }
-
       
       if (!empty($object->pid)) {
         drupal_set_message(t("Item !pid created successfully.", array('!pid' => l($object->pid, 'fedora/repository/'. $object->pid))), "status");
@@ -548,9 +581,9 @@ class MagFormBuilder extends FormBuilder {
   function createBaseForm(&$form, $action) {
     $form['indicator2']['metadigit'] = array(
       '#type' => 'fieldset',
-      '#title' => t('Datastream MAG'),
+      '#title' => t('Datastream MAG' . $language->language),
     );
-     
+    
     $form['indicator2']['metadigit']['bib'] = array(
 	      '#type' => 'fieldset',
 	      '#title' => t('Sezione BIB'),
@@ -558,32 +591,46 @@ class MagFormBuilder extends FormBuilder {
     
     $mag_section_name = $this->getContentModelType($action);
     
-    //TODO esclude GEN dalla sub_collection, ma per questo tipo di oggetto
-    //forse sarebbe meglio non usare il mag 
-    if (strcmp($mag_section_name, "collection") != 0) {
+    if ($mag_section_name != "collection") {
 	    $form['indicator2']['metadigit']['gen'] = array(
-	      '#type' => 'fieldset',
-	      '#title' => t('Sezione GEN'),
+		      '#type' => 'fieldset',
+		      '#title' => t('Sezione GEN'),
 	    );
-    }  
+    }
     
     if (isset($mag_section_name) && in_array($mag_section_name, $this->mag_fields)) {
-	   
-            $form['indicator2']['metadigit'][$mag_section_name] = array(
+    	$section = $mag_section_name == "bigimg" ? "img" : $mag_section_name;
+	    $form['indicator2']['metadigit'][$section] = array(
 				'#type' => 'fieldset',
-			  '#title' => t('Sezione ' . strtoupper($mag_section_name)),
+			  '#title' => t('Sezione ' . strtoupper($section)),
 			);
+    }
+    
+    if ($mag_section_name == "img" && $action != "edit") {
+    	$form['indicator2']['metadigit'][$mag_section_name]['watermarks'] = array(
+			      '#type' => 'fieldset',
+			      '#title' => t('Watermark'),
+		     		'#description' => t('Inserisci il testo che comparirà nell\'immagine come Watermark.
+		     				Il campo è opzionale; se lasciato vuoto non verrà aggiunto alcun Watermark.
+		     		')
+    	);
+    	$form['indicator2']['metadigit'][$mag_section_name]['watermarks']['watermark'] = array(
+			      '#type' => 'textfield',
+						'#description' => t('NB: Questo campo non fa parte dello standard MAG e non farà parte dell\'XML; è posizionato qui per praticità.'),
+    	);
     }
   }
   
   
   function magBuildForm(&$form, $elements, &$form_values) {
+  	global $language;
+  	echo i18n_get_lang();
+  	
   	$action = "insert";
   	$form['#multistep'] = TRUE; // used so that it triggers a form rebuild every time.
   	
   	$this->createBaseForm($form, $action);
-
-        
+  	
     foreach ($elements as $element) {
       if ($element['type'] == 'markup') {
         $el = array('#value'=> $element['description']);
@@ -655,8 +702,6 @@ class MagFormBuilder extends FormBuilder {
       
       //XML metadigit (verifica la versione del contenuto ... possono esserci più xml content dopo ogni modifica...)
       $content = $this->item->get_datastream_dissemination($dsId);
-      
-      //$content = trim($content);
       
       $dom = new DOMDocument();
       if (!$dom->loadXML($content)) {
@@ -810,5 +855,28 @@ class MagFormBuilder extends FormBuilder {
     $ret = $metaDataForm->updateMetaData($form_id, $form_dc, $soap_client);
     
     return;
+  }
+  
+  /**
+   * When ingesting a new Digital Image Object, the operator would choose
+   * to insert a label on the bottom of the image.
+   * 
+   * @param array $form_values
+   */
+  function magWatermark($form_values) {
+    // Create Watermark if exists
+    if (isset($form_values['watermark'])) {
+    	$wmk_cc = variable_get('islandora_mag_img_cc_str', 'You can remove this label without breaking the Creative Commons license.');
+    	$wmk_str = $form_values['watermark'];
+    	
+	    $img_in = str_replace(" ", "\ ", $form_values["ingest-file-location"]);
+	    $wmk_w = exec('exiftool -ImageWidth -s -s -s ' . $img_in);
+	    $wmk_h = 50; //fixed height px
+    	    	
+    	exec("/usr/bin/convert -size " . $wmk_w . "x" . $wmk_h . " xc:white -stroke black -strokewidth 0 -draw \"line 0,0 " . $wmk_w . ",0\" label_0.png");
+    	exec("/usr/bin/convert label_0.png -gravity northeast -pointsize 12 -draw \" fill black  text 0,5 '" . $wmk_cc  . "'\"  label_1.png");
+    	exec("/usr/bin/convert label_1.png -gravity south     -pointsize 16 -draw \" fill black  text 0,5 '" . $wmk_str . "'\"  label_2.png");
+  		exec("/usr/bin/convert " . $img_in . " label_2.png -append " . $img_in);
+    }
   }
 }

@@ -54,13 +54,15 @@
         <collection_policy name="epistemetec:sub_collection" xmlns="http://www.islandora.ca"
           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.islandora.ca http://syn.lib.umanitoba.ca/collection_policy.xsd">
           <content_models>
-            <content_model dsid="ISLANDORACM" name="MAG IMG" namespace="epistemetec:mag_img" pid="epistemetec:mag_img"/>
-            <content_model dsid="ISLANDORACM" name="MAG BIG-IMG" namespace="epistemetec:mag_big_img" pid="epistemetec:mag_big_img"/>
-            <content_model dsid="ISLANDORACM" name="MAG DOC" namespace="epistemetec:mag_doc" pid="epistemetec:mag_doc"/>
-            <content_model dsid="ISLANDORACM" name="MAG BOOK" namespace="epistemetec:mag_book" pid="epistemetec:mag_book"/>
-            <content_model dsid="ISLANDORACM" name="MAG AUDIO" namespace="epistemetec:mag_audio" pid="epistemetec:mag_audio"/>
-            <content_model dsid="ISLANDORACM" name="MAG VIDEO" namespace="epistemetec:mag_video" pid="epistemetec:mag_video"/>
+            <content_model dsid="ISLANDORACM" name="Immagine (JPG)" namespace="epistemetec:mag_img" pid="epistemetec:mag_img"/>
+            <content_model dsid="ISLANDORACM" name="Immagine Alta Risoluzione (TIFF)" namespace="epistemetec:mag_big_img" pid="epistemetec:mag_big_img"/>
+            <content_model dsid="ISLANDORACM" name="Documento (PDF)" namespace="epistemetec:mag_doc" pid="epistemetec:mag_doc"/>
+            <content_model dsid="ISLANDORACM" name="Libro (TIFF)" namespace="epistemetec:mag_book" pid="epistemetec:mag_book"/>
+            <content_model dsid="ISLANDORACM" name="Audio (MP3)" namespace="epistemetec:mag_audio" pid="epistemetec:mag_audio"/>
+            <content_model dsid="ISLANDORACM" name="Video (FLV,MP4,AVI,MPEG)" namespace="epistemetec:mag_video" pid="epistemetec:mag_video"/>
+            <content_model dsid="ISLANDORACM" name="Sub-collezione" namespace="epistemetec:sub_collection" pid="epistemetec:sub_collection"/>
           </content_models>
+
           <search_terms>
             <term field="dc.title">dc.title</term>
             <term field="dc.creator">dc.creator</term>
@@ -126,18 +128,42 @@
   <ingest_form dsid="MAG" page="2">
     <form_builder_method class="MagFormBuilder" file="plugins/MagFormBuilder.inc" handler="handleXMLForm" method="magBuildForm" module="islandora_mag"/>
     <form_elements>
-      <element label="Title/Caption/Object Name" name="metadigit][bib][dc:title" required="true" type="textfield">
+
+      <element label="Titolo" name="metadigit][bib][dc:title" required="true" type="textfield" lang="it">
+        <description>Un nome dato alla risorsa e con il quale tale risorsa è formalmente conosciuta.</description>
+      </element>
+      <element label="Title" name="metadigit][bib][dc:title" required="true" type="textfield" lang="en">
         <description>The name given to the resource</description>
       </element>
-      <element label="Autore/proprietario/creatore" name="metadigit][bib][dc:creator" type="textfield">
+
+      <element label="Creator" name="metadigit][bib][dc:creator" type="textfield" lang="en">
         <description>An entity primarily responsible for making the content of the resource such as a person, organization or service.</description>
       </element>
-      <element label="Description" name="metadigit][bib][dc:description" required="true" type="textarea">
+      <element label="Creatore" name="metadigit][bib][dc:creator" type="textfield" lang="it">
+        <description>Un'entità (una persona, un'organizzazione o un servizio) che ha la responsabilità principale della produzione del contenuto della risorsa</description>
+      </element>
+
+      <element label="Subject" name="metadigit][bib][dc:subject" type="select_taxonomies" lang="en">
+        <description>The topic of the resource.</description>
+      </element>
+      <element label="Soggetto" name="metadigit][bib][dc:subject" type="select_taxonomies" lang="it">
+        <description>L’argomento della risorsa.</description>
+      </element>
+
+      <element label="Description" name="metadigit][bib][dc:description" required="true" type="textarea" lang="en">
         <description>Examples include an abstract, table of contents, or free-text account of the content of the resource.</description>
       </element>
-      <element label="Identifier" name="metadigit][bib][dc:identifier" type="hidden">
-        <description>A unique reference to the resource; In this instance, the accession number or collection number.</description>
+      <element label="Descrizione" name="metadigit][bib][dc:description" required="true" type="textarea" lang="it">
+        <description>Una spiegazione del contenuto della risorsa. Può includere ma non è limitata solo a: un riassunto analitico, un indice, un riferimento al contenuto di una rappresentazione grafica o un testo libero del contenuto.</description>
       </element>
+
+      <element label="Identifier" name="metadigit][bib][dc:identifier" type="hidden" lang="en">
+        <description>An unambiguous reference to the resource within a given context.</description>
+      </element>
+      <element label="Identificatore" name="metadigit][bib][dc:identifier" type="hidden" lang="it">
+        <description>Un riferimento univoco alla risorsa nell'ambito di un dato contesto.</description>
+      </element>
+
     </form_elements>
   </ingest_form>
   <edit_metadata_method class="MagFormBuilder" dsid="MAG" file="plugins/MagFormBuilder.inc" handler="magHandleEditMetadataForm" method="magBuildEditMetadataForm" module="islandora_mag"/>
