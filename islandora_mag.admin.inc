@@ -39,6 +39,16 @@ function islandora_mag_admin_globals() {
     '#description' => t('Taxonomy used to fill the dc:subject MAG\'s field.')
   );
   
+  /*
+  $options = array('1' => t('Enabled'), '0' => t('Disabled'));
+  $form['islandora_mag_admin_globals']['islandora_mag_delete_fo_on_del'] = array(
+   '#type' => 'radios',
+    '#title' => t('Cancellation of the Fedora object upon removal of the node'),
+    '#default_value' => variable_get('islandora_mag_delete_fo_on_del', '0'),
+  	'#options' => $options,
+    '#description' => t('WARNING: Set this to "Enabled" will remove the Fedora Object related to the deleted node.')
+  );
+  */
 
   $form['islandora_mag_admin_globals']['#submit'][] = 'islandora_mag_admin_globals_submit';
   

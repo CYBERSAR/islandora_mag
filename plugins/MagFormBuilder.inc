@@ -125,9 +125,52 @@ class MagFormBuilder extends FormBuilder {
    */
   function createMetadigitStream(&$form_values, &$dom, $action="insert") {
   	global $base_url;
+  	global $language;
   	
     $mag = $dom->createElement("metadigit");
     $mag->setAttribute("xmlns:dc","http://purl.org/dc/elements/1.1/");
+    $mag->setAttribute('xml:lang', $language->language);
+    
+    /*
+     * TODO
+     * 
+     * http://www.iccu.sbn.it/upload/documenti/manuale.html#magDoc
+     * -----------------------------------------------------------
+     * 
+     * L'elemento root dello schema MAG è <metadigit> (o <mag:metadigit> a seconda che si decida o meno di usare elementi qualificati).
+     * Nello start tag debbono essere richiamati tutti gli attributi necessari ad abilitare i numerosi namespace usati dallo schema MAG,
+     * come nell'esempio:
+
+<mag:metadigit xmlns:dc="http://purl.org/dc/elements/1.1/" 
+  xmlns:niso="http://www.niso.org/pdfs/DataDict.pdf" 
+  xmlns:xlink="http://www.w3.org/TR/xlink" 
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+  xmlns:mag="http://www.iccu.sbn.it/metaAG1.pdf" 
+  xsi:schemaLocation="http://www.iccu.sbn.it/metaAG1.pdf metadigit.xsd" 
+  version="2.0.1">
+    
+    <!-- qui il documento -->
+
+</mag:metadigit>
+
+Per l'elemento è definito un unico attributo opzionale:
+
+    * version : indica la versione dello schema MAG. Il valore di default è 2.0.1
+
+Si noti che l'esempio presenta un documento MAG qualificato, che normalmente si usa solo per la distribuzione del documento all'esterno dell'istiuzione; in ogni caso lo schema distribuito prevede che i documenti presenti elementi qualififcati e attributi non qualificati (file metadigit.xsd):
+
+<xsd:schema xmlns="http://www.iccu.sbn.it/metaAG1.pdf" 
+                      xmlns:dc="http://purl.org/dc/elements/1.1/" 
+                      xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+                      targetNamespace="http://www.iccu.sbn.it/metaAG1.pdf" 
+                      elementFormDefault="qualified" attributeFormDefault="unqualified">
+    
+          <!-- qui lo schema -->
+                      
+</xsd:schema>    
+                  
+  
+     */
 
     $previousElement = NULL;
     foreach ($form_values as $key => $value) {
@@ -456,6 +499,43 @@ class MagFormBuilder extends FormBuilder {
     return $section;
   }
   
+	/**
+	 * Creates the Language datastream
+	 * 
+	 * @param array $form_values
+	 * @param dom $dom
+	 * @param dom $rootElement
+	 *
+  function createLangStream(&$form_values, &$dom, &$rootElement) {
+  	global $language;
+  	
+    $datastream = $dom->createElement("foxml:datastream");
+    $datastream->setAttribute("ID", "LANG");
+    $datastream->setAttribute("STATE", "A");
+    $datastream->setAttribute("CONTROL_GROUP", "X");
+    
+    $version = $dom->createElement("foxml:datastreamVersion");
+    $version->setAttribute("ID", "LANG.0");
+    $version->setAttribute("MIMETYPE", "text/xml");
+    $version->setAttribute("LABEL", "Language Record");
+    $datastream->appendChild($version);
+        
+    $content = $dom->createElement("foxml:xmlContent");
+    $version->appendChild($content);
+    
+    $lang = $dom->createElement("languages");
+    $content->appendChild($lang);
+    
+    $lang_def = $dom->createElement("language", $language->language);
+    $lang_def->setAttribute("MAG_DS_ID", "MAG");
+    $lang_def->setAttribute("DEFAULT", "true");
+    $lang->appendChild($lang_def);
+    
+    $rootElement->appendChild($datastream);
+  }
+  */
+
+  
   
   function handleXMLForm($form_values) {
     module_load_include('inc', 'fedora_repository', 'api/fedora_item');
@@ -470,6 +550,7 @@ class MagFormBuilder extends FormBuilder {
     $rootElement->setAttribute('xmlns:foxml', "info:fedora/fedora-system:def/foxml#");
     $rootElement->setAttribute('xmlns:xsi', "http://www.w3.org/2001/XMLSchema-instance");
     $rootElement->setAttribute('xsi:schemaLocation', "info:fedora/fedora-system:def/foxml# http://www.fedora.info/definitions/1/0/foxml1-1.xsd");
+    
     $dom->appendChild($rootElement);
     
 
@@ -491,13 +572,19 @@ class MagFormBuilder extends FormBuilder {
     // Create dublin core
     //$this->createQDCStream($form_values, $dom, $rootElement);
     
-    // Create MAG
+    // Create MAG datastream
     $form_values['dc:identifier'] = $pid;
     $this->createMAGStream($form_values, $dom, $rootElement);
+    
+    global $language;
+    $form_values['metadigit_lang'] = $language->language;
+    
+    //$this->createLangStream($form_values, $dom, $rootElement);
 
     if (!empty($form_values['ingest-file-location'])) {
       $this->createFedoraDataStreams($form_values, $dom, $rootElement);
     }
+    
     $this->createPolicy($collectionPid, &$dom, &$rootElement);
     
     // definition of fedora_alter_ingest hooks
@@ -505,13 +592,7 @@ class MagFormBuilder extends FormBuilder {
 		$hook = 'fedora_alter_ingest';
 		foreach (module_implements($hook) as $module) {
 			$function = $module . '_' . $hook;
-			$datastream = $function($form_values, $dom, $rootElement);
-			if (isset($datastream) && is_array($datastream)) {
-				$datastreams = array_merge($datastreams, $datastream);
-			}
-			elseif (isset($datastream)) {
-				$datastreams[] = $datastream;
-			}
+			$function($form_values, $dom, $rootElement);
 		}
     
     // we can see the full xml only saving it. Eclipse debugger crop it at 1024 char
@@ -559,10 +640,11 @@ class MagFormBuilder extends FormBuilder {
 				$hook = 'fedora_after_ingest';
 				foreach (module_implements($hook) as $module) {
 					$function = $module . '_' . $hook;
-					$function($object, $form_values);
+					$status = $function($form_values); //TRUE on success, FALSE otherwise
 				}
 				
       }
+      
       if (!empty($_SESSION['fedora_ingest_files'])) {
         foreach ($_SESSION['fedora_ingest_files'] as $dsid => $createdFile) {
           file_delete($createdFile);
@@ -581,7 +663,7 @@ class MagFormBuilder extends FormBuilder {
   function createBaseForm(&$form, $action) {
     $form['indicator2']['metadigit'] = array(
       '#type' => 'fieldset',
-      '#title' => t('Datastream MAG' . $language->language),
+      '#title' => t('Datastream MAG'),
     );
     
     $form['indicator2']['metadigit']['bib'] = array(
@@ -599,6 +681,7 @@ class MagFormBuilder extends FormBuilder {
     }
     
     if (isset($mag_section_name) && in_array($mag_section_name, $this->mag_fields)) {
+    	//use the img section also for high-resolution images
     	$section = $mag_section_name == "bigimg" ? "img" : $mag_section_name;
 	    $form['indicator2']['metadigit'][$section] = array(
 				'#type' => 'fieldset',
@@ -607,6 +690,7 @@ class MagFormBuilder extends FormBuilder {
     }
     
     if ($mag_section_name == "img" && $action != "edit") {
+    	//insert the watermark field only for simple images (jpg/png)
     	$form['indicator2']['metadigit'][$mag_section_name]['watermarks'] = array(
 			      '#type' => 'fieldset',
 			      '#title' => t('Watermark'),
@@ -624,7 +708,6 @@ class MagFormBuilder extends FormBuilder {
   
   function magBuildForm(&$form, $elements, &$form_values) {
   	global $language;
-  	echo i18n_get_lang();
   	
   	$action = "insert";
   	$form['#multistep'] = TRUE; // used so that it triggers a form rebuild every time.
@@ -804,22 +887,28 @@ class MagFormBuilder extends FormBuilder {
   			$form_values[$key] = $_POST[$key];
   		}
   	}
+  	
+  	//retrieve collection pid...
+		$uris = __getCollectionPid($this->pid);
+    $form_values['collection_pid'] = $uris[0];
+  	
   	$dummy = $this->magUpdateDCMetadata($form_id, $form_values, $soap_client);
   	
   	$dom = new DomDocument("1.0", "UTF-8");
     $dom->formatOutput = TRUE;
     
+    
     $mag = $this->createMetadigitStream($form_values, $dom, $action="edit");
     $dom->appendChild($mag);
     
     if ($this->item->modify_datastream_by_value($dom->saveXML(), 'MAG', "MAG Record", 'text/xml') !== NULL) {
-    	drupal_set_message(t('Il datastream MAG per l\'oggetto "%pid" è stato modificato con successo.', array('%pid'=>$this->pid)));
+    	drupal_set_message(t('Success changing MAG for the object "%pid"', array('%pid' => $this->pid)));
     	
-    	//invoke all fedora_after_ingest hooks
-    	$hook = 'fedora_alter_edit';
+    	//invoke all fedora_after_edit hooks
+    	$hook = 'fedora_after_edit';
     	foreach (module_implements($hook) as $module) {
     		$function = $module . '_' . $hook;
-    		$function($form_values);
+    		$function($form_values, $this->pid);
     	}
     }
     else {
@@ -828,6 +917,38 @@ class MagFormBuilder extends FormBuilder {
     
     drupal_goto('/fedora/repository/'. $this->pid);
   }
+  
+  
+  
+  function __getCollectionPid($pid) {
+    $uris = array();
+    
+  	module_load_include('inc', 'fedora_repository', 'ObjectHelper');
+  	$object_helper = new ObjectHelper();
+  	$collection_objs = $object_helper->get_parent_objects($pid);
+  	
+  	try {
+      $parent_collections = new SimpleXMLElement($collection_objs);
+    }
+    catch (exception $e) {
+      drupal_set_message(t('Error getting parent objects !e', array('!e' => $e->getMessage())));
+      return;
+    }
+    
+    foreach ($parent_collections->results->result as $result) {
+     foreach ($result->object->attributes() as $a => $b) {
+        if ($a == 'uri') {
+          $uri = (string) $b;
+          $uri = substr($uri, strpos($uri, '/')+1);
+        }
+      }
+      
+      $uris[] = $uri;
+    }
+    
+    return $uris;
+  }
+  
   
   /**
    * Per modificare il datastream DC (di base) è necessario passare il titolo modificato
@@ -865,7 +986,7 @@ class MagFormBuilder extends FormBuilder {
    */
   function magWatermark($form_values) {
     // Create Watermark if exists
-    if (isset($form_values['watermark'])) {
+    if (isset($form_values['watermark']) and !empty($form_values['watermark']) ) {
     	$wmk_cc = variable_get('islandora_mag_img_cc_str', 'You can remove this label without breaking the Creative Commons license.');
     	$wmk_str = $form_values['watermark'];
     	
@@ -877,6 +998,18 @@ class MagFormBuilder extends FormBuilder {
     	exec("/usr/bin/convert label_0.png -gravity northeast -pointsize 12 -draw \" fill black  text 0,5 '" . $wmk_cc  . "'\"  label_1.png");
     	exec("/usr/bin/convert label_1.png -gravity south     -pointsize 16 -draw \" fill black  text 0,5 '" . $wmk_str . "'\"  label_2.png");
   		exec("/usr/bin/convert " . $img_in . " label_2.png -append " . $img_in);
+  		
+  		watchdog(
+  			'[Islandora MAG] Watermark',
+  			'Added watermark: "' . $form_values['watermark'] . '" to "' . $form_values["ingest-file-location"] . '"'
+  		);
+    }
+    else {
+      watchdog(
+  			'[Islandora MAG] Watermark',
+  			'Watermark empty for "' . $form_values["ingest-file-location"] . '"'
+  		);
     }
   }
+  
 }

@@ -66,7 +66,7 @@ function theme_select_taxonomies($element) {
    $element	Array [20]	
     	#title	Subject	
     	#required	0	
-    	#description	An entity primarily responsible for making the content of the resource such as a person, organization or service.	
+    	#description	An entity primarily responsible for making ...
     	#type	select_taxonomies	
     	#post	Array [0]	
     	#programmed	false	
@@ -102,22 +102,6 @@ function theme_select_taxonomies($element) {
   $terms = taxonomy_get_tree($tid);
   $options = array();
   
-  //in this way you can get a select with opt group
-  //but we need to let user select the opt self so we can't use it
-  /*
-  foreach ($terms as $term) {
-    if ($term->depth == 0) {
-      $options[$term->tid][0] = $term->name;
-      
-    }
-    elseif ($term->depth == 1) {
-      foreach ($term->parents as $key => $parent) {
-        $options[$parent][$term->tid] = $term->name;
-      }
-    }
-  }
-  */
-  
   foreach ($terms as $term) {
     $choice = new stdClass();
     $choice->option = array($term->name => str_repeat('-', $term->depth) . " " . $term->name);
@@ -144,3 +128,23 @@ function islandora_mag_theme() {
     )
   );
 }
+
+
+/**
+ * Implementation of hook_form_alter().
+ */
+function islandora_mag_form_alter(&$form, $form_state, $form_id) {
+	global $language;
+	
+	switch ($form_id) {
+		case 'fedora_repository_ingest_form':
+			drupal_set_message(
+				t('You\'re going to create an object that has as default language: @lang_lang / @lang_name',
+				array('@lang_lang' => $language->language, '@lang_name' => $language->name)),
+				"notice",
+				FALSE
+			);
+			break;
+	}
+}
+

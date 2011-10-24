@@ -97,6 +97,14 @@ function MagBook_add_pages_form_submit($form, &$form_state) {
       sort($file_list);
       MagBook_create_page_objects($pid, $file_list);
     }
+    else {
+    	drupal_set_message(t('Invalid Directory! Remember to use an FTP directory!'), 'error');
+    	watchdog(
+    		'islandora_mag',
+    		"Invalid directory: '%dir'.",
+    		array('%dir' => $form_state['values']['tiff_dir'])
+    	);
+    }
   }
 }
 
