@@ -38,7 +38,15 @@ function islandora_mag_menu() {
 	  'access arguments' => array('administer site configuration'),
 	  'type' => MENU_NORMAL_ITEM,
 		'file' => 'islandora_mag.admin.inc',
-	);	
+	);
+	
+	$items['fedora/cloneObject'] = array(
+        'title' => t('Clone object'),
+        'page callback' => 'islandora_mag_clone_object',
+        'type' => MENU_CALLBACK,
+        'access arguments' => array('add fedora datastreams')
+    );
+	
 	return $items;
 }
 
@@ -102,6 +110,22 @@ function theme_select_taxonomies($element) {
   $terms = taxonomy_get_tree($tid);
   $options = array();
   
+  //in this way you can get a select with opt group
+  //but we need to let user select the opt self so we can't use it
+  /*
+  foreach ($terms as $term) {
+    if ($term->depth == 0) {
+      $options[$term->tid][0] = $term->name;
+      
+    }
+    elseif ($term->depth == 1) {
+      foreach ($term->parents as $key => $parent) {
+        $options[$parent][$term->tid] = $term->name;
+      }
+    }
+  }
+  */
+  
   foreach ($terms as $term) {
     $choice = new stdClass();
     $choice->option = array($term->name => str_repeat('-', $term->depth) . " " . $term->name);
@@ -144,7 +168,221 @@ function islandora_mag_form_alter(&$form, $form_state, $form_id) {
 				"notice",
 				FALSE
 			);
+			/*
+			$object_pid_full = arg(2);
+			$exploded_pid = explode(":", $object_pid_full);
+			$pid = $exploded_pid[1];
+			if ( is_numeric($pid) ) {
+				echo $pid;
+				$form_state['storage']['step'] = 2;
+				
+				$form_state['storage']['content_model']
+				$form_state['storage']['collection_pid']
+				
+			}
+			*/
+			
 			break;
 	}
 }
 
+
+
+function getAllInfoCollectionPid($pid) {
+
+	module_load_include('inc', 'fedora_repository', 'ObjectHelper');
+	$object_helper = new ObjectHelper();
+	$collection_objs = $object_helper->get_parent_objects($pid);
+	 
+	try {
+		$parent_collections = new SimpleXMLElement($collection_objs);
+	}
+	catch (exception $e) {
+		drupal_set_message(t('Error getting parent objects !e', array('!e' => $e->getMessage())));
+		return;
+	}
+
+	foreach ($parent_collections->results->result as $result) {
+		
+		foreach ($result->object->attributes() as $a => $b) {
+			if ($a == 'uri') {
+				$uri = (string) $b;
+				$uri = substr($uri, strpos($uri, '/')+1);
+			}
+		}
+
+		$uris = array(
+			'uri' => $uri,
+			'title' => (string) $result->title
+		);
+		
+	}
+
+	return $uris;
+}
+
+
+function islandora_mag_clone_object( $collection_pid = NULL, $collection_label = NULL, $content_model = NULL, $source_pid = NULL ) {
+  
+  module_load_include('inc', 'fedora_repository', 'api/fedora_utils');
+  module_load_include('inc', 'fedora_repository', 'ObjectHelper');
+  if (!user_access('ingest new fedora objects')) {
+    drupal_set_message(t('You do not have permission to ingest.'), 'error');
+    return '';
+  }
+
+  if (!validPid($collection_pid)) {
+    if (validPid(urldecode($collection_pid))) {
+      $collection_pid = urldecode($collection_pid);
+    } else {
+      drupal_set_message(t("This collection PID $collection_pid is not valid"), 'error');
+      return ' ';
+    }
+    
+  }
+
+  if ($collection_pid == NULL) {
+    drupal_set_message(t('You must specify a collection object pid to clone an object.'), 'error');
+    return '';
+  }
+  $output = drupal_get_form('islandora_mag_ingest_form', $collection_pid, $collection_label, $content_model, $source_pid);
+
+  $breadcrumbs = array();
+  $objectHelper = new ObjectHelper();
+  $objectHelper->getBreadcrumbs($collection_pid, $breadcrumbs);
+  drupal_set_breadcrumb(array_reverse($breadcrumbs));
+
+  return $output;
+}
+
+
+
+function islandora_mag_ingest_form(&$form_state, $collection_pid, $collection_label = NULL, $content_model = NULL, $source_pid = NULL) {
+	module_load_include('inc', 'fedora_repository', 'formClass');
+
+	echo $source_pid;
+
+	module_load_include('inc', 'fedora_repository', 'ObjectHelper');
+	$oh = new ObjectHelper();
+
+	$collinfo = $oh->get_content_models_list($source_pid);
+
+	$form_state['storage']['step'] = 2; //comment this to pass through step 1
+	$form_state['values']['step']= 1; //will be added 1
+	//$form_state['storage']['content_model'] = $content_model;
+	$form_state['storage']['collection_pid'] = $collection_pid;
+	$form_state['storage']['source_pid'] = $source_pid;
+	$form_state['values']['models'] = $collinfo[0] . "/ISLANDORACM";
+	$form_state['values']['collection_pid'] =	$collection_pid;
+
+	$ingestForm = new formClass();
+	$form = $ingestForm->createIngestForm($collection_pid, $collection_label, $form_state);
+	
+	$form['submit'] = array(
+        '#type' => 'submit',
+        '#submit' => array('islandora_mag_ingest_form_submit'),
+        '#value' => "Ingest"
+    );
+    
+    return $form;
+}
+
+function islandora_mag_ingest_form_submit($form, &$form_state) {
+  //only validate the form if the submit button was pressed (other buttons may be used for AHAH
+  if ($form_state['clicked_button']['#id'] == 'edit-submit') {
+    global $base_url;
+    module_load_include('inc', 'fedora_repository', 'CollectionClass');
+    module_load_include('inc', 'fedora_repository', 'CollectionPolicy');
+    module_load_include('inc', 'fedora_repository', 'ContentModel');
+
+    $contentModelPid = ContentModel::getPidFromIdentifier($form_state['values']['models']);
+    $contentModelDsid = ContentModel::getDSIDFromIdentifier($form_state['values']['models']);
+    $err = TRUE;
+    $redirect = TRUE;
+    if (($cp = CollectionPolicy::loadFromCollection($form_state['values']['collection_pid'])) !== FALSE) {
+      $relationship = $cp->getRelationship();
+
+      if (($cm = ContentModel::loadFromModel($contentModelPid, $contentModelDsid)) !== FALSE) {
+        $pid = $cp->getNextPid($contentModelDsid);
+        global $user;
+        $form_state['values']['user_id'] = $user->name;
+        $form_state['values']['pid'] = $pid;
+        $form_state['values']['content_model_pid'] = $contentModelPid;
+        $form_state['values']['relationship'] = $relationship;
+
+        $err = (!$cm->execFormHandler($form_state['values'],$form_state));
+
+        $_SESSION['fedora_ingest_files'] = ''; //empty this variable
+
+        $attr = $cm->getIngestFormAttributes();
+        $redirect = $attr['redirect'];
+
+        if ($redirect) {
+          $form_state['storage'] = NULL;
+        }
+      }
+    }
+
+    if ($redirect) {
+      $form_state['redirect'] = ($err) ? ' ' : $base_url . "/fedora/repository/{$form_state['values']['collection_pid']}";
+    }
+  }
+}
+
+function islandora_mag_ingest_form_validate($form, &$form_state) {
+  //only validate the form if the submit button was pressed (other buttons may be used for AHAH
+  if ($form_state['clicked_button']['#id'] == 'edit-submit') {
+    switch ($form_state['storage']['step']) {
+      case 1:
+        $form_state['storage']['step']++;
+        $form_state['rebuild'] = TRUE;
+        break;
+
+      case 2:
+
+        // Get the uploaded file.
+        $validators = array();
+
+        if (!empty($_FILES['files']['name']['ingest-file-location'])) {
+          $fileObject = file_save_upload('ingest-file-location', $validators);
+
+          file_move($fileObject->filepath, 0, 'FILE_EXISTS_RENAME');
+          $form_state['values']['ingest-file-location'] = $fileObject->filepath;
+        }
+
+        if (file_exists($form_state['values']['ingest-file-location'])) {
+          module_load_include('inc', 'fedora_repository', 'ContentModel');
+          module_load_include('inc', 'fedora_repository', 'MimeClass');
+
+          $file = $form_state['values']['ingest-file-location'];
+
+          $contentModelPid = ContentModel::getPidFromIdentifier($form_state['values']['models']);
+          $contentModelDsid = ContentModel::getDSIDFromIdentifier($form_state['values']['models']);
+
+          if (($cm = ContentModel::loadFromModel($contentModelPid, $contentModelDsid)) !== FALSE) {
+            $allowedMimeTypes = $cm->getMimetypes();
+
+            $mimetype = new MimeClass();
+            $dformat = $mimetype->getType($file);
+
+            if (!empty($file)) {
+              if (!in_array($dformat, $allowedMimeTypes)) {
+                form_set_error('ingest-file-location', t('The uploaded file\'s mimetype (' . $dformat . ') is not associated with this Content Model. The allowed types are ' .
+                                implode(' ', $allowedMimeTypes)));
+                file_delete($file);
+                return;
+              }
+              elseif (!$cm->execIngestRules($file, $dformat)) {
+                drupal_set_message(t('Error following Content Model Rules'), 'error');
+                foreach (ContentModel::$errors as $err) {
+                  drupal_set_message($err, 'error');
+                }
+              }
+            }
+          }
+        }
+        $form_state['rebuild'] = FALSE;
+        break;
+    }
+  }
+}
