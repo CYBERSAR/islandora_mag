@@ -630,8 +630,6 @@ class MagFormBuilder extends FormBuilder {
 				}
 				$object->add_datastream_from_file($file_tn, "TN", "Default Thumbnail");
 			}
-
-			$a = 1;
 			
 			/*
 			 * When managing with user defined sub-collection, e.g. epistemetec:mag_collection,
