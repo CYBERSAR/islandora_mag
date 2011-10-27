@@ -631,6 +631,8 @@ class MagFormBuilder extends FormBuilder {
 				$object->add_datastream_from_file($file_tn, "TN", "Default Thumbnail");
 			}
 
+			$a = 1;
+			
 			/*
 			 * When managing with user defined sub-collection, e.g. epistemetec:mag_collection,
 			 * we need to add collection policies to show the ingestion button and thereby allow
@@ -640,18 +642,21 @@ class MagFormBuilder extends FormBuilder {
 				$collection_policy_path = drupal_get_path('module', 'islandora_mag') . "/foxml/COLLECTION_POLICY.foxml";
 				$file_cp = variable_get('default_collection_policy', $collection_policy_path);
 				$object->add_datastream_from_file($file_cp, "COLLECTION_POLICY", "Collection Policy");
-				/*
-				 $collection_father = new fedora_item($form_values['collection_pid']);
-				 $father_child_security = $collection_father->get_datastream_dissemination('CHILD_SECURITY');
+				
+				
+				$collection_father = new fedora_item($collectionPid);
+				$father_child_security = $collection_father->get_datastream_dissemination('CHILD_SECURITY');
 
-				 if (!empty($father_child_security)) {
-				 $object->add_datastream_from_string($father_child_security, "POLICY");
-				 drupal_set_message(t("Successfully added the POLICY datastream to this collection");
-				 }
-				 else {
-				 drupal_set_message(t("Errors adding the POLICY datastream to this collection", 'warning');
-				 }
-				 */
+				if ( !empty($father_child_security) ) {
+					$object->add_datastream_from_string($father_child_security, "POLICY");
+					$object->add_datastream_from_string($father_child_security, "CHILD_SECURITY");
+				 	drupal_set_message(t("Successfully added the POLICY datastream to this collection"));
+				}
+				else {
+					drupal_set_message(t("Errors adding the POLICY datastream to this collection"), 'warning');
+				}
+				
+				
 			}
 
 			if (!empty($object->pid)) {
