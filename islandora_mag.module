@@ -46,6 +46,32 @@ function islandora_mag_menu() {
         'type' => MENU_CALLBACK,
         'access arguments' => array('add fedora datastreams')
     );
+    
+    
+/*
+ * The path "fedora/cloneObject" will be called e.g. from a clicked link in a block like that
+ * 
+    <?php
+    $object_pid_full = arg(2);
+
+    if ( arg(0) == "fedora" && arg(1) == "repository" &&  !empty($object_pid_full) ) {
+    	module_load_include('module', 'islandora_mag', 'islandora_mag');
+    	$coll = getAllInfoCollectionPid($object_pid_full);
+    	$exploded_pid = explode(":", $object_pid_full);
+    	$pid = $exploded_pid[1];
+
+    	if ( is_numeric($pid) ) {
+    		$path = drupal_get_path('module', 'islandora_mag');
+    		global $base_url;
+
+    		echo '<a title="' . t('Create a New object like that') . '"  href="' . base_path() .  'fedora/cloneObject/' . $coll['uri'] . "/" . $coll['title'] . "/-/" .  $object_pid_full  . '">';
+    		echo '<img src="' . $base_url . '/' . $path .  '/images/clone.png" alt="' . t('Create a New Object like that') . '" class="icon">';
+    		echo '</a>' . t('Clone it!');
+    	}
+    }
+
+    ?>
+ */    
 	
 	return $items;
 }
@@ -168,19 +194,6 @@ function islandora_mag_form_alter(&$form, $form_state, $form_id) {
 				"notice",
 				FALSE
 			);
-			/*
-			$object_pid_full = arg(2);
-			$exploded_pid = explode(":", $object_pid_full);
-			$pid = $exploded_pid[1];
-			if ( is_numeric($pid) ) {
-				echo $pid;
-				$form_state['storage']['step'] = 2;
-				
-				$form_state['storage']['content_model']
-				$form_state['storage']['collection_pid']
-				
-			}
-			*/
 			
 			break;
 	}
