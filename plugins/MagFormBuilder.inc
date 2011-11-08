@@ -535,9 +535,29 @@ class MagFormBuilder extends FormBuilder {
 	 }
 	 */
 
+	function clean_value( $value ) {
+		
+		//$value = iconv("UTF-8","UTF-8//IGNORE", $value); non funziona
+		
+		//return a string with all NUL bytes, HTML and PHP tags stripped
+		/*
+		$value = strip_tags ( $value );
+		$value = htmlspecialchars ( $value, ENT_IGNORE );
+		$value = check_plain( $value );
+		*/
+		//$value = htmlentities( $value ); //rimuove tutto
+		$value = filter_var($value, FILTER_SANITIZE_URL);
+		
+		return $value;
+		
+	}
 
 
 	function handleXMLForm($form_values) {
+		
+		$form_values['dc:title'] = $this->clean_value($form_values['dc:title']);
+		$form_values['dc:description'] = $this->clean_value($form_values['dc:description']);
+		
 		module_load_include('inc', 'fedora_repository', 'api/fedora_item');
 		module_load_include('inc', 'fedora_repository', 'CollectionPolicy');
 
@@ -954,9 +974,11 @@ class MagFormBuilder extends FormBuilder {
 				$form_values[$key] = $_POST[$key];
 			}
 		}
-			
+		$form_values['dc:title'] = $this->clean_value($form_values['dc:title']);
+		$form_values['dc:description'] = $this->clean_value($form_values['dc:description']);
+		
 		//retrieve collection pid...
-		$uris = __getCollectionPid($this->pid);
+		$uris = $this->__getCollectionPid($this->pid);
 		$form_values['collection_pid'] = $uris[0];
 			
 		$dummy = $this->magUpdateDCMetadata($form_id, $form_values, $soap_client);
