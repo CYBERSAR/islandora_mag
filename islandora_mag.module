@@ -134,6 +134,12 @@ function theme_select_taxonomies($element) {
   }
   
   $terms = taxonomy_get_tree($tid);
+  
+  if (module_exists('i18ntaxonomy')) {
+  	//get terms translated
+    $terms = i18ntaxonomy_localize_terms($terms, array('name', 'description'));
+  }
+
   $options = array();
   
   //in this way you can get a select with opt group

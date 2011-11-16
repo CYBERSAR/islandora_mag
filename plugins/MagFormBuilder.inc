@@ -535,29 +535,22 @@ class MagFormBuilder extends FormBuilder {
 	 }
 	 */
 
-	function clean_value( $value ) {
-		
-		//$value = iconv("UTF-8","UTF-8//IGNORE", $value); non funziona
-		
-		//return a string with all NUL bytes, HTML and PHP tags stripped
-		/*
-		$value = strip_tags ( $value );
-		$value = htmlspecialchars ( $value, ENT_IGNORE );
-		$value = check_plain( $value );
-		*/
-		//$value = htmlentities( $value ); //rimuove tutto
-		$value = filter_var($value, FILTER_SANITIZE_URL);
-		
-		return $value;
-		
+	
+	function toAscii($str, $replace=array(), $delimiter='-') {
+		setlocale(LC_ALL, 'it_IT.UTF8');
+		if( !empty($replace) ) {
+			$str = str_replace((array)$replace, ' ', $str);
+		}
+	
+		$clean = iconv('UTF-8', 'ASCII//TRANSLIT', $str);
+		$clean = preg_replace("/[^a-zA-Z0-9\/_|+ -]/", '', $clean);
+		$clean = strtolower(trim($clean, '-'));
+		$clean = preg_replace("/[\/_|+ -]+/", $delimiter, $clean);
+	
+		return $clean;
 	}
 
-
 	function handleXMLForm($form_values) {
-		
-		$form_values['dc:title'] = $this->clean_value($form_values['dc:title']);
-		$form_values['dc:description'] = $this->clean_value($form_values['dc:description']);
-		
 		module_load_include('inc', 'fedora_repository', 'api/fedora_item');
 		module_load_include('inc', 'fedora_repository', 'CollectionPolicy');
 
@@ -577,7 +570,10 @@ class MagFormBuilder extends FormBuilder {
 		$this->magWatermark($form_values);
 
 		// Create standard fedora stuff
+		$tmp = $form_values['dc:title'];
+		$form_values['dc:title'] = $this->toAscii($tmp);
 		$this->createStandardFedoraStuff($form_values, $dom, $rootElement);
+		$form_values['dc:title'] = $tmp;
 
 		// Create relationships
 		$this->createRelationShips($form_values, $dom, $rootElement);
@@ -650,7 +646,7 @@ class MagFormBuilder extends FormBuilder {
 				}
 				$object->add_datastream_from_file($file_tn, "TN", "Default Thumbnail");
 			}
-			
+
 			/*
 			 * When managing with user defined sub-collection, e.g. epistemetec:mag_collection,
 			 * we need to add collection policies to show the ingestion button and thereby allow
@@ -974,9 +970,7 @@ class MagFormBuilder extends FormBuilder {
 				$form_values[$key] = $_POST[$key];
 			}
 		}
-		$form_values['dc:title'] = $this->clean_value($form_values['dc:title']);
-		$form_values['dc:description'] = $this->clean_value($form_values['dc:description']);
-		
+			
 		//retrieve collection pid...
 		$uris = $this->__getCollectionPid($this->pid);
 		$form_values['collection_pid'] = $uris[0];
@@ -1053,7 +1047,7 @@ class MagFormBuilder extends FormBuilder {
 		//NB il trattino finale è fondamentale
 		foreach ($form_value as $key => $value) {
 			if ($key == "dc:title") {
-				$form_dc["dc:title-"] = $value;
+				$form_dc["dc:title-"] = $this->toAscii($value);
 			}
 			if ($key == "dc:identifier") {
 				$form_dc["dc:identifier-"] = $value;
