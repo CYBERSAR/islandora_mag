@@ -589,6 +589,7 @@ class MagFormBuilder extends FormBuilder {
 				$form_values['dc:relation'] = $collectionName;
 			}
 		}
+		
 		*/
 		
 		// Create dublin core
