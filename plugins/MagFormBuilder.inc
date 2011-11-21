@@ -579,12 +579,18 @@ class MagFormBuilder extends FormBuilder {
 		$this->createRelationShips($form_values, $dom, $rootElement);
 		$collectionPid = $form_values['collection_pid'];
 
+		/*
+		 * We don't need to fill dc:relation with the collection name anymore.
+		 * Now we want to specify one or more pids.
+		 * 
 		if (($cp = CollectionPolicy::LoadFromCollection($collectionPid)) !== FALSE) {
 			$collectionName = trim($cp->getName());
 			if (trim($collectionName) != '') {
 				$form_values['dc:relation'] = $collectionName;
 			}
 		}
+		*/
+		
 		// Create dublin core
 		//$this->createQDCStream($form_values, $dom, $rootElement);
 

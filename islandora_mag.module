@@ -17,7 +17,20 @@
  * 
  * in naming hooks we can add at the end "_object" to refear to the fedora object
  *  
- * /
+ */
+
+/*
+ * nota 1: il codice con "nota 1" importa il javascript che consente di aprire
+ * una finestra modale al click sul campo dc:relation.
+ * Viene creato un path nel menu e associato ad una callback (che per ora fa solo
+ * un pull del contenuti della collezione in cui il partner sta inserendo gli oggetti)
+ * Questo path verrà invocato dalla chiamata ajax correlata al click sul campo dc:relation.
+ */
+
+    /*
+     * TODO nota 1
+drupal_add_js(drupal_get_path('module', 'islandora_mag') . '/dcrelations.js');
+*/
 
 /**
  * Implements hook fedora_alter_content_models_path
@@ -47,7 +60,6 @@ function islandora_mag_menu() {
         'access arguments' => array('add fedora datastreams')
     );
     
-    
 /*
  * The path "fedora/cloneObject" will be called e.g. from a clicked link in a block like that
  * 
@@ -71,10 +83,41 @@ function islandora_mag_menu() {
     }
 
     ?>
- */    
+ */
+    
+    /*
+     * TODO nota 1
+    $items['islandora_mag/ajax_calls/get_objects_by/%'] = array(
+        'page callback' => 'islandora_mag_ajax_objects',
+        'type' => MENU_CALLBACK,
+        'access arguments' => array('add fedora datastreams')
+    );
 	
 	return $items;
+	*/
 }
+
+/*
+ * TODO nota 1 
+function islandora_mag_ajax_objects() {
+	$collection_pid = arg(3);
+	
+	$allowed_collections = array(
+		"epistemetec:mag_collection",
+		"epistemetec:ci_collection",
+	);
+	
+	if (!empty($collection_pid) && in_array($collection_pid, $allowed_collections)) {
+		module_load_include('inc', 'fedora_repository', 'api/fedora_collection');
+		
+		$objects = get_related_items_as_array($collection_pid);
+		
+		return var_dump($objects);
+	}
+	
+	return null;
+}
+*/
 
 
 /**
