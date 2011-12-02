@@ -9,7 +9,7 @@
       <applies_to>image/tiff</applies_to>
       <applies_to>image/tif</applies_to>
       <ingest_methods>
-        <ingest_method class="ImageManipulation" dsid="JP2" file="plugins/ImageManipulation.inc" method="createJP2" modified_files_ext="jp2" module=""/>
+        <ingest_method class="ImageManipulation" dsid="JP2" file="plugins/ImageManipulation.inc" method="createJP2" modified_files_ext="jp2" module="islandora_mag"/>
       </ingest_methods>
     </rule>
     <rule>
@@ -19,19 +19,19 @@
        <applies_to>image/tiff</applies_to>
        <applies_to>image/tif</applies_to>
        <ingest_methods>
-         <ingest_method class="ImageManipulation" dsid="TN" file="plugins/ImageManipulation.inc" method="createThumbnail" modified_files_ext="jpg" module="">
+         <ingest_method class="ImageManipulation" dsid="TN" file="plugins/ImageManipulation.inc" method="createThumbnail" modified_files_ext="jpg" module="islandora_mag">
            <parameters>
              <parameter name="width">100</parameter>
              <parameter name="height">120</parameter>
            </parameters>
          </ingest_method>
-         <ingest_method class="ImageManipulation" dsid="PNG" file="plugins/ImageManipulation.inc" method="createPNG" modified_files_ext="png" module="">
+         <ingest_method class="ImageManipulation" dsid="PNG" file="plugins/ImageManipulation.inc" method="createPNG" modified_files_ext="png" module="islandora_mag">
            <parameters>
              <parameter name="width">100</parameter>
              <parameter name="height">120</parameter>
            </parameters>
          </ingest_method>
-         <ingest_method class="ImageManipulation" dsid="PRE" file="plugins/ImageManipulation.inc" method="createPreview" modified_files_ext="jpg" module="">
+         <ingest_method class="ImageManipulation" dsid="PRE" file="plugins/ImageManipulation.inc" method="createPreview" modified_files_ext="jpg" module="islandora_mag">
            <parameters>
              <parameter name="width">240</parameter>
              <parameter name="height">300</parameter>
