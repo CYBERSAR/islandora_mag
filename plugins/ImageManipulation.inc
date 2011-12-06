@@ -75,17 +75,17 @@ class ImageManipulation {
 
     $output = array();
     
-    /*
-    
     $cmd = "exiftool -Compression -s -s -s " . $file;
     $compression = exec($cmd);
-    	
     if ($compression != "Uncompressed") {
-    $filenew = $file . ".new.tiff";
-    $cmd = "convert -compress None " . $file . " " .  $filenew;
-    exec($cmd);
+	    $filenew = $file . ".new.tiff";
+	    $cmd = "convert -compress None " . $file . " " .  $filenew;
+	    exec($cmd);
     	$file = $filenew;
     }
+    
+    
+    /*
 	
     exec('kdu_compress -i "' . $file . '" -o "' . $file . $file_suffix . '" -rate 0.5 Clayers=1 Clevels=7 "Cprecincts={256,256},{256,256},{256,256},{128,128},{128,128},{64,64},{64,64},{32,32},{16,16}" "Corder=RPCL" "ORGgen_plt=yes" "ORGtparts=R" "Cblk={32,32}" Cuse_sop=yes', $output, $returnValue);
 
@@ -109,7 +109,7 @@ class ImageManipulation {
 	$_SESSION['fedora_ingest_files'][$dsid] = $file . $file_suffix;
 	
 	//exec('convert "' . $file . '" -define jp2:tilewidth=256 -define jp2:tileheight=256 "' . $file . "_lossless.jp2" . '"');
-	//$_SESSION['fedora_ingest_files'][$dsid] = $file . "_lossless.jp2";
+	//$_SESSION['fedora_ingest_files']["LOSSLESS_JP2"] = $file . '_lossless.jp2';
     
     exec("convert  -resize 800 \"{$file}\"[0]  \"$file-med.jpg\"", $output, $returnValue);
     if ($returnValue == '0') {
@@ -126,11 +126,14 @@ class ImageManipulation {
       ObjectHelper::warnIfMisconfigured('ImageMagick');
     }
 
+    if ($compression != "Uncompressed") {
+    	unlink($file);
+    }
+    
     if ($returnValue == '0') {
       return TRUE;
     }
     else {
-
       return $returnValue;
     }
   }
