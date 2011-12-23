@@ -1,0 +1,150 @@
+<?php
+// $Id$
+
+/**
+ * @file
+ * Adds the support for the italian standard MAG.
+ *
+ */
+
+
+/**
+ * This module exposes a fews hooks. Till now the only hooks are:
+ *  
+ * hook_fedora_after_ingest; 
+ * hook_fedora_alter_ingest;
+ * hook_fedora_alter_edit;
+ * 
+ * in naming hooks we can add at the end "_object" to refear to the fedora object
+ *  
+ * /
+
+/**
+ * Implements hook fedora_alter_content_models_path
+ * @return an addition path to our content models
+ */
+function islandora_mag_fedora_alter_content_models_path() {
+	return drupal_get_path('module','islandora_mag') . '/content_models';
+}
+
+/**
+ * Adds a menu to set some stuff
+ */
+function islandora_mag_menu() {
+  $items['admin/settings/islandora_mag'] = array(
+	  'title' => 'Islandora MAG settings',
+	  'page callback' => 'drupal_get_form',
+	  'page arguments' => array('islandora_mag_admin_globals'),
+	  'access arguments' => array('administer site configuration'),
+	  'type' => MENU_NORMAL_ITEM,
+		'file' => 'islandora_mag.admin.inc',
+	);	
+	return $items;
+}
+
+
+/**
+ * Implementation of hook_elements():
+ * Custom form element for the MAG
+ */
+function islandora_mag_elements() {
+  $type['select_taxonomies'] = array( 
+    '#input'=> TRUE,
+    '#sticky ' => FALSE,
+  );
+
+  return $type;
+}
+
+/**
+ * Theme element: select_taxonomies
+ * @param array $element
+ */
+function theme_select_taxonomies($element) {
+  /*
+   For example, our array is:
+   $element	Array [20]	
+    	#title	Subject	
+    	#required	0	
+    	#description	An entity primarily responsible for making ...
+    	#type	select_taxonomies	
+    	#post	Array [0]	
+    	#programmed	false	
+    	#tree	false	
+    	#parents	Array [1]	
+    		0	dc:subject	
+    	#array_parents	Array [4]	
+    		0	indicator2	
+    		1	metadigit	
+    		2	bib	
+    		3	dc:subject	
+    	#weight	0.002	
+    	#processed	true	
+    	#attributes	Array [0]	
+    	#input	true	
+    	#sticky 	false	
+    	#process	Array [1]	
+    		0	imfe_sticky_select_process	
+    	#name	dc:subject	
+    	#id	edit-dc:subject	
+    	#value	
+    	#defaults_loaded	true	
+    	#sorted	true	
+   */
+  
+  $tid = variable_get('islandora_mag_dcsubject_taxonomy', 0);
+  
+  if ($tid == 0) {
+  	drupal_set_message(t('Field "dc:subject" unfilled: go to the islandora_mag configuration page to set the right taxonomy.'), 'warning');
+  	return null;
+  }
+  
+  $terms = taxonomy_get_tree($tid);
+  $options = array();
+  
+  foreach ($terms as $term) {
+    $choice = new stdClass();
+    $choice->option = array($term->name => str_repeat('-', $term->depth) . " " . $term->name);
+    $options[] = $choice;
+  }
+  
+  //here we add taxonomies to the element's option
+  $element['#options'] = $options;
+
+  $el = '<select name="'. $element['#name'] .'" id="'. $element['#id'] .'" class="tid_' . $tid . '">';
+  $el.= form_select_options($element);
+  $el.= '</select>';
+  
+  return theme('form_element', $element, $el);
+}
+
+/**
+ * Implementation of hook_theme() to register how to theme our elements.
+ */
+function islandora_mag_theme() {
+  return array(
+    'select_taxonomies' => array(
+      'arguments' => array('form' => NULL),
+    )
+  );
+}
+
+
+/**
+ * Implementation of hook_form_alter().
+ */
+function islandora_mag_form_alter(&$form, $form_state, $form_id) {
+	global $language;
+	
+	switch ($form_id) {
+		case 'fedora_repository_ingest_form':
+			drupal_set_message(
+				t('You\'re going to create an object that has as default language: @lang_lang / @lang_name',
+				array('@lang_lang' => $language->language, '@lang_name' => $language->name)),
+				"notice",
+				FALSE
+			);
+			break;
+	}
+}
+

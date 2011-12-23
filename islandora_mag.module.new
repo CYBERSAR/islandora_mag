@@ -52,7 +52,7 @@ function islandora_mag_menu() {
 	  'type' => MENU_NORMAL_ITEM,
 		'file' => 'islandora_mag.admin.inc',
 	);
-	
+	/*
 	$items['fedora/cloneObject'] = array(
         'title' => t('Clone object'),
         'page callback' => 'islandora_mag_clone_object',
@@ -92,9 +92,9 @@ function islandora_mag_menu() {
         'type' => MENU_CALLBACK,
         'access arguments' => array('add fedora datastreams')
     );
-	*/
-	return $items;
 	
+	return $items;
+	*/
 }
 
 /*
