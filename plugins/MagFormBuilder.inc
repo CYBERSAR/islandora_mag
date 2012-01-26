@@ -254,7 +254,7 @@ class MagFormBuilder extends FormBuilder {
 		 * if is book, we probably have an image_group created when ingecting new pages
 		 * so, we need to preserve it from form editing or it will be lost
 		 */
-		if ($mag_section_name == "book" && action == "edit") {
+		if ($mag_section_name == "book" and $action == "edit") {
 		  module_load_include('inc', 'fedora_repository', 'api/fedora_item');
 		  $book = new Fedora_Item($this->pid);
 		  if (!$book->exists()) {
@@ -262,21 +262,16 @@ class MagFormBuilder extends FormBuilder {
 		  }
 		  $mag_ds = $book->get_datastream_dissemination("MAG");
 
-		  try {
-		    $sxmles = new SimpleXMLElement($mag_ds);
-		  }
-		  catch (exception $e) {
-		    drupal_set_message(t('Error getting mag ds !e', array('!e' => $e->getMessage())));
-		    return;
-		  }
+		  $doom = new DOMDocument();
+		  if ($doom->loadXML($mag_ds)) {
 
-		  foreach ($sxmles->gen->img_group as $img_group) {
-		    $dom_img_group = dom_import_simplexml($img_group);
-        $gen->appendChild($dom_img_group);
-		  }
+		    $img_groups = $old_metadigit->getElementsByTagName('img_group');
 
+		    foreach ($img_groups as $img_group) {
+		      $gen->appendChild($img_group);
+		    }
+		  }
 		}
-
 
 
 		return $mag;
