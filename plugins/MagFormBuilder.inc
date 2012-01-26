@@ -254,7 +254,7 @@ class MagFormBuilder extends FormBuilder {
 		 * if is book, we probably have an image_group created when ingecting new pages
 		 * so, we need to preserve it from form editing or it will be lost
 		 */
-		if ($mag_section_name == "book") {
+		if ($mag_section_name == "book" && action == "edit") {
 		  module_load_include('inc', 'fedora_repository', 'api/fedora_item');
 		  $book = new Fedora_Item($this->pid);
 		  if (!$book->exists()) {
