@@ -248,41 +248,47 @@ class MagFormBuilder extends FormBuilder {
 			if (isset($stuff)) {
 				$mag->appendChild($stuff);
 			}
-
-			/*
-			 * if is book, we probably have an image_group created when ingecting new pages
-			 * so, we need to preserve it from form editing or it will be lost
-			 */
-			if ($mag_section_name == "book") {
-			  drupal_set_message(t("[booktest] : Is book"), 'warning');
-
-			  module_load_include('inc', 'fedora_repository', 'api/fedora_item');
-        $book = new Fedora_Item($this->pid);
-        if (!$book->exists()) {
-          return FALSE;
-        }
-    		$mag_ds = $book->get_datastream_dissemination("MAG");
-        $mag_ds = trim($mag_ds);
-
-        drupal_set_message( "[booktest] : got magds: " . $mag_ds, 'warning');
-
-        $doom = new DOMDocument();
-        if ($doom->loadXML($mag_ds)) {
-          drupal_set_message( "[booktest] : loaded old xml", 'warning');
-
-        	$old_metadigit = $doom->getElementsByTagName('metadigit')->item(0);
-        	$img_group = $old_metadigit->getElementsByTagName('img_group');
-
-        	drupal_set_message( "[booktest] : got imggroup: " . $img_group, 'warning');
-
-        	if ($img_group->length > 0) {
-            $mag->appendChild($img_group);
-        	}
-        }
-			}
-
-
 		}
+
+
+
+		/*
+		 * if is book, we probably have an image_group created when ingecting new pages
+		 * so, we need to preserve it from form editing or it will be lost
+		 */
+		if ($mag_section_name == "book") {
+
+		  file_save_data($dom->saveXML(), 'book_debug.txt', FILE_EXISTS_REPLACE);
+
+		  drupal_set_message(t("[booktest] : Is book"), 'warning');
+
+		  module_load_include('inc', 'fedora_repository', 'api/fedora_item');
+		  $book = new Fedora_Item($this->pid);
+		  if (!$book->exists()) {
+		    return FALSE;
+		  }
+		  $mag_ds = $book->get_datastream_dissemination("MAG");
+		  $mag_ds = trim($mag_ds);
+
+		  drupal_set_message( "[booktest] : got magds: " . $mag_ds, 'warning');
+
+		  $doom = new DOMDocument();
+		  if ($doom->loadXML($mag_ds)) {
+		    drupal_set_message( "[booktest] : loaded old xml", 'warning');
+
+		    $old_metadigit = $doom->getElementsByTagName('metadigit')->item(0);
+		    $img_group = $old_metadigit->getElementsByTagName('img_group');
+
+		    drupal_set_message( "[booktest] : got imggroup: " . $img_group, 'warning');
+
+		    if ($img_group->length > 0) {
+		      $mag->appendChild($img_group);
+		    }
+		  }
+		}
+
+
+
 
 		return $mag;
 	}
