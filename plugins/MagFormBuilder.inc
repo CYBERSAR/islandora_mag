@@ -126,7 +126,7 @@ class MagFormBuilder extends FormBuilder {
 	function createMetadigitStream(&$form_values, &$dom, $action="insert") {
 		global $base_url;
 		global $language;
-			
+
 		$mag = $dom->createElement("metadigit");
 		$mag->setAttribute("xmlns:dc","http://purl.org/dc/elements/1.1/");
 		$mag->setAttribute('xml:lang', $language->language);
@@ -248,6 +248,32 @@ class MagFormBuilder extends FormBuilder {
 			if (isset($stuff)) {
 				$mag->appendChild($stuff);
 			}
+
+			/*
+			 * if is book, we probably have an image_group created when ingecting new pages
+			 * so, we need to preserve it from form editing or it will be lost
+			 */
+			if ($mag_section_name == "book") {
+			  module_load_include('inc', 'fedora_repository', 'api/fedora_item');
+        $book = new Fedora_Item($this->pid);
+        if (!$book->exists()) {
+          return FALSE;
+        }
+    		$mag_ds = $book->get_datastream_dissemination("MAG");
+        $mag_ds = trim($mag_ds);
+
+        $doom = new DOMDocument();
+        if ($doom->loadXML($mag_ds)) {
+        	$old_metadigit = $doom->getElementsByTagName('metadigit')->item(0);
+        	$img_group = $old_metadigit->getElementsByTagName('img_group');
+
+        	if ($img_group->length > 0) {
+            $mag->appendChild($img_group);
+        	}
+        }
+			}
+
+
 		}
 
 		return $mag;
@@ -265,7 +291,7 @@ class MagFormBuilder extends FormBuilder {
 	 */
 	function createMetadigitSection(&$form_values, &$dom, $action, $section_name) {
 		$section = $dom->createElement($section_name);
-			
+
 		$tags3_sublevels = array(
 	  		"audio_dimentions",
 	  		"audio_metrics",
@@ -508,7 +534,7 @@ class MagFormBuilder extends FormBuilder {
 	 *
 	 function createLangStream(&$form_values, &$dom, &$rootElement) {
 	 global $language;
-	  
+
 	 $datastream = $dom->createElement("foxml:datastream");
 	 $datastream->setAttribute("ID", "LANG");
 	 $datastream->setAttribute("STATE", "A");
@@ -535,18 +561,18 @@ class MagFormBuilder extends FormBuilder {
 	 }
 	 */
 
-	
+
 	function toAscii($str, $replace=array(), $delimiter='-') {
 		setlocale(LC_ALL, 'it_IT.UTF8');
 		if( !empty($replace) ) {
 			$str = str_replace((array)$replace, ' ', $str);
 		}
-	
+
 		$clean = iconv('UTF-8', 'ASCII//TRANSLIT', $str);
 		$clean = preg_replace("/[^a-zA-Z0-9\/_|+ -]/", '', $clean);
 		$clean = strtolower(trim($clean, '-'));
 		$clean = preg_replace("/[\/_|+ -]+/", $delimiter, $clean);
-	
+
 		return $clean;
 	}
 
@@ -582,16 +608,16 @@ class MagFormBuilder extends FormBuilder {
 		/*
 		 * We don't need to fill dc:relation with the collection name anymore.
 		 * Now we want to specify one or more pids.
-		 * 
+		 *
 		if (($cp = CollectionPolicy::LoadFromCollection($collectionPid)) !== FALSE) {
 			$collectionName = trim($cp->getName());
 			if (trim($collectionName) != '') {
 				$form_values['dc:relation'] = $collectionName;
 			}
 		}
-		
+
 		*/
-		
+
 		// Create dublin core
 		//$this->createQDCStream($form_values, $dom, $rootElement);
 
@@ -663,8 +689,8 @@ class MagFormBuilder extends FormBuilder {
 				$collection_policy_path = drupal_get_path('module', 'islandora_mag') . "/foxml/COLLECTION_POLICY.foxml";
 				$file_cp = variable_get('default_collection_policy', $collection_policy_path);
 				$object->add_datastream_from_file($file_cp, "COLLECTION_POLICY", "Collection Policy");
-				
-				
+
+
 				$collection_father = new fedora_item($collectionPid);
 				$father_child_security = $collection_father->get_datastream_dissemination('CHILD_SECURITY');
 
@@ -676,8 +702,8 @@ class MagFormBuilder extends FormBuilder {
 				else {
 					drupal_set_message(t("Errors adding the POLICY datastream to this collection"), 'warning');
 				}
-				
-				
+
+
 			}
 
 			if (!empty($object->pid)) {
@@ -755,9 +781,9 @@ class MagFormBuilder extends FormBuilder {
 
 	function magBuildForm(&$form, $elements, &$form_values) {
 		global $language;
-			
+
 		$action = "insert";
-		
+
 		if ( isset($form_values['storage']['source_pid'] )) {
 
 			$action = "clone";
@@ -782,11 +808,11 @@ class MagFormBuilder extends FormBuilder {
 			$this->cm = ContentModel::loadFromObject($form_values['storage']['source_pid']);
 			$this->item = new fedora_item($form_values['storage']['source_pid']);
 		}
-		
+
 		$form['#multistep'] = TRUE; // used so that it triggers a form rebuild every time.
-		
+
 		$this->createBaseForm($form, $action);
-			
+
 		foreach ($elements as $element) {
 			$name = explode('][', $element['name']);
 
@@ -796,15 +822,15 @@ class MagFormBuilder extends FormBuilder {
 				);
 				$the_name = $name[sizeof($name)-1];
 				$the_value = $xml_array_values[$the_name];
-					
+
 				if ( isset($the_value) &&  !in_array( $the_name, $excluded_values ) ) {
 					$el_value = $the_value;
 				}
 				else {
 					$el_value = "";
 				}
-					
-					
+
+
 				if ($element['type'] == 'markup') {
 					$el = array('#value'=> $element['description']);
 				}
@@ -818,7 +844,7 @@ class MagFormBuilder extends FormBuilder {
 					);
 				}
 
-					
+
 				$elLocation = &$form['indicator2'];
 				while (isset($elLocation[$name[0]]) && ($partial = array_shift($name)) != NULL) {
 					$elLocation = &$elLocation[$partial];
@@ -892,7 +918,7 @@ class MagFormBuilder extends FormBuilder {
 			foreach ($elements as $element) { // per ogni elemento del form (per come è nel CM)
 				$name = explode('][', $element['name']);
 				$elLocation = &$form['indicator2'];
-					
+
 				while (isset($elLocation[$name[0]]) && ($partial = array_shift($name)) != NULL) {
 					$elLocation = &$elLocation[$partial];
 				}
@@ -977,13 +1003,13 @@ class MagFormBuilder extends FormBuilder {
 				$form_values[$key] = $_POST[$key];
 			}
 		}
-			
+
 		//retrieve collection pid...
 		$uris = $this->__getCollectionPid($this->pid);
 		$form_values['collection_pid'] = $uris[0];
-			
+
 		$dummy = $this->magUpdateDCMetadata($form_id, $form_values, $soap_client);
-			
+
 		$dom = new DomDocument("1.0", "UTF-8");
 		$dom->formatOutput = TRUE;
 
@@ -1015,7 +1041,7 @@ class MagFormBuilder extends FormBuilder {
 		module_load_include('inc', 'fedora_repository', 'ObjectHelper');
 		$object_helper = new ObjectHelper();
 		$collection_objs = $object_helper->get_parent_objects($pid);
-			
+
 		try {
 			$parent_collections = new SimpleXMLElement($collection_objs);
 		}
