@@ -269,11 +269,14 @@ class MagFormBuilder extends FormBuilder {
 
 		  $doom = new DOMDocument();
 		  if ($doom->loadXML($mag_ds)) {
-		    file_save_data($doom->saveXML(), 'full_xml_debug-book.txt', FILE_EXISTS_REPLACE);
+
 
 		    drupal_set_message( "[booktest] : loaded old xml", 'warning');
 
 		    $old_metadigit = $doom->getElementsByTagName('metadigit')->item(0);
+
+		    file_save_data($old_metadigit->saveXML(), 'full_xml_debug-book.txt', FILE_EXISTS_REPLACE);
+
 		    $img_group = $old_metadigit->getElementsByTagName('img_group');
 
 		    drupal_set_message( "[booktest] : got imggroup: " . $img_group, 'warning');
