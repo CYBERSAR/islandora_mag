@@ -3,3 +3,5 @@
 Un po di documentazione per questo modulo.
 
 Ok, ecco ancora un pò di doc. Bravo scrivi scrivi. Bisogna capire quello che si sta facendo.
+
+Certo, mica siamo qui a schiacciare i punti neri alle coccinelle! -_-"
