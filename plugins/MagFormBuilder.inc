@@ -271,7 +271,8 @@ class MagFormBuilder extends FormBuilder {
 		  }
 
 		  foreach ($sxmles->gen->img_group as $img_group) {
-        $gen->appendChild($img_group);
+		    $dom_img_group = dom_import_simplexml($img_group);
+        $gen->appendChild($dom_img_group);
 		  }
 
 		}
