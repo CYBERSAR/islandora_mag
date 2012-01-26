@@ -257,11 +257,6 @@ class MagFormBuilder extends FormBuilder {
 		 * so, we need to preserve it from form editing or it will be lost
 		 */
 		if ($mag_section_name == "book") {
-
-		  file_save_data($dom->saveXML(), 'book_debug.txt', FILE_EXISTS_REPLACE);
-
-		  drupal_set_message(t("[booktest] : Is book"), 'warning');
-
 		  module_load_include('inc', 'fedora_repository', 'api/fedora_item');
 		  $book = new Fedora_Item($this->pid);
 		  if (!$book->exists()) {
