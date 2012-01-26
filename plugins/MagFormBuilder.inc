@@ -254,6 +254,8 @@ class MagFormBuilder extends FormBuilder {
 			 * so, we need to preserve it from form editing or it will be lost
 			 */
 			if ($mag_section_name == "book") {
+			  drupal_set_message(t("[booktest] : Is book"), 'warning');
+
 			  module_load_include('inc', 'fedora_repository', 'api/fedora_item');
         $book = new Fedora_Item($this->pid);
         if (!$book->exists()) {
@@ -262,10 +264,16 @@ class MagFormBuilder extends FormBuilder {
     		$mag_ds = $book->get_datastream_dissemination("MAG");
         $mag_ds = trim($mag_ds);
 
+        drupal_set_message( "[booktest] : got magds: " . $mag_ds, 'warning');
+
         $doom = new DOMDocument();
         if ($doom->loadXML($mag_ds)) {
+          drupal_set_message( "[booktest] : loaded old xml", 'warning');
+
         	$old_metadigit = $doom->getElementsByTagName('metadigit')->item(0);
         	$img_group = $old_metadigit->getElementsByTagName('img_group');
+
+        	drupal_set_message( "[booktest] : got imggroup: " . $img_group, 'warning');
 
         	if ($img_group->length > 0) {
             $mag->appendChild($img_group);
