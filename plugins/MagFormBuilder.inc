@@ -250,8 +250,6 @@ class MagFormBuilder extends FormBuilder {
 			}
 		}
 
-
-
 		/*
 		 * if is book, we probably have an image_group created when ingecting new pages
 		 * so, we need to preserve it from form editing or it will be lost
@@ -263,30 +261,20 @@ class MagFormBuilder extends FormBuilder {
 		    return FALSE;
 		  }
 		  $mag_ds = $book->get_datastream_dissemination("MAG");
-		  $mag_ds = trim($mag_ds);
 
-		  drupal_set_message( "[booktest] : got magds: " . $mag_ds, 'warning');
-
-		  $doom = new DOMDocument();
-		  if ($doom->loadXML($mag_ds)) {
-
-
-		    drupal_set_message( "[booktest] : loaded old xml", 'warning');
-
-		    $old_metadigit = $doom->getElementsByTagName('metadigit')->item(0);
-
-		    file_save_data($old_metadigit->saveXML(), 'full_xml_debug-book.txt', FILE_EXISTS_REPLACE);
-
-		    $img_group = $old_metadigit->getElementsByTagName('img_group');
-
-		    drupal_set_message( "[booktest] : got imggroup: " . $img_group, 'warning');
-
-		    if ($img_group->length > 0) {
-		      $mag->appendChild($img_group);
-		    }
+		  try {
+		    $sxmles = new SimpleXMLElement($mag_ds);
 		  }
-		}
+		  catch (exception $e) {
+		    drupal_set_message(t('Error getting mag ds !e', array('!e' => $e->getMessage())));
+		    return;
+		  }
 
+		  foreach ($sxmles->gen->img_group as $img_group) {
+        $gen->appendChild($img_group);
+		  }
+
+		}
 
 
 
