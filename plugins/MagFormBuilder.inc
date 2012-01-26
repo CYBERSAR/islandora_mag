@@ -264,11 +264,12 @@ class MagFormBuilder extends FormBuilder {
 
 		  $doom = new DOMDocument();
 		  if ($doom->loadXML($mag_ds)) {
-
-		    $img_groups = $old_metadigit->getElementsByTagName('img_group');
+		    $img_groups = $doom->getElementsByTagName('img_group');
 
 		    foreach ($img_groups as $img_group) {
-		      $gen->appendChild($img_group);
+		      if (isset($gen)) {
+		        $gen->appendChild($img_group);
+		      }
 		    }
 		  }
 		}
