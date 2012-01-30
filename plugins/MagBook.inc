@@ -212,7 +212,6 @@ function MagBook_create_page_objects($pid, $image_list = array()) {
 		else {
 			drupal_set_message(t('Errore nella modifica del datastream MAG: !e', array('!e' => $e->getMessage())), 'error');
 		}
-		 
 	}
 
 	$book_title = $book->objectProfile->objLabel;
