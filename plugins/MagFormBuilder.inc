@@ -268,6 +268,7 @@ class MagFormBuilder extends FormBuilder {
 
 		    foreach ($img_groups as $img_group) {
 		      if (isset($gen)) {
+		        $img_group = $dom->importNode($img_group, true); //http://php.net/manual/en/domdocument.importnode.php
 		        $gen->appendChild($img_group);
 		      }
 		    }
