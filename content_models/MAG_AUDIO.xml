@@ -1,379 +1,585 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<content_model xmlns="http://www.islandora.ca" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="MAG AUDIO" xsi:schemaLocation="http://www.islandora.ca http://localhost/islandoracm.xsd">
-  <mimetypes>
-    <type>audio/mp3</type>
-    <type>audio/x-aiff</type>
-    <type>audio/mpeg</type>
-    <type>audio/x-wav</type>
-  </mimetypes>
-  <ingest_rules>
-    <rule>
-      <applies_to>audio/mp3</applies_to>
-      <applies_to>audio/x-aiff</applies_to>
-      <applies_to>audio/mpeg</applies_to>
-      <applies_to>audio/x-wav</applies_to>
-      <ingest_methods>
-        <ingest_method file="plugins/Exiftool.inc" class="Exiftool" method="extractMetadata" dsid="OBJ_EXIFTOOL" module="islandora_mag" modified_files_ext="">
-          <parameters></parameters>
-        </ingest_method>
-      </ingest_methods>
-    </rule>
-  </ingest_rules>
-  <datastreams>
-    <datastream dsid="OBJ">
-      <display_method class="ShowQtStreamsInFieldSets" file="plugins/qt_viewer.inc" method="showQt" module=""/>
-      <display_method class="MagShowStreamsInFieldSets" file="plugins/MagShowStreamsInFieldSets.inc" method="showMag" module="islandora_mag"/>
-    </datastream>
-    <datastream dsid="PROXY"></datastream>
-    <datastream dsid="OBJ_EXIFTOOL"></datastream>
-    <datastream dsid="QDC">
-      <display_method class="ShowStreamsInFieldSets" file="plugins/ShowStreamsInFieldSets.inc" method="showQdc" module=""></display_method>
-    </datastream>
-  </datastreams>
-  <ingest_form dsid="MAG" page="2">
-    <form_builder_method class="MagFormBuilder" file="plugins/MagFormBuilder.inc" handler="handleXMLForm" method="magBuildForm" module="islandora_mag"/>
-      <form_elements>
+<content_model xmlns="http://www.islandora.ca"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="MAG AUDIO"
+	xsi:schemaLocation="http://www.islandora.ca http://localhost/islandoracm.xsd">
+	<mimetypes>
+		<type>audio/mp3</type>
+		<type>audio/x-aiff</type>
+		<type>audio/mpeg</type>
+		<type>audio/x-wav</type>
+	</mimetypes>
+	<ingest_rules>
+		<rule>
+			<applies_to>audio/mp3</applies_to>
+			<applies_to>audio/x-aiff</applies_to>
+			<applies_to>audio/mpeg</applies_to>
+			<applies_to>audio/x-wav</applies_to>
+			<ingest_methods>
+				<ingest_method file="plugins/Exiftool.inc" class="Exiftool"
+					method="extractMetadata" dsid="OBJ_EXIFTOOL" module="islandora_mag"
+					modified_files_ext="">
+					<parameters></parameters>
+				</ingest_method>
+			</ingest_methods>
+		</rule>
+	</ingest_rules>
+	<datastreams>
+		<datastream dsid="OBJ">
+			<display_method class="ShowQtStreamsInFieldSets" file="plugins/qt_viewer.inc"
+				method="showQt" module="" />
+			<display_method class="MagShowStreamsInFieldSets"
+				file="plugins/MagShowStreamsInFieldSets.inc" method="showMag"
+				module="islandora_mag" />
+		</datastream>
+		<datastream dsid="PROXY"></datastream>
+		<datastream dsid="OBJ_EXIFTOOL"></datastream>
+		<datastream dsid="QDC">
+			<display_method class="ShowStreamsInFieldSets"
+				file="plugins/ShowStreamsInFieldSets.inc" method="showQdc" module=""></display_method>
+		</datastream>
+	</datastreams>
+	<ingest_form dsid="MAG" page="2">
+		<form_builder_method class="MagFormBuilder"
+			file="plugins/MagFormBuilder.inc" handler="handleXMLForm" method="magBuildForm"
+			module="islandora_mag" />
+		<form_elements>
 
-<!-- BIB -->
-      <element label="Titolo" name="metadigit][bib][dc:title" required="true" type="textfield" lang="it">
-        <description>Un nome dato alla risorsa e con il quale tale risorsa è formalmente conosciuta.</description>
-      </element>
-      <element label="Title" name="metadigit][bib][dc:title" required="true" type="textfield" lang="en">
-        <description>The name given to the resource</description>
-      </element>
+			<!-- BIB -->
+			<element label="Titolo" name="metadigit][bib][dc:title"
+				required="true" type="textfield" lang="it">
+				<description>Un nome dato alla risorsa e con il quale tale risorsa è
+					formalmente conosciuta.</description>
+			</element>
+			<element label="Title" name="metadigit][bib][dc:title"
+				required="true" type="textfield" lang="en">
+				<description>The name given to the resource</description>
+			</element>
 
-      <element label="Creator" name="metadigit][bib][dc:creator" type="textfield" lang="en">
-        <description>An entity primarily responsible for making the content of the resource such as a person, organization or service.</description>
-      </element>
-      <element label="Creatore" name="metadigit][bib][dc:creator" type="textfield" lang="it">
-        <description>Un'entità (una persona, un'organizzazione o un servizio) che ha la responsabilità principale della produzione del contenuto della risorsa</description>
-      </element>
+			<element label="Creator" name="metadigit][bib][dc:creator"
+				type="textfield" lang="en">
+				<description>An entity primarily responsible for making the content
+					of the resource such as a person, organization or service.</description>
+			</element>
+			<element label="Creatore" name="metadigit][bib][dc:creator"
+				type="textfield" lang="it">
+				<description>Un'entità (una persona, un'organizzazione o un
+					servizio) che ha la responsabilità principale della produzione del
+					contenuto della risorsa</description>
+			</element>
 
-      <element label="Subject" name="metadigit][bib][dc:subject" type="select_taxonomies" lang="en">
-        <description>The topic of the resource.</description>
-      </element>
-      <element label="Soggetto" name="metadigit][bib][dc:subject" type="select_taxonomies" lang="it">
-        <description>L’argomento della risorsa.</description>
-      </element>
+			<element label="Subject" name="metadigit][bib][dc:subject"
+				type="select_taxonomies" lang="en">
+				<description>The topic of the resource.</description>
+			</element>
+			<element label="Soggetto" name="metadigit][bib][dc:subject"
+				type="select_taxonomies" lang="it">
+				<description>L’argomento della risorsa.</description>
+			</element>
 
-      <element label="Description" name="metadigit][bib][dc:description" required="true" type="textarea" lang="en">
-        <description>Examples include an abstract, table of contents, or free-text account of the content of the resource.</description>
-      </element>
-      <element label="Descrizione" name="metadigit][bib][dc:description" required="true" type="textarea" lang="it">
-        <description>Una spiegazione del contenuto della risorsa. Può includere ma non è limitata solo a: un riassunto analitico, un indice, un riferimento al contenuto di una rappresentazione grafica o un testo libero del contenuto.</description>
-      </element>
+			<element label="Description" name="metadigit][bib][dc:description"
+				required="true" type="textarea" lang="en">
+				<description>Examples include an abstract, table of contents, or
+					free-text account of the content of the resource.</description>
+			</element>
+			<element label="Descrizione" name="metadigit][bib][dc:description"
+				required="true" type="textarea" lang="it">
+				<description>Una spiegazione del contenuto della risorsa. Può
+					includere ma non è limitata solo a: un riassunto analitico, un
+					indice, un riferimento al contenuto di una rappresentazione grafica
+					o un testo libero del contenuto.</description>
+			</element>
 
-      <element label="Publisher" name="metadigit][bib][dc:publisher" type="textfield" lang="en">
-        <description>An entity (including persons, organizations, or services) responsible for making the resource available.</description>
-      </element>
-      <element label="Editore" name="metadigit][bib][dc:publisher" type="textfield" lang="it">
-        <description>Un'entità (una persona, un'organizzazione o un servizio) responsabile della produzione della risorsa, disponibile nella sua forma presente.</description>
-      </element>
+			<element label="Publisher" name="metadigit][bib][dc:publisher"
+				type="textfield" lang="en">
+				<description>An entity (including persons, organizations, or
+					services) responsible for making the resource available.</description>
+			</element>
+			<element label="Editore" name="metadigit][bib][dc:publisher"
+				type="textfield" lang="it">
+				<description>Un'entità (una persona, un'organizzazione o un
+					servizio) responsabile della produzione della risorsa, disponibile
+					nella sua forma presente.</description>
+			</element>
 
-      <element label="Contributor" name="metadigit][bib][dc:contributor" type="textfield" lang="en">
-        <description>An entity (including persons, organizations, or services) responsible for contributing to the content of the resource.</description>
-      </element>
-      <element label="Autore di contributo subordinato" name="metadigit][bib][dc:contributor" type="textfield" lang="it">
-        <description>Un'entità (una persona, un'organizzazione o un servizio) responsabile della produzione di un contributo al contenuto della risorsa.</description>
-      </element>
+			<element label="Contributor" name="metadigit][bib][dc:contributor"
+				type="textfield" lang="en">
+				<description>An entity (including persons, organizations, or
+					services) responsible for contributing to the content of the
+					resource.</description>
+			</element>
+			<element label="Autore di contributo subordinato" name="metadigit][bib][dc:contributor"
+				type="textfield" lang="it">
+				<description>Un'entità (una persona, un'organizzazione o un
+					servizio) responsabile della produzione di un contributo al
+					contenuto della risorsa.</description>
+			</element>
 
-      <element label="Date" name="metadigit][bib][dc:date" type="textfield" lang="en">
-        <description>A date associated with an event in the life cycle of the resource. Typically, Date will be associated with the creation or availability of the resource. Recommended best practice for encoding the date value is defined in a profile of ISO 8601 [Date and Time Formats, W3C Note, http://www.w3.org/TR/NOTE-datetime] and follows the YYYY-MM-DD format.</description>
-      </element>
-      <element label="Data" name="metadigit][bib][dc:date" type="textfield" lang="it">
-        <description>Una data associata a un evento del ciclo di vita della risorsa. Normalmente è associata alla creazione o alla disponibilità della risorsa. Si consiglia di usare un numero di 8 caratteri nella forma YYYY-MM-DD come definita in http://www.w3.org/TR/NOTE-datetime, un profilo dello standard ISO 8601. In questo schema l'elemento data 1994-11-05 corrisponde al 5 novembre 1994. Sono possibili molti altri schemi, ma se vengono utilizzati, devono poter essere identificati in modo univoco.</description>
-      </element>
+			<element label="Date" name="metadigit][bib][dc:date" type="textfield"
+				lang="en">
+				<description>A date associated with an event in the life cycle of
+					the resource. Typically, Date will be associated with the creation
+					or availability of the resource. Recommended best practice for
+					encoding the date value is defined in a profile of ISO 8601 [Date
+					and Time Formats, W3C Note, http://www.w3.org/TR/NOTE-datetime] and
+					follows the YYYY-MM-DD format.</description>
+			</element>
+			<element label="Data" name="metadigit][bib][dc:date" type="textfield"
+				lang="it">
+				<description>Una data associata a un evento del ciclo di vita della
+					risorsa. Normalmente è associata alla creazione o alla
+					disponibilità della risorsa. Si consiglia di usare un numero di 8
+					caratteri nella forma YYYY-MM-DD come definita in
+					http://www.w3.org/TR/NOTE-datetime, un profilo dello standard ISO
+					8601. In questo schema l'elemento data 1994-11-05 corrisponde al 5
+					novembre 1994. Sono possibili molti altri schemi, ma se vengono
+					utilizzati, devono poter essere identificati in modo univoco.</description>
+			</element>
 
-      <element label="Resource Type" name="metadigit][bib][dc:type" type="select" lang="en">
-        <description>The nature or genre of the content of the resource. Type includes terms describing general categories, functions, genres, or aggregation levels for content. Recommended best practice is to select a value from a controlled vocabulary (UNIMARC). To describe the physical or digital manifestation of the resource, use the FORMAT element.</description>
-        <authoritative_list>
-          <item>None</item>
-          <item>Printed text</item>
-          <item>Manuscript</item>
-          <item>Printed music</item>
-          <item>Manuscript music</item>
-          <item>Printed cartography</item>
-          <item>Manuscript maps</item>
-          <item>Video material</item>
-          <item>Non-musical sound recording</item>
-          <item>Musical audio recording</item>
-          <item>Graphic material</item>
-          <item>Electronic Resource</item>
-          <item>Multimedia material</item>
-          <item>Object in three dimensions</item>
-          <item>Herbarium</item>
-          <item>Archaeological find</item>
-          <item>Mineral exhibit</item>
-          <item>Paleontological findings</item>
-          <item>Petrographic findings</item>
-        </authoritative_list>
-      </element>
-      <element label="Tipo di risorsa" name="metadigit][bib][dc:type" type="select" lang="it">
-        <description>La natura o il genere del contenuto della risorsa: include termini che descrivono categorie generali, funzioni, generi o livelli di aggregazione per contenuto. Si raccomanda di selezionare un valore da un vocabolario controllato (UNIMARC). Per descrivere la manifestazione fisica o digitale della risorsa, si usa l’elemento Format. </description>
-        <authoritative_list>
-          <item>Non specificato</item>
-          <item>Testo a stampa</item>
-          <item>Manoscritto</item>
-          <item>Musica a stampa</item>
-          <item>Musica manoscritta</item>
-          <item>Cartografia a stampa</item>
-          <item>Cartografia manoscritta</item>
-          <item>Materiale video</item>
-          <item>Registrazione sonora non musicale</item>
-          <item>Registrazione sonora musicale</item>
-          <item>Materiale grafico</item>
-          <item>Risorsa elettronica</item>
-          <item>Materiale multimediale</item>
-          <item>Oggetto a tre dimensioni</item>
-          <item>Erbario</item>
-          <item>Reperto archeologico</item>
-          <item>Reperto mineralogico</item>
-          <item>Reperto paleontologico</item>
-          <item>Reperto petrografico</item>
-        </authoritative_list>
-      </element>
+			<element label="Resource Type" name="metadigit][bib][dc:type"
+				type="select" lang="en">
+				<description>The nature or genre of the content of the resource.
+					Type includes terms describing general categories, functions,
+					genres, or aggregation levels for content. Recommended best
+					practice is to select a value from a controlled vocabulary
+					(UNIMARC). To describe the physical or digital manifestation of the
+					resource, use the FORMAT element.</description>
+				<authoritative_list>
+					<item>None</item>
+					<item>Printed text</item>
+					<item>Manuscript</item>
+					<item>Printed music</item>
+					<item>Manuscript music</item>
+					<item>Printed cartography</item>
+					<item>Manuscript maps</item>
+					<item>Video material</item>
+					<item>Non-musical sound recording</item>
+					<item>Musical audio recording</item>
+					<item>Graphic material</item>
+					<item>Electronic Resource</item>
+					<item>Multimedia material</item>
+					<item>Object in three dimensions</item>
+					<item>Herbarium</item>
+					<item>Archaeological find</item>
+					<item>Mineral exhibit</item>
+					<item>Paleontological findings</item>
+					<item>Petrographic findings</item>
+				</authoritative_list>
+			</element>
+			<element label="Tipo di risorsa" name="metadigit][bib][dc:type"
+				type="select" lang="it">
+				<description>La natura o il genere del contenuto della risorsa:
+					include termini che descrivono categorie generali, funzioni, generi
+					o livelli di aggregazione per contenuto. Si raccomanda di
+					selezionare un valore da un vocabolario controllato (UNIMARC). Per
+					descrivere la manifestazione fisica o digitale della risorsa, si
+					usa l’elemento Format. </description>
+				<authoritative_list>
+					<item>Non specificato</item>
+					<item>Testo a stampa</item>
+					<item>Manoscritto</item>
+					<item>Musica a stampa</item>
+					<item>Musica manoscritta</item>
+					<item>Cartografia a stampa</item>
+					<item>Cartografia manoscritta</item>
+					<item>Materiale video</item>
+					<item>Registrazione sonora non musicale</item>
+					<item>Registrazione sonora musicale</item>
+					<item>Materiale grafico</item>
+					<item>Risorsa elettronica</item>
+					<item>Materiale multimediale</item>
+					<item>Oggetto a tre dimensioni</item>
+					<item>Erbario</item>
+					<item>Reperto archeologico</item>
+					<item>Reperto mineralogico</item>
+					<item>Reperto paleontologico</item>
+					<item>Reperto petrografico</item>
+				</authoritative_list>
+			</element>
 
-      <element label="Source" name="metadigit][bib][dc:source" type="textfield" lang="en">
-        <description>A Reference to a resource from which the present resource is derived. The present resource may be derived from the Source resource in whole or part. Recommended best practice is to reference the resource by means of a string or number conforming to a formal identification system.</description>
-      </element>
-      <element label="Fonte" name="metadigit][bib][dc:source" type="textfield" lang="it">
-        <description>AUn riferimento a una risorsa dalla quale è derivata la risorsa in oggetto. La risorsa può essere derivata dalla risorsa Source in tutto o in parte. Si raccomanda di identificare la risorsa per mezzo di una sequenza di caratteri alfabetici o numerici secondo un sistema di identificazione formalmente definito.</description>
-      </element>
+			<element label="Source" name="metadigit][bib][dc:source"
+				type="textfield" lang="en">
+				<description>A Reference to a resource from which the present
+					resource is derived. The present resource may be derived from the
+					Source resource in whole or part. Recommended best practice is to
+					reference the resource by means of a string or number conforming to
+					a formal identification system.</description>
+			</element>
+			<element label="Fonte" name="metadigit][bib][dc:source" type="textfield"
+				lang="it">
+				<description>AUn riferimento a una risorsa dalla quale è derivata la
+					risorsa in oggetto. La risorsa può essere derivata dalla risorsa
+					Source in tutto o in parte. Si raccomanda di identificare la
+					risorsa per mezzo di una sequenza di caratteri alfabetici o
+					numerici secondo un sistema di identificazione formalmente
+					definito.</description>
+			</element>
 
-      <element label="Identifier" name="metadigit][bib][dc:identifier" type="hidden" lang="en">
-        <description>An unambiguous reference to the resource within a given context.</description>
-      </element>
-      <element label="Identificatore" name="metadigit][bib][dc:identifier" type="hidden" lang="it">
-        <description>Un riferimento univoco alla risorsa nell'ambito di un dato contesto.</description>
-      </element>
+			<element label="Identifier" name="metadigit][bib][dc:identifier"
+				type="hidden" lang="en">
+				<description>An unambiguous reference to the resource within a given
+					context.</description>
+			</element>
+			<element label="Identificatore" name="metadigit][bib][dc:identifier"
+				type="hidden" lang="it">
+				<description>Un riferimento univoco alla risorsa nell'ambito di un
+					dato contesto.</description>
+			</element>
 
-      <element label="Language" name="metadigit][bib][dc:language" type="select" lang="en">
-        <description>The language of the intellectual content of the resource.</description>
-        <authoritative_list>
-          <item field="eng">English</item>
-          <item field="fre">French</item>
-          <item field="ita">Italian</item>
-          <item field="lat">Latin</item>
-        </authoritative_list>
-      </element>
-      <element label="Lingua" name="metadigit][bib][dc:language" type="select" lang="it">
-        <description>La lingua del contenuto intellettuale della risorsa.</description>
-        <authoritative_list>
-          <item field="eng">Inglese</item>
-          <item field="fre">Francese</item>
-          <item field="ita">Italiano</item>
-          <item field="lat">Latino</item>
-        </authoritative_list>
-      </element>
+			<element label="Language" name="metadigit][bib][dc:language"
+				type="select" lang="en">
+				<description>The language of the intellectual content of the
+					resource.</description>
+				<authoritative_list>
+					<item field="eng">English</item>
+					<item field="fre">French</item>
+					<item field="ita">Italian</item>
+					<item field="lat">Latin</item>
+				</authoritative_list>
+			</element>
+			<element label="Lingua" name="metadigit][bib][dc:language"
+				type="select" lang="it">
+				<description>La lingua del contenuto intellettuale della risorsa.</description>
+				<authoritative_list>
+					<item field="eng">Inglese</item>
+					<item field="fre">Francese</item>
+					<item field="ita">Italiano</item>
+					<item field="lat">Latino</item>
+				</authoritative_list>
+			</element>
 
-      <element label="Relation" name="metadigit][bib][dc:relation" type="textfield" lang="en">
-        <description>A reference to a related resource. Recommended best practice is to reference the resource by means of a string or number conforming to a formal identification system.</description>
-      </element>
-      <element label="Relazione" name="metadigit][bib][dc:relation" type="textfield" lang="it">
-        <description>Un riferimento alla risorsa correlata. Si raccomanda di far riferimento alla risorsa per mezzo di una sequenza di caratteri alfabetici o numerici in conformità ad un sistema di identificazione formalmente definito.</description>
-      </element>
+			<element label="Relation" name="metadigit][bib][dc:relation"
+				type="textfield" lang="en">
+				<description>A reference to a related resource. Recommended best
+					practice is to reference the resource by means of a string or
+					number conforming to a formal identification system.</description>
+			</element>
+			<element label="Relazione" name="metadigit][bib][dc:relation"
+				type="textfield" lang="it">
+				<description>Un riferimento alla risorsa correlata. Si raccomanda di
+					far riferimento alla risorsa per mezzo di una sequenza di caratteri
+					alfabetici o numerici in conformità ad un sistema di
+					identificazione formalmente definito.</description>
+			</element>
 
-      <element label="Rights Management" name="metadigit][bib][dc:rights" type="textarea" lang="en">
-        <description>Information about rights held in and over the resource. Typically a Rights element will contain a rights management statement for the resource, or reference a service providing such information. Rights information often encompasses Intellectual Property Rights (IPR), Copyright, and various Property Rights. If the rights element is absent, no assumptions can be made about the status of these and other rights with respect to the resource.</description>
-      </element>
-      <element label="Gestione dei diritti" name="metadigit][bib][dc:rights" type="textarea" lang="it">
-        <description>Informazione sui diritti esercitati sulla risorsa. Normalmente un elemento Rights contiene un’indicazione di gestione dei diritti sulla risorsa, o un riferimento ad un servizio che fornisce questa informazione. L’informazione sui diritti spesso comprende i diritti di proprietà intellettuale Intellectual Property Rights (IPR), Copyright e vari diritti di proprietà. Se l’elemento Rights è assente, non si può fare alcuna ipotesi sullo stato di questi o altri diritti in riferimento alla risorsa.</description>
-      </element>
+			<element label="Rights Management" name="metadigit][bib][dc:rights"
+				type="textarea" lang="en">
+				<description>Information about rights held in and over the resource.
+					Typically a Rights element will contain a rights management
+					statement for the resource, or reference a service providing such
+					information. Rights information often encompasses Intellectual
+					Property Rights (IPR), Copyright, and various Property Rights. If
+					the rights element is absent, no assumptions can be made about the
+					status of these and other rights with respect to the resource.</description>
+			</element>
+			<element label="Gestione dei diritti" name="metadigit][bib][dc:rights"
+				type="textarea" lang="it">
+				<description>Informazione sui diritti esercitati sulla risorsa.
+					Normalmente un elemento Rights contiene un’indicazione di gestione
+					dei diritti sulla risorsa, o un riferimento ad un servizio che
+					fornisce questa informazione. L’informazione sui diritti spesso
+					comprende i diritti di proprietà intellettuale Intellectual
+					Property Rights (IPR), Copyright e vari diritti di proprietà. Se
+					l’elemento Rights è assente, non si può fare alcuna ipotesi sullo
+					stato di questi o altri diritti in riferimento alla risorsa.</description>
+			</element>
 
-      <element label="Ownership" name="metadigit][bib][mag:bib:holdings" type="hidden" lang="en">
-        <description>Location of the analogue object within a particular institution.</description>
+			<element label="Ownership" name="metadigit][bib][mag:bib:holdings"
+				type="hidden" lang="en">
+				<description>Location of the analogue object within a particular
+					institution.</description>
 
-        <element label="Library" name="metadigit][bib][mag:bib:holdings:library" type="select" lang="en">
-          <description>Contains the name of the institution that owns the analogue object or the portion of the analogue object.</description>
-          <authoritative_list>
-            <item>Non specificato</item>
-            <item>Archivo Storico - Istituto Tecnico "G. Asproni" di Iglesias</item>
-            <item>Archivio storico comunale di Iglesias</item>
-            <item>Archivio storico minerario - Igea spa</item>
-            <item>Biblioteca Civica Berio</item>
-            <item>Consorzio per il Parco Geominerario, Storico, Ambientale della Sardegna</item>
-            <item>Ecomuseo Miniere di Rosas - Comune di Narcao</item>
-            <item>Museo Civico di Buggerru</item>
-            <item>Museo di Archeologia Ligure</item>
-            <item>Museo del Carbone - Centro Italiano della Cultura del Carbone</item>
-            <item>Provincia di Carbonia Iglesias</item>
-            <item>Sezione Storia Locale - Biblioteca Comunale di Carbonia</item>
-            <item>Università di Cagliari - Dipartimento di Scienze della Terra</item>
-          </authoritative_list>
-        </element>
-        <element label="Inventory Number" name="metadigit][bib][mag:bib:holdings:inventory_number" type="textfield" lang="en">
-          <description>Contains the inventory number assigned by the institution that owns the object analogue.</description>
-        </element>
-      </element>
+				<element label="Library" name="metadigit][bib][mag:bib:holdings:library"
+					type="select" lang="en">
+					<description>Contains the name of the institution that owns the
+						analogue object or the portion of the analogue object.</description>
+					<authoritative_list>
+						<item>Non specificato</item>
+						<item>Archivo Storico - Istituto Tecnico "G. Asproni" di Iglesias</item>
+						<item>Archivio storico comunale di Iglesias</item>
+						<item>Archivio storico minerario - Igea spa</item>
+						<item>Biblioteca Civica Berio</item>
+						<item>Consorzio per il Parco Geominerario, Storico, Ambientale
+							della Sardegna</item>
+						<item>Ecomuseo Miniere di Rosas - Comune di Narcao</item>
+						<item>Museo Civico di Buggerru</item>
+						<item>Museo di Archeologia Ligure</item>
+						<item>Museo del Carbone - Centro Italiano della Cultura del
+							Carbone</item>
+						<item>Provincia di Carbonia Iglesias</item>
+						<item>Sezione Storia Locale - Biblioteca Comunale di Carbonia</item>
+						<item>Università di Cagliari - Dipartimento di Scienze della Terra</item>
+					</authoritative_list>
+				</element>
+				<element label="Inventory Number"
+					name="metadigit][bib][mag:bib:holdings:inventory_number" type="textfield"
+					lang="en">
+					<description>Contains the inventory number assigned by the
+						institution that owns the object analogue.</description>
+				</element>
+			</element>
 
-      <element label="Proprietà" name="metadigit][bib][mag:bib:holdings" type="hidden" lang="it">
-        <description>Localizzazione dell'oggetto analogico all'interno di una particolare istituzione.</description>
+			<element label="Proprietà" name="metadigit][bib][mag:bib:holdings"
+				type="hidden" lang="it">
+				<description>Localizzazione dell'oggetto analogico all'interno di
+					una particolare istituzione.</description>
 
-        <element label="Istituzione" name="metadigit][bib][mag:bib:holdings:library" type="select" lang="it">
-          <description>Contiene il nome dell'istituzione proprietaria dell'oggetto analogico o di parte dell'oggetto analogico.</description>
-          <authoritative_list>
-            <item>Non specificato</item>
-            <item>Archivo Storico - Istituto Tecnico "G. Asproni" di Iglesias</item>
-            <item>Archivio storico comunale di Iglesias</item>
-            <item>Archivio storico minerario - Igea spa</item>
-            <item>Biblioteca Civica Berio</item>
-            <item>Consorzio per il Parco Geominerario, Storico, Ambientale della Sardegna</item>
-            <item>Ecomuseo Miniere di Rosas - Comune di Narcao</item>
-            <item>Museo Civico di Buggerru</item>
-            <item>Museo di Archeologia Ligure</item>
-            <item>Museo del Carbone - Centro Italiano della Cultura del Carbone</item>
-            <item>Provincia di Carbonia Iglesias</item>
-            <item>Sezione Storia Locale - Biblioteca Comunale di Carbonia</item>
-            <item>Università di Cagliari - Dipartimento di Scienze della Terra</item>
-          </authoritative_list>
-        </element>
-        <element label="Numero di inventario" name="metadigit][bib][mag:bib:holdings:inventory_number" type="textfield" lang="it">
-          <description>Contiene il numero di inventario attribuito all'oggetto analogico dall'istituzione che lo possiede.</description>
-        </element>
-      </element>
+				<element label="Istituzione" name="metadigit][bib][mag:bib:holdings:library"
+					type="select" lang="it">
+					<description>Contiene il nome dell'istituzione proprietaria
+						dell'oggetto analogico o di parte dell'oggetto analogico.</description>
+					<authoritative_list>
+						<item>Non specificato</item>
+						<item>Archivo Storico - Istituto Tecnico "G. Asproni" di Iglesias</item>
+						<item>Archivio storico comunale di Iglesias</item>
+						<item>Archivio storico minerario - Igea spa</item>
+						<item>Biblioteca Civica Berio</item>
+						<item>Consorzio per il Parco Geominerario, Storico, Ambientale
+							della Sardegna</item>
+						<item>Ecomuseo Miniere di Rosas - Comune di Narcao</item>
+						<item>Museo Civico di Buggerru</item>
+						<item>Museo di Archeologia Ligure</item>
+						<item>Museo del Carbone - Centro Italiano della Cultura del
+							Carbone</item>
+						<item>Provincia di Carbonia Iglesias</item>
+						<item>Sezione Storia Locale - Biblioteca Comunale di Carbonia</item>
+						<item>Università di Cagliari - Dipartimento di Scienze della Terra</item>
+					</authoritative_list>
+				</element>
+				<element label="Numero di inventario"
+					name="metadigit][bib][mag:bib:holdings:inventory_number" type="textfield"
+					lang="it">
+					<description>Contiene il numero di inventario attribuito
+						all'oggetto analogico dall'istituzione che lo possiede.</description>
+				</element>
+			</element>
 
 
-<!-- GEN -->
-      <element label="Sito dell'organizzazione che ha digitalizzato l'oggetto" name="metadigit][gen][mag:gen:stprog" required="true" type="textfield" lang="it">
-        <description>Contiene la URI dove è possibile trovare la documentazione relativa la progetto di digitalizzazione. Tipicamente si tratta della pagina web in cui sono specificate le scelte relative alla digitalizzazione del progetto; in alternativa si suggerisce di puntare alla home page dell'istituzione responsabile del progetto.</description>
-      </element>
-      <element label="Nome dell'organizzazione che ha digitalizzato l'oggetto" name="metadigit][gen][mag:gen:agency" required="true" type="textfield" lang="it">
-        <description>contiene il nome dell'istituzione responsabile del progetto di digitalizzazione. Si raccomanda di usare la sintassi UNIMARC definita per il campo 801, cioè cod. paese (due caratteri):codice Agenzia per intero, per esempio: IT:BNCF. In alternativa è possibile usare una sigla riconosciuta, per esempio dall'Anagrafe biblioteche italiane: http://anagrafe.iccu.sbn.it/, per esempio: IT:VE0049 o IT:RM1316.</description>
-      </element>
-      <element label="Riferimento alla collezione di cui la risorsa digitale farà parte" name="metadigit][gen][mag:gen:collection" type="textfield" lang="it">
-        <description>Contiene la URI (tipicamente l'indirizzo di una pagina web) di un documento in cui viene specificata la collezione cui fa parte la risorsa o le risorse digitalizzate.</description>
-      </element>
-      <element label="Condizioni di accesso all'oggetto descritto nella sezione BIB" name="metadigit][gen][mag:gen:access_rights" required="true" type="select" lang="it">
-        <description>Dichiara le condizioni di accessibilità dell'oggetto descritto nella sezione BIB.</description>
-        <authoritative_list>
-          <item>Uso riservato all'interno dell'istituzione</item>
-          <item>Uso pubblico</item>
-        </authoritative_list>
-      </element>
-      <element label="Completezza della digitalizzazione." name="metadigit][gen][mag:gen:completeness" required="true" type="select" lang="it">
-        <description>Dichiara la completezza della digitalizzazione.</description>
-        <authoritative_list>
-          <item>Digitalizzazione completa</item>
-          <item>Digitalizzazione incompleta</item>
-        </authoritative_list>
-      </element>
+			<!-- GEN -->
+			<element label="Sito dell'organizzazione che ha digitalizzato l'oggetto"
+				name="metadigit][gen][mag:gen:stprog" required="true" type="textfield"
+				lang="it">
+				<description>Contiene la URI dove è possibile trovare la
+					documentazione relativa la progetto di digitalizzazione.
+					Tipicamente si tratta della pagina web in cui sono specificate le
+					scelte relative alla digitalizzazione del progetto; in alternativa
+					si suggerisce di puntare alla home page dell'istituzione
+					responsabile del progetto.</description>
+			</element>
+			<element label="Nome dell'organizzazione che ha digitalizzato l'oggetto"
+				name="metadigit][gen][mag:gen:agency" required="true" type="textfield"
+				lang="it">
+				<description>contiene il nome dell'istituzione responsabile del
+					progetto di digitalizzazione. Si raccomanda di usare la sintassi
+					UNIMARC definita per il campo 801, cioè cod. paese (due
+					caratteri):codice Agenzia per intero, per esempio: IT:BNCF. In
+					alternativa è possibile usare una sigla riconosciuta, per esempio
+					dall'Anagrafe biblioteche italiane: http://anagrafe.iccu.sbn.it/,
+					per esempio: IT:VE0049 o IT:RM1316.</description>
+			</element>
+			<element
+				label="Riferimento alla collezione di cui la risorsa digitale farà parte"
+				name="metadigit][gen][mag:gen:collection" type="textfield" lang="it">
+				<description>Contiene la URI (tipicamente l'indirizzo di una pagina
+					web) di un documento in cui viene specificata la collezione cui fa
+					parte la risorsa o le risorse digitalizzate.</description>
+			</element>
+			<element
+				label="Condizioni di accesso all'oggetto descritto nella sezione BIB"
+				name="metadigit][gen][mag:gen:access_rights" required="true" type="select"
+				lang="it">
+				<description>Dichiara le condizioni di accessibilità dell'oggetto
+					descritto nella sezione BIB.</description>
+				<authoritative_list>
+					<item>Uso riservato all'interno dell'istituzione</item>
+					<item>Uso pubblico</item>
+				</authoritative_list>
+			</element>
+			<element label="Completezza della digitalizzazione." name="metadigit][gen][mag:gen:completeness"
+				required="true" type="select" lang="it">
+				<description>Dichiara la completezza della digitalizzazione.</description>
+				<authoritative_list>
+					<item>Digitalizzazione completa</item>
+					<item>Digitalizzazione incompleta</item>
+				</authoritative_list>
+			</element>
 
-<!-- AUDIO -->
-      <element label="Numero di sequenza" name="metadigit][audio][mag:audio:sequence_number" type="textfield" lang="it">
-        <description>Ciascuna traccia audio descritta all'interno di MAG viene identificata univocamente grazie a questo elemento. Il suo contenuto è un numero positivo. Se non specificato il suo valore di default è 1.</description>
-      </element>
-      <element label="Denominazione o titolo" name="metadigit][audio][mag:audio:nomenclature" required="true" type="textfield" lang="it">
-        <description>A ciascuna traccia audio deve inoltre essere attribuita una denominazione, per esempio Ouverture, Certe Notti, Canzone 1 ecc.</description>
-      </element>
-      
-<!-- AUDIO / Proxies -->
-      <element label="Proxies" name="metadigit][audio][mag:audio:proxies" type="hidden" lang="it">
-       <description>Descrizione dello stream audio.</description>
-      
-      <element label="Localizzazione fisica" name="metadigit][audio][mag:audio:proxies:file" type="hidden" lang="it">
-        <description>Localizzare il file contenenete la traccia audio mediante un link.</description>
-      </element>
-      
-      <element label="Impronta digitale MD5" name="metadigit][audio][mag:audio:proxies:md5" type="hidden" lang="it">
-        <description>32 caratteri rilevati automaticamente che consentono di verificare l'integrita' del contenuto.</description>
-      </element>
-      
-      <element label="Grandezza (Byte)" name="metadigit][audio][mag:audio:proxies:filesize" type="hidden" lang="it">
-        <description>Grandezza del file audio espressa in Byte.</description>
-      </element>
-      
-<!-- AUDIO / Proxies / Audio Dimentions -->
-      <element label="Dimensioni" name="metadigit][audio][mag:audio:proxies:audio_dimentions" type="hidden" lang="it">
-        <description>Definisce le dimensioni dello stream video.</description>
-        <element label="Durata (h:m:s)" name="metadigit][audio][mag:audio:proxies:audio_dimentions:duration" type="hidden" lang="it">
-          <description>Durata espressa in ora:minuti:secondi.</description>
-        </element>
-      </element>
-      
-<!-- AUDIO / Proxies / Audio Metrics -->
-      <element label="Caratteristiche tecniche" name="metadigit][audio][mag:audio:proxies:audio_metrics" type="hidden" lang="it">
-        <description>Definisce le caratteristiche tecniche dello stream video.</description>
-        <element label="Frequenza di campionamento" name="metadigit][audio][mag:audio:proxies:audio_metrics:samplingfrequency" type="hidden" lang="it">
-          <description>Descrive la frequenza di campionamento della traccia audio digitale espressa in KHz.</description>
-          <!-- Opzioni consigliate: 8 | 11.025 | 12 | 16 | 22.05 | 24 | 32 | 44.1 | 48 | 96 -->
-        </element>
-        <element label="Bitrate" name="metadigit][audio][mag:audio:proxies:audio_metrics:bitrate" type="hidden" lang="it">
-          <description>Esprime i kbit per secondo (kbps) del campione considerato.</description>
-          <!-- Opzioni consigliate: 24 | 32 | 48 | 56 | 64 | 96 | 128 | 160 | 192 | 256 | 320 | 384 -->
-        </element>
-      </element>
+			<!-- AUDIO -->
+			<element label="Numero di sequenza" name="metadigit][audio][mag:audio:sequence_number"
+				type="textfield" lang="it">
+				<description>Ciascuna traccia audio descritta all'interno di MAG
+					viene identificata univocamente grazie a questo elemento. Il suo
+					contenuto è un numero positivo. Se non specificato il suo valore di
+					default è 1.</description>
+			</element>
+			<element label="Denominazione o titolo" name="metadigit][audio][mag:audio:nomenclature"
+				required="true" type="textfield" lang="it">
+				<description>A ciascuna traccia audio deve inoltre essere attribuita
+					una denominazione, per esempio Ouverture, Certe Notti, Canzone 1
+					ecc.</description>
+			</element>
 
-<!-- AUDIO / Proxies / Format -->
-       <element label="Formato" name="metadigit][audio][mag:audio:proxies:format" type="hidden" lang="it">
-        <description>Formato degli stream audio.</description>
-        <element label="Nome del formato" name="metadigit][audio][mag:audio:proxies:format:name" type="hidden" lang="it">
-          <description>Nome del formato; si usi l'estensione del file.</description>
-        </element>
-        <element label="MIME type" name="metadigit][audio][mag:audio:proxies:format:mime" type="hidden" lang="it">
-          <description>Tipo mime dello stream audio.</description>
-          <!-- Opzioni consigliate: audio/wav | audio/mpeg | audio/mpg | audio/mp3 | audio/x-mpeg | audio/midi | audio/x-realaudio -->
-        </element>
-        
-        <element label="Compressione" name="metadigit][audio][mag:audio:proxies:format:compression" type="hidden" lang="it">
-          <description>Tipo di compressione applicato al file audio.</description>
-          <!-- Opzioni consigliate: Uncompressed | Linear PCM | MPEG-1 layer 1 | MPEG-1 layer 2 | MPEG-1 layer 3 | AC3 | Dolby | DTC -->
-        </element>
-        <element label="Canali" name="metadigit][audio][mag:audio:proxies:format:channel_configuration" type="hidden" lang="it">
-          <description>Schema di configurazione dei canali audio.</description>
-          <!-- Opzioni consigliate: Mono | Dual mono | Joint stereo | Stereo | 2 ch | 4 ch | 5.1 ch | 6.1 ch  -->
-        </element>
-      </element>
-      
-<!-- AUDIO / Proxies / Transcription -->
-      <element label="Trascrizione" name="metadigit][audio][mag:audio:proxies:transcription" type="hidden" lang="it">
-        <description>Modalità della trascrizione della traccia audio digitale.</description>
-        
-        <element label="Fonte analogica" name="metadigit][audio][mag:audio:proxies:transcription:sourcetype" type="select" lang="it">
-          <description>Descrive il tipo di fonte analogica utilizzata per l'acquisizione dello stream video.</description>
-          <authoritative_list>
-            <item>Altro</item>
-				    <item>Registrazione sonora</item>
-				    <item>Disco</item>
-				    <item>Nastro (bobina aperta)</item>
-				    <item>Nastro (cassetta)</item>
-				    <item>Nastro (cartuccia)</item>
-				    <item>Registrazione su filo</item>
-				    <item>Cilindro</item>
-				    <item>Rullo di tamburo</item>
-				    <item>Film (sonoro)</item>
-				    <item>Compact Disc</item>
-				    <item>DAT</item>
-				    <item>Disco (33 gg.)</item>
-				    <item>Disco (45 gg.)</item>
-				    <item>Disco (78 gg.)</item>
-          </authoritative_list>
-        </element>
-        
-        <element label="Traccia audio creata da" name="metadigit][audio][mag:audio:proxies:transcription:transcriptionagency" type="textfield" lang="it">
-          <description>Il nome dell'istituzione che ha effettuato la digitalizzazione della traccia audio; è utile nel caso la digitalizzazione non sia stata effettuata direttamente dall'istituzione responsabile del processo di digitalizzazione.</description>
-        </element>
-        <element label="Dispositivo utilizzato per la digitalizzazione" name="metadigit][audio][mag:audio:proxies:transcription:devicesource" type="select" lang="it">
-          <description>La tipologia dell'apparecchiatura usata per realizzare la digitalizzazione.</description>
-          <authoritative_list>
-            <item>Sconosciuto</item>
-            <item>Microfono</item>
-            <item>Recorder</item>
-            <item>Giradischi</item>
-          </authoritative_list>
-        </element>        
-      </element>
-      
-      <element label="Data e ora di creazione" name="metadigit][audio][mag:audio:proxies:datetimecreated" type="hidden" lang="it">
-        <description>Registra la data e l'ora di creazione del file digitale.</description>
-      </element>
-      
-      </element> <!-- end proxies -->
-      
-      <element label="Annotazioni" name="metadigit][audio][mag:audio:note" type="textarea" lang="it">
-        <description>Eventuali ulteriori annotazioni sull'oggetto.</description>
-      </element>
-      
-    </form_elements>
-  </ingest_form>
-  <edit_metadata_method class="MagFormBuilder" dsid="MAG" file="plugins/MagFormBuilder.inc" handler="magHandleEditMetadataForm" method="magBuildEditMetadataForm" module="islandora_mag"/>
+			<!-- AUDIO / Proxies -->
+			<element label="Proxies" name="metadigit][audio][mag:audio:proxies"
+				type="hidden" lang="it">
+				<description>Descrizione dello stream audio.</description>
+
+				<element label="Localizzazione fisica" name="metadigit][audio][mag:audio:proxies:file"
+					type="hidden" lang="it">
+					<description>Localizzare il file contenenete la traccia audio
+						mediante un link.</description>
+				</element>
+
+				<element label="Impronta digitale MD5" name="metadigit][audio][mag:audio:proxies:md5"
+					type="hidden" lang="it">
+					<description>32 caratteri rilevati automaticamente che consentono
+						di verificare l'integrita' del contenuto.</description>
+				</element>
+
+				<element label="Grandezza (Byte)"
+					name="metadigit][audio][mag:audio:proxies:filesize" type="hidden"
+					lang="it">
+					<description>Grandezza del file audio espressa in Byte.</description>
+				</element>
+
+				<!-- AUDIO / Proxies / Audio Dimentions -->
+				<element label="Dimensioni"
+					name="metadigit][audio][mag:audio:proxies:audio_dimentions" type="hidden"
+					lang="it">
+					<description>Definisce le dimensioni dello stream video.</description>
+					<element label="Durata (h:m:s)"
+						name="metadigit][audio][mag:audio:proxies:audio_dimentions:duration"
+						type="hidden" lang="it">
+						<description>Durata espressa in ora:minuti:secondi.</description>
+					</element>
+				</element>
+
+				<!-- AUDIO / Proxies / Audio Metrics -->
+				<element label="Caratteristiche tecniche"
+					name="metadigit][audio][mag:audio:proxies:audio_metrics" type="hidden"
+					lang="it">
+					<description>Definisce le caratteristiche tecniche dello stream
+						video.</description>
+					<element label="Frequenza di campionamento"
+						name="metadigit][audio][mag:audio:proxies:audio_metrics:samplingfrequency"
+						type="hidden" lang="it">
+						<description>Descrive la frequenza di campionamento della traccia
+							audio digitale espressa in KHz.</description>
+						<!-- Opzioni consigliate: 8 | 11.025 | 12 | 16 | 22.05 | 24 | 32 | 
+							44.1 | 48 | 96 -->
+					</element>
+					<element label="Bitrate"
+						name="metadigit][audio][mag:audio:proxies:audio_metrics:bitrate"
+						type="hidden" lang="it">
+						<description>Esprime i kbit per secondo (kbps) del campione
+							considerato.</description>
+						<!-- Opzioni consigliate: 24 | 32 | 48 | 56 | 64 | 96 | 128 | 160 | 
+							192 | 256 | 320 | 384 -->
+					</element>
+				</element>
+
+				<!-- AUDIO / Proxies / Format -->
+				<element label="Formato" name="metadigit][audio][mag:audio:proxies:format"
+					type="hidden" lang="it">
+					<description>Formato degli stream audio.</description>
+					<element label="Nome del formato"
+						name="metadigit][audio][mag:audio:proxies:format:name" type="hidden"
+						lang="it">
+						<description>Nome del formato; si usi l'estensione del file.</description>
+					</element>
+					<element label="MIME type"
+						name="metadigit][audio][mag:audio:proxies:format:mime" type="hidden"
+						lang="it">
+						<description>Tipo mime dello stream audio.</description>
+						<!-- Opzioni consigliate: audio/wav | audio/mpeg | audio/mpg | audio/mp3 
+							| audio/x-mpeg | audio/midi | audio/x-realaudio -->
+					</element>
+
+					<element label="Compressione"
+						name="metadigit][audio][mag:audio:proxies:format:compression"
+						type="hidden" lang="it">
+						<description>Tipo di compressione applicato al file audio.</description>
+						<!-- Opzioni consigliate: Uncompressed | Linear PCM | MPEG-1 layer 
+							1 | MPEG-1 layer 2 | MPEG-1 layer 3 | AC3 | Dolby | DTC -->
+					</element>
+					<element label="Canali"
+						name="metadigit][audio][mag:audio:proxies:format:channel_configuration"
+						type="hidden" lang="it">
+						<description>Schema di configurazione dei canali audio.</description>
+						<!-- Opzioni consigliate: Mono | Dual mono | Joint stereo | Stereo 
+							| 2 ch | 4 ch | 5.1 ch | 6.1 ch -->
+					</element>
+				</element>
+
+				<!-- AUDIO / Proxies / Transcription -->
+				<element label="Trascrizione"
+					name="metadigit][audio][mag:audio:proxies:transcription" type="hidden"
+					lang="it">
+					<description>Modalità della trascrizione della traccia audio
+						digitale.</description>
+
+					<element label="Fonte analogica"
+						name="metadigit][audio][mag:audio:proxies:transcription:sourcetype"
+						type="select" lang="it">
+						<description>Descrive il tipo di fonte analogica utilizzata per
+							l'acquisizione dello stream video.</description>
+						<authoritative_list>
+							<item>Altro</item>
+							<item>Registrazione sonora</item>
+							<item>Disco</item>
+							<item>Nastro (bobina aperta)</item>
+							<item>Nastro (cassetta)</item>
+							<item>Nastro (cartuccia)</item>
+							<item>Registrazione su filo</item>
+							<item>Cilindro</item>
+							<item>Rullo di tamburo</item>
+							<item>Film (sonoro)</item>
+							<item>Compact Disc</item>
+							<item>DAT</item>
+							<item>Disco (33 gg.)</item>
+							<item>Disco (45 gg.)</item>
+							<item>Disco (78 gg.)</item>
+						</authoritative_list>
+					</element>
+
+					<element label="Traccia audio creata da"
+						name="metadigit][audio][mag:audio:proxies:transcription:transcriptionagency"
+						type="textfield" lang="it">
+						<description>Il nome dell'istituzione che ha effettuato la
+							digitalizzazione della traccia audio; è utile nel caso la
+							digitalizzazione non sia stata effettuata direttamente
+							dall'istituzione responsabile del processo di digitalizzazione.</description>
+					</element>
+					<element label="Dispositivo utilizzato per la digitalizzazione"
+						name="metadigit][audio][mag:audio:proxies:transcription:devicesource"
+						type="select" lang="it">
+						<description>La tipologia dell'apparecchiatura usata per
+							realizzare la digitalizzazione.</description>
+						<authoritative_list>
+							<item>Sconosciuto</item>
+							<item>Microfono</item>
+							<item>Recorder</item>
+							<item>Giradischi</item>
+						</authoritative_list>
+					</element>
+				</element>
+
+				<element label="Data e ora di creazione"
+					name="metadigit][audio][mag:audio:proxies:datetimecreated" type="hidden"
+					lang="it">
+					<description>Registra la data e l'ora di creazione del file
+						digitale.</description>
+				</element>
+
+			</element> <!-- end proxies -->
+
+			<element label="Annotazioni" name="metadigit][audio][mag:audio:note"
+				type="textarea" lang="it">
+				<description>Eventuali ulteriori annotazioni sull'oggetto.</description>
+			</element>
+
+		</form_elements>
+	</ingest_form>
+	<edit_metadata_method class="MagFormBuilder" dsid="MAG"
+		file="plugins/MagFormBuilder.inc" handler="magHandleEditMetadataForm"
+		method="magBuildEditMetadataForm" module="islandora_mag" />
 </content_model>
