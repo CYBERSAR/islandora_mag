@@ -20,6 +20,7 @@ $collection_policy_path = drupal_get_path('module', 'islandora_mag') . "/foxml/C
 variable_set('default_collection_policy', $collection_policy_path);
 
 module_load_include('inc', 'fedora_repository', 'plugins/FormBuilder');
+
 class MagFormBuilder extends FormBuilder {
 	protected $cm;
 	protected $item;
@@ -255,24 +256,24 @@ class MagFormBuilder extends FormBuilder {
 		 * so, we need to preserve it from form editing or it will be lost
 		 */
 		if ($mag_section_name == "book" and $action == "edit") {
-		  module_load_include('inc', 'fedora_repository', 'api/fedora_item');
-		  $book = new Fedora_Item($this->pid);
-		  if (!$book->exists()) {
-		    return FALSE;
-		  }
-		  $mag_ds = $book->get_datastream_dissemination("MAG");
+			module_load_include('inc', 'fedora_repository', 'api/fedora_item');
+			$book = new Fedora_Item($this->pid);
+			if (!$book->exists()) {
+				return FALSE;
+			}
+			$mag_ds = $book->get_datastream_dissemination("MAG");
 
-		  $new_dom = new DOMDocument();
-		  if ($new_dom->loadXML($mag_ds)) {
-		    $img_groups = $new_dom->getElementsByTagName('img_group');
+			$new_dom = new DOMDocument();
+			if ($new_dom->loadXML($mag_ds)) {
+				$img_groups = $new_dom->getElementsByTagName('img_group');
 
-		    foreach ($img_groups as $img_group) {
-		      if (isset($gen)) {
-		        $img_group = $dom->importNode($img_group, true); // http://php.net/manual/en/domdocument.importnode.php
-		        $gen->appendChild($img_group);
-		      }
-		    }
-		  }
+				foreach ($img_groups as $img_group) {
+					if (isset($gen)) {
+						$img_group = $dom->importNode($img_group, true); // http://php.net/manual/en/domdocument.importnode.php
+						$gen->appendChild($img_group);
+					}
+				}
+			}
 		}
 
 		return $mag;
@@ -608,12 +609,12 @@ class MagFormBuilder extends FormBuilder {
 		 * We don't need to fill dc:relation with the collection name anymore.
 		 * Now we want to specify one or more pids.
 		 *
-		if (($cp = CollectionPolicy::LoadFromCollection($collectionPid)) !== FALSE) {
+		 if (($cp = CollectionPolicy::LoadFromCollection($collectionPid)) !== FALSE) {
 			$collectionName = trim($cp->getName());
 			if (trim($collectionName) != '') {
-				$form_values['dc:relation'] = $collectionName;
+			    $form_values['dc:relation'] = $collectionName;
 			}
-		}
+		 }
 
 		*/
 
@@ -641,14 +642,15 @@ class MagFormBuilder extends FormBuilder {
 		foreach (module_implements($hook) as $module) {
 			$function = $module . '_' . $hook;
 			/*
-			$datastream = $function($form_values, $dom, $rootElement);
-			if (isset($datastream) && is_array($datastream)) {
+			 $datastream = $function($form_values, $dom, $rootElement);
+			 if (isset($datastream) && is_array($datastream)) {
 				$datastreams = array_merge($datastreams, $datastream);
-			}
-			elseif (isset($datastream)) {
+			 }
+			 elseif (isset($datastream)) {
 				$datastreams[] = $datastream;
-			}
+			 }
 			*/
+			
 			$function($form_values, $dom, $rootElement);
 		}
 
@@ -696,7 +698,7 @@ class MagFormBuilder extends FormBuilder {
 				if ( !empty($father_child_security) ) {
 					$object->add_datastream_from_string($father_child_security, "POLICY");
 					$object->add_datastream_from_string($father_child_security, "CHILD_SECURITY");
-				 	drupal_set_message(t("Successfully added the POLICY datastream to this collection"));
+					drupal_set_message(t("Successfully added the POLICY datastream to this collection"));
 				}
 				else {
 					drupal_set_message(t("Errors adding the POLICY datastream to this collection"), 'warning');
@@ -986,9 +988,9 @@ class MagFormBuilder extends FormBuilder {
 		  '#type' => 'submit',
 		  '#submit' => array('fedora_repository_edit_qdc_form_submit'),
 		  '#value' => 'Save Metadata'
-		 );
+		  );
 
-		return $form;
+		  return $form;
 	}
 
 	/**
