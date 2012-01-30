@@ -262,19 +262,18 @@ class MagFormBuilder extends FormBuilder {
 		  }
 		  $mag_ds = $book->get_datastream_dissemination("MAG");
 
-		  $doom = new DOMDocument();
-		  if ($doom->loadXML($mag_ds)) {
-		    $img_groups = $doom->getElementsByTagName('img_group');
+		  $new_dom = new DOMDocument();
+		  if ($new_dom->loadXML($mag_ds)) {
+		    $img_groups = $new_dom->getElementsByTagName('img_group');
 
 		    foreach ($img_groups as $img_group) {
 		      if (isset($gen)) {
-		        $img_group = $dom->importNode($img_group, true); //http://php.net/manual/en/domdocument.importnode.php
+		        $img_group = $dom->importNode($img_group, true); // http://php.net/manual/en/domdocument.importnode.php
 		        $gen->appendChild($img_group);
 		      }
 		    }
 		  }
 		}
-
 
 		return $mag;
 	}
