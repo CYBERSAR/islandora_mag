@@ -45,11 +45,17 @@ class MagBook {
       '#content' => fedora_ilives_create_book_view($this->pid),
 		);
 
-		$tabset['my_tabset']['add_pages'] = array(
-      '#type' => 'tabpage',
-      '#title' => t('Add pages'),
-      '#content' => drupal_get_form('MagBook_add_pages_form', $this->pid),
-		);
+		/**
+		 * nasconde...
+		 */
+		if (user_access('purge objects and datastreams')) {		
+			$tabset['my_tabset']['add_pages'] = array(
+	      '#type' => 'tabpage',
+	      '#title' => t('Add pages'),
+	      '#content' => drupal_get_form('MagBook_add_pages_form', $this->pid),
+			);
+		}
+		
 		return tabs_render($tabset);
 	}
 }
