@@ -45,9 +45,7 @@ class MagBook {
       '#content' => fedora_ilives_create_book_view($this->pid),
 		);
 
-		/**
-		 * nasconde...
-		 */
+		// Hide "Add pages" tab if user don't have the right permissions
 		if (user_access('purge objects and datastreams')) {		
 			$tabset['my_tabset']['add_pages'] = array(
 	      '#type' => 'tabpage',
