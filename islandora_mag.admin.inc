@@ -11,7 +11,7 @@ function islandora_mag_admin_globals() {
   );
   
 
-  $form['islandora_mag_admin_globals']['islandora_mag_image_label_cc_str'] = array(
+  $form['islandora_mag_admin_globals']['islandora_mag_img_cc_str'] = array(
     '#type' => 'textfield',
     '#title' => t('Creative Commons Label on Watermark'),
     '#default_value' => variable_get('islandora_mag_img_cc_str', 'You can remove this label without breaking the Creative Commons license.'),

@@ -8,5 +8,5 @@ function islandora_mag_uninstall() {
 
  // Delete our module's variable from the variables table.
  variable_del('islandora_mag_dcsubject_taxonomy');
- variable_del('islandora_mag_image_label_cc_str');
+ variable_del('islandora_mag_img_cc_str');
 }
