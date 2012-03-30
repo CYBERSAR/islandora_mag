@@ -43,7 +43,7 @@ class MagShowStreamsInFieldSets {
 	      '#type' => 'tabpage',
 	      '#title' => t('Read Online'),
 	      '#content' => "<iframe src=\"http://docs.google.com/viewer?url=". $base_url . '/fedora/repository/'. 
-			$this->pid . '/OBJ/preview.pdf'. "&embedded=TRUE\" style=\"width:600px; height:500px;\" frameborder=\"0\"></iframe>"
+			$this->pid . '/OBJ'. "&embedded=TRUE\" style=\"width:90%; height:auto;\" frameborder=\"0\"></iframe>"
 		);
 
 		// Render the tabset.
