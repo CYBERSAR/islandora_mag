@@ -650,7 +650,7 @@ class MagFormBuilder extends FormBuilder {
 				$datastreams[] = $datastream;
 			 }
 			*/
-			
+
 			$function($form_values, $dom, $rootElement);
 		}
 
