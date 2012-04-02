@@ -577,9 +577,9 @@ class MagFormBuilder extends FormBuilder {
 	}
 
 	function strXmlSafe(&$form_values) {
-	    foreach ($form_values as $key => $value) {
+	    foreach ($form_values as $key => &$value) {
     			if (substr($key, 0, 2) == 'dc') {
-    	        $form_values[$key] = htmlspecialchars($value) . "--";
+    	        $value = htmlspecialchars($value) . "--";
     	    }
 	    }
 	}
@@ -1008,8 +1008,6 @@ class MagFormBuilder extends FormBuilder {
 	 * nel caso dell'invocazione del metodo di gestione del metadata custom.
 	 */
 	function magHandleEditMetadataForm(&$form_id, &$form_values, &$soap_client) {
-	  $this->strXmlSafe($form_values);
-
 		foreach ($form_values as $key => $value) {
 			if (isset($_POST[$key]) && $key != "form_build_id") {
 				$form_values[$key] = $_POST[$key];
@@ -1027,6 +1025,8 @@ class MagFormBuilder extends FormBuilder {
 
 		$mag = $this->createMetadigitStream($form_values, $dom, $action="edit");
 		$dom->appendChild($mag);
+
+		$this->strXmlSafe($form_values);
 
 		if ($this->item->modify_datastream_by_value($dom->saveXML(), 'MAG', "MAG Record", 'text/xml') !== NULL) {
 			drupal_set_message(t('Success changing MAG for the object "%pid"', array('%pid' => $this->pid)));
