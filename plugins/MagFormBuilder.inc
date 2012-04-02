@@ -1014,7 +1014,7 @@ class MagFormBuilder extends FormBuilder {
 	 * nel caso dell'invocazione del metodo di gestione del metadata custom.
 	 */
 	function magHandleEditMetadataForm(&$form_id, &$form_values, &$soap_client) {
-	  $this->strXmlSafe($form_values);
+	  //$this->strXmlSafe($form_values);
 
 		foreach ($form_values as $key => $value) {
 			if (isset($_POST[$key]) && $key != "form_build_id") {
