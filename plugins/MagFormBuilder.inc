@@ -623,7 +623,7 @@ class MagFormBuilder extends FormBuilder {
     			$test = substr($key, 0, 3);
 
     			if ($test == 'mag' || $test == 'dc:') {
-    	        $form_values[$key] = stripInvalidXml($value);
+    	        $form_values[$key] = $this->stripInvalidXml($value);
     	    }
 	    }
 	}
