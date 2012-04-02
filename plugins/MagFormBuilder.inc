@@ -577,7 +577,7 @@ class MagFormBuilder extends FormBuilder {
 	}
 
 	function strXmlSafe(&$form_values) {
-	    defined( "ENT_XML1") or define( "ENT_XML1", 16);
+	    defined("ENT_XML1") or define("ENT_XML1", 16);
 
 	    foreach ($form_values as $key => $value) {
     			$index = strrpos($key, '-');
@@ -587,7 +587,7 @@ class MagFormBuilder extends FormBuilder {
     			$test = substr($key, 0, 3);
 
     			if ($test == 'mag' || $test == 'dc:') {
-    	        $form_values[$key] = htmlspecialchars($value, ENT_XML1);
+    	        $form_values[$key] = htmlspecialchars($value, ENT_XML1, "UTF-8");
     	    }
 	    }
 	}
