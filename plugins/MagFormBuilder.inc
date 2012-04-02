@@ -576,6 +576,42 @@ class MagFormBuilder extends FormBuilder {
 		return $clean;
 	}
 
+	/**
+	 * Removes invalid XML
+	 *
+	 * @access public
+	 * @param string $value
+	 * @return string
+	 */
+	function stripInvalidXml($value)
+	{
+	    $ret = "";
+	    $current;
+	    if (empty($value)) {
+	        return $ret;
+	    }
+
+	    $length = strlen($value);
+	    for ($i=0; $i < $length; $i++)
+	    {
+	        $current = ord($value{$i});
+	        if (($current == 0x9) ||
+	        ($current == 0xA) ||
+	        ($current == 0xD) ||
+	        (($current >= 0x20) && ($current <= 0xD7FF)) ||
+	        (($current >= 0xE000) && ($current <= 0xFFFD)) ||
+	        (($current >= 0x10000) && ($current <= 0x10FFFF)))
+	        {
+	            $ret .= chr($current);
+	        }
+	        else
+	        {
+	            $ret .= " ";
+	        }
+	    }
+	    return $ret;
+	}
+
 	function strXmlSafe(&$form_values) {
 	    defined("ENT_XML1") or define("ENT_XML1", 16);
 
@@ -587,7 +623,7 @@ class MagFormBuilder extends FormBuilder {
     			$test = substr($key, 0, 3);
 
     			if ($test == 'mag' || $test == 'dc:') {
-    	        $form_values[$key] = htmlspecialchars($value, ENT_XML1, "UTF-8");
+    	        $form_values[$key] = stripInvalidXml($value);
     	    }
 	    }
 	}
