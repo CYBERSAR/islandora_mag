@@ -589,6 +589,8 @@ class MagFormBuilder extends FormBuilder {
 		module_load_include('inc', 'fedora_repository', 'api/fedora_item');
 		module_load_include('inc', 'fedora_repository', 'CollectionPolicy');
 
+		$this->strXmlSafe($form_values);
+
 		$dom = new DomDocument("1.0", "UTF-8");
 		$dom->formatOutput = TRUE;
 		$pid = $form_values['pid'];
