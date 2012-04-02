@@ -577,7 +577,7 @@ class MagFormBuilder extends FormBuilder {
 	}
 
 	function strXmlSafe(&$form_values) {
-	    foreach ($form_values as $key => &$value) {
+	    foreach ($form_values as $key => $value) {
     			$index = strrpos($key, '-');
     			if ($index > 01) {
     				$key = substr($key, 0, $index);
@@ -585,7 +585,7 @@ class MagFormBuilder extends FormBuilder {
     			$test = substr($key, 0, 3);
 
     			if ($test == 'mag' || $test == 'dc:') {
-    	        $value = htmlspecialchars($value);
+    	        $form_values[$key] = htmlspecialchars($value);
     	    }
 	    }
 	}
@@ -1014,7 +1014,7 @@ class MagFormBuilder extends FormBuilder {
 	 * nel caso dell'invocazione del metodo di gestione del metadata custom.
 	 */
 	function magHandleEditMetadataForm(&$form_id, &$form_values, &$soap_client) {
-	  //$this->strXmlSafe($form_values);
+	  $this->strXmlSafe($form_values);
 
 		foreach ($form_values as $key => $value) {
 			if (isset($_POST[$key]) && $key != "form_build_id") {
