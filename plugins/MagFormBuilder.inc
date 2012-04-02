@@ -579,7 +579,7 @@ class MagFormBuilder extends FormBuilder {
 	function strXmlSafe(&$form_values) {
 	    foreach ($form_values as $key => &$value) {
     			if (substr($key, 0, 2) == 'dc') {
-    	        $value = htmlspecialchars($value) . "--";
+    	        $value = htmlspecialchars($value);
     	    }
 	    }
 	}
