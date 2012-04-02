@@ -577,6 +577,8 @@ class MagFormBuilder extends FormBuilder {
 	}
 
 	function strXmlSafe(&$form_values) {
+	    defined( "ENT_XML1") or define( "ENT_XML1", 16);
+
 	    foreach ($form_values as $key => $value) {
     			$index = strrpos($key, '-');
     			if ($index > 01) {
