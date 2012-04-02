@@ -1014,6 +1014,8 @@ class MagFormBuilder extends FormBuilder {
 			}
 		}
 
+		$this->strXmlSafe($form_values);
+
 		//retrieve collection pid...
 		$uris = $this->__getCollectionPid($this->pid);
 		$form_values['collection_pid'] = $uris[0];
@@ -1026,7 +1028,7 @@ class MagFormBuilder extends FormBuilder {
 		$mag = $this->createMetadigitStream($form_values, $dom, $action="edit");
 		$dom->appendChild($mag);
 
-		$this->strXmlSafe($form_values);
+
 
 		if ($this->item->modify_datastream_by_value($dom->saveXML(), 'MAG', "MAG Record", 'text/xml') !== NULL) {
 			drupal_set_message(t('Success changing MAG for the object "%pid"', array('%pid' => $this->pid)));
