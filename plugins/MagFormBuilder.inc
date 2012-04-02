@@ -577,18 +577,9 @@ class MagFormBuilder extends FormBuilder {
 	}
 
 	function strXmlSafe(&$form_values) {
-	    defined("ENT_XML1") or define("ENT_XML1", 16);
-
 	    foreach ($form_values as $key => $value) {
-    			$index = strrpos($key, '-');
-    			if ($index > 01) {
-    				$key = substr($key, 0, $index);
-    			}
-    			$test = substr($key, 0, 3);
-
-    			if ($test == 'mag' || $test == 'dc:') {
-    	        //$form_values[$key] = iconv('UTF-8', 'ASCII//TRANSLIT//IGNORE', $value);
-    	        $form_values[$key] = htmlspecialchars($value);
+    			if (substr($key, 0, 3) == 'dc:') {
+    	        $form_values[$key] = htmlspecialchars($value) . "--";
     	    }
 	    }
 	}
