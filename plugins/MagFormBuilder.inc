@@ -576,6 +576,13 @@ class MagFormBuilder extends FormBuilder {
 		return $clean;
 	}
 
+	function __strXmlSafe(&$form_values) {
+	    foreach ($form_values as &$value) {
+	        $value = htmlspecialchars($value);
+	    }
+	}
+
+
 	function handleXMLForm($form_values) {
 		module_load_include('inc', 'fedora_repository', 'api/fedora_item');
 		module_load_include('inc', 'fedora_repository', 'CollectionPolicy');
@@ -999,6 +1006,7 @@ class MagFormBuilder extends FormBuilder {
 	 * nel caso dell'invocazione del metodo di gestione del metadata custom.
 	 */
 	function magHandleEditMetadataForm(&$form_id, &$form_values, &$soap_client) {
+	  __strXmlSafe($form_values);
 		foreach ($form_values as $key => $value) {
 			if (isset($_POST[$key]) && $key != "form_build_id") {
 				$form_values[$key] = $_POST[$key];
