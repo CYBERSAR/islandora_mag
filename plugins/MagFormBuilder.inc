@@ -576,6 +576,11 @@ class MagFormBuilder extends FormBuilder {
 		return $clean;
 	}
 
+	/**
+	 * Used to clean up dc values from unsafe XML chars
+	 *
+	 * @param array $form_values
+	 */
 	function strXmlSafe(&$form_values) {
 	    foreach ($form_values as $key => &$value) {
     			if (substr($key, 0, 2) == 'dc') {
