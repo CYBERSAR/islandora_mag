@@ -1,0 +1,449 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<foxml:digitalObject VERSION="1.1" PID="epistemetec:mag_collection"
+xmlns:foxml="info:fedora/fedora-system:def/foxml#"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xsi:schemaLocation="info:fedora/fedora-system:def/foxml# http://www.fedora.info/definitions/1/0/foxml1-1.xsd">
+<foxml:objectProperties>
+<foxml:property NAME="info:fedora/fedora-system:def/model#state" VALUE="Active"/>
+<foxml:property NAME="info:fedora/fedora-system:def/model#label" VALUE="epistemetec:mag_collection"/>
+<foxml:property NAME="info:fedora/fedora-system:def/model#ownerId" VALUE="fedoraAdmin"/>
+<foxml:property NAME="info:fedora/fedora-system:def/model#createdDate" VALUE="2011-03-30T11:19:26.119Z"/>
+<foxml:property NAME="info:fedora/fedora-system:def/view#lastModifiedDate" VALUE="2011-10-27T10:50:02.762Z"/>
+</foxml:objectProperties>
+<foxml:datastream ID="AUDIT" STATE="A" CONTROL_GROUP="X" VERSIONABLE="false">
+<foxml:datastreamVersion ID="AUDIT.0" LABEL="Audit Trail for this object" CREATED="2011-03-30T11:19:26.119Z" MIMETYPE="text/xml" FORMAT_URI="info:fedora/fedora-system:format/xml.fedora.audit">
+<foxml:xmlContent>
+<audit:auditTrail xmlns:audit="info:fedora/fedora-system:def/audit#">
+<audit:record ID="AUDREC1">
+<audit:process type="Fedora API-M"/>
+<audit:action>ingest</audit:action>
+<audit:componentID></audit:componentID>
+<audit:responsibility>admin</audit:responsibility>
+<audit:date>2011-03-30T11:19:26.119Z</audit:date>
+<audit:justification>Fedora Object Ingested</audit:justification>
+</audit:record>
+<audit:record ID="AUDREC2">
+<audit:process type="Fedora API-M"/>
+<audit:action>ingest</audit:action>
+<audit:componentID></audit:componentID>
+<audit:responsibility>fedoraAdmin</audit:responsibility>
+<audit:date>2011-04-28T11:06:07.703Z</audit:date>
+<audit:justification>Ingested from local file /var/www/www.epistemetec.cyb/sites/all/modules/islandora_mag/foxml/MAG_COLLECTION.foxml</audit:justification>
+</audit:record>
+<audit:record ID="AUDREC3">
+<audit:process type="Fedora API-M"/>
+<audit:action>addDatastream</audit:action>
+<audit:componentID>TN</audit:componentID>
+<audit:responsibility>admin</audit:responsibility>
+<audit:date>2011-04-28T11:07:44.375Z</audit:date>
+<audit:justification>Ingested object TN</audit:justification>
+</audit:record>
+<audit:record ID="AUDREC4">
+<audit:process type="Fedora API-M"/>
+<audit:action>purgeDatastream</audit:action>
+<audit:componentID>TN</audit:componentID>
+<audit:responsibility>admin</audit:responsibility>
+<audit:date>2011-07-13T16:36:20.182Z</audit:date>
+<audit:justification>Purged datastream using Islandora API . . . Purged datastream (ID=TN), versions ranging from the beginning of time to the end of time.  This resulted in the permanent removal of 1 datastream version(s) (2011-04-28T13:07:44.375Z) and all associated audit records.</audit:justification>
+</audit:record>
+<audit:record ID="AUDREC5">
+<audit:process type="Fedora API-M"/>
+<audit:action>addDatastream</audit:action>
+<audit:componentID>TN</audit:componentID>
+<audit:responsibility>admin</audit:responsibility>
+<audit:date>2011-07-13T16:36:32.792Z</audit:date>
+<audit:justification>Ingested object TN</audit:justification>
+</audit:record>
+<audit:record ID="AUDREC6">
+<audit:process type="Fedora API-M"/>
+<audit:action>modifyDatastreamByValue</audit:action>
+<audit:componentID>COLLECTION_POLICY</audit:componentID>
+<audit:responsibility>fedoraAdmin</audit:responsibility>
+<audit:date>2011-07-13T16:38:06.144Z</audit:date>
+<audit:justification></audit:justification>
+</audit:record>
+<audit:record ID="AUDREC7">
+<audit:process type="Fedora API-M"/>
+<audit:action>modifyDatastreamByValue</audit:action>
+<audit:componentID>COLLECTION_POLICY</audit:componentID>
+<audit:responsibility>fedoraAdmin</audit:responsibility>
+<audit:date>2011-07-14T09:06:22.237Z</audit:date>
+<audit:justification></audit:justification>
+</audit:record>
+<audit:record ID="AUDREC8">
+<audit:process type="Fedora API-M"/>
+<audit:action>modifyDatastreamByValue</audit:action>
+<audit:componentID>COLLECTION_POLICY</audit:componentID>
+<audit:responsibility>fedoraAdmin</audit:responsibility>
+<audit:date>2011-07-14T09:06:55.168Z</audit:date>
+<audit:justification></audit:justification>
+</audit:record>
+<audit:record ID="AUDREC9">
+<audit:process type="Fedora API-M"/>
+<audit:action>purgeDatastream</audit:action>
+<audit:componentID>TN</audit:componentID>
+<audit:responsibility>admin</audit:responsibility>
+<audit:date>2011-07-14T09:28:29.481Z</audit:date>
+<audit:justification>Purged datastream using Islandora API . . . Purged datastream (ID=TN), versions ranging from the beginning of time to the end of time.  This resulted in the permanent removal of 1 datastream version(s) (2011-07-13T18:36:32.792Z) and all associated audit records.</audit:justification>
+</audit:record>
+<audit:record ID="AUDREC10">
+<audit:process type="Fedora API-M"/>
+<audit:action>addDatastream</audit:action>
+<audit:componentID>TN</audit:componentID>
+<audit:responsibility>admin</audit:responsibility>
+<audit:date>2011-07-14T09:28:42.335Z</audit:date>
+<audit:justification>Ingested object TN</audit:justification>
+</audit:record>
+<audit:record ID="AUDREC11">
+<audit:process type="Fedora API-M"/>
+<audit:action>modifyDatastreamByValue</audit:action>
+<audit:componentID>COLLECTION_POLICY</audit:componentID>
+<audit:responsibility>fedoraAdmin</audit:responsibility>
+<audit:date>2011-09-02T11:17:46.145Z</audit:date>
+<audit:justification></audit:justification>
+</audit:record>
+<audit:record ID="AUDREC12">
+<audit:process type="Fedora API-M"/>
+<audit:action>addDatastream</audit:action>
+<audit:componentID>CHILD_SECURITY</audit:componentID>
+<audit:responsibility>fedoraAdmin</audit:responsibility>
+<audit:date>2011-09-21T12:47:03.440Z</audit:date>
+<audit:justification>DatastreamsPane generated this logMessage.</audit:justification>
+</audit:record>
+<audit:record ID="AUDREC13">
+<audit:process type="Fedora API-M"/>
+<audit:action>purgeDatastream</audit:action>
+<audit:componentID>CHILD_SECURITY</audit:componentID>
+<audit:responsibility>admin</audit:responsibility>
+<audit:date>2011-10-27T10:45:03.311Z</audit:date>
+<audit:justification>Purged datastream using Islandora API . . . Purged datastream (ID=CHILD_SECURITY), versions ranging from the beginning of time to the end of time.  This resulted in the permanent removal of 1 datastream version(s) (2011-09-21T14:47:03.440Z) and all associated audit records.</audit:justification>
+</audit:record>
+<audit:record ID="AUDREC14">
+<audit:process type="Fedora API-M"/>
+<audit:action>addDatastream</audit:action>
+<audit:componentID>CHILD_SECURITY</audit:componentID>
+<audit:responsibility>admin</audit:responsibility>
+<audit:date>2011-10-27T10:47:37.574Z</audit:date>
+<audit:justification>Ingested object CHILD_SECURITY</audit:justification>
+</audit:record>
+<audit:record ID="AUDREC15">
+<audit:process type="Fedora API-M"/>
+<audit:action>purgeDatastream</audit:action>
+<audit:componentID>CHILD_SECURITY</audit:componentID>
+<audit:responsibility>admin</audit:responsibility>
+<audit:date>2011-10-27T10:49:46.214Z</audit:date>
+<audit:justification>Purged datastream using Islandora API . . . Purged datastream (ID=CHILD_SECURITY), versions ranging from the beginning of time to the end of time.  This resulted in the permanent removal of 1 datastream version(s) (2011-10-27T12:47:37.574Z) and all associated audit records.</audit:justification>
+</audit:record>
+<audit:record ID="AUDREC16">
+<audit:process type="Fedora API-M"/>
+<audit:action>addDatastream</audit:action>
+<audit:componentID>CHILD_SECURITY</audit:componentID>
+<audit:responsibility>admin</audit:responsibility>
+<audit:date>2011-10-27T10:50:02.762Z</audit:date>
+<audit:justification>Ingested object CHILD_SECURITY</audit:justification>
+</audit:record>
+</audit:auditTrail>
+</foxml:xmlContent>
+</foxml:datastreamVersion>
+</foxml:datastream>
+<foxml:datastream ID="DC" STATE="A" CONTROL_GROUP="X" VERSIONABLE="true">
+<foxml:datastreamVersion ID="DC1.0" LABEL="Dublin Core Record for this object" CREATED="2011-03-30T11:19:26.119Z" MIMETYPE="text/xml" FORMAT_URI="http://www.openarchives.org/OAI/2.0/oai_dc/" SIZE="405">
+<foxml:xmlContent>
+<oai_dc:dc xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+  <dc:title>epistemetec:mag_collection</dc:title>
+  <dc:identifier>epistemetec:mag_collection</dc:identifier>
+</oai_dc:dc>
+</foxml:xmlContent>
+</foxml:datastreamVersion>
+</foxml:datastream>
+<foxml:datastream ID="RELS-EXT" STATE="A" CONTROL_GROUP="X" VERSIONABLE="true">
+<foxml:datastreamVersion ID="RELS-EXT.0" LABEL="Fedora Object-to-Object Relationship Metadata" CREATED="2011-03-30T11:19:29.432Z" MIMETYPE="text/xml" SIZE="523">
+<foxml:xmlContent>
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+          <rdf:Description rdf:about="info:fedora/epistemetec:mag_collection">
+            <fedora-model:hasModel xmlns:fedora-model="info:fedora/fedora-system:def/model#" rdf:resource="info:fedora/islandora:collectionCModel"></fedora-model:hasModel>
+            <isMemberOfCollection xmlns="info:fedora/fedora-system:def/relations-external#" rdf:resource="info:fedora/islandora:top"></isMemberOfCollection>
+          </rdf:Description>
+        </rdf:RDF>
+</foxml:xmlContent>
+</foxml:datastreamVersion>
+</foxml:datastream>
+<foxml:datastream ID="COLLECTION_POLICY" STATE="A" CONTROL_GROUP="X" VERSIONABLE="true">
+<foxml:datastreamVersion ID="COLLECTION_POLICY.0" LABEL="epistemetec:mag_collection" CREATED="2011-03-30T11:19:30.525Z" MIMETYPE="text/xml" SIZE="2199">
+<foxml:xmlContent>
+<collection_policy xmlns="http://www.islandora.ca" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="epistemetec:mag_collection" xsi:schemaLocation="http://www.islandora.ca http://syn.lib.umanitoba.ca/collection_policy.xsd">
+          <content_models>
+            <content_model dsid="ISLANDORACM" name="MAG IMG" namespace="epistemetec:mag_img" pid="epistemetec:mag_img"></content_model>
+            <content_model dsid="ISLANDORACM" name="MAG BIG-IMG" namespace="epistemetec:mag_big_img" pid="epistemetec:mag_big_img"></content_model>
+            <content_model dsid="ISLANDORACM" name="MAG DOC" namespace="epistemetec:mag_doc" pid="epistemetec:mag_doc"></content_model>
+            <content_model dsid="ISLANDORACM" name="MAG BOOK" namespace="epistemetec:mag_book" pid="epistemetec:mag_book"></content_model>
+            <content_model dsid="ISLANDORACM" name="MAG AUDIO" namespace="epistemetec:mag_audio" pid="epistemetec:mag_audio"></content_model>
+            <content_model dsid="ISLANDORACM" name="MAG VIDEO" namespace="epistemetec:mag_video" pid="epistemetec:mag_video"></content_model>
+            <content_model dsid="ISLANDORACM" name="SUB COLLECTION" namespace="epistemetec:sub_collection" pid="epistemetec:sub_collection"></content_model>
+          </content_models>
+          <search_terms>
+            <term field="dc.title">dc.title</term>
+            <term field="dc.creator">dc.creator</term>
+            <term default="true" field="dc.description">dc.description</term>
+            <term field="dc.date">dc.date</term>
+            <term field="dc.identifier">dc.identifier</term>
+            <term field="dc.language">dc.language</term>
+            <term field="dc.publisher">dc.publisher</term>
+            <term field="dc.rights">dc.rights</term>
+            <term field="dc.subject">dc.subject</term>
+            <term field="dc.relation">dc.relation</term>
+            <term field="dcterms.temporal">dcterms.temporal</term>
+            <term field="dcterms.spatial">dcterms.spatial</term>
+            <term field="fgs.DS.first.text">Full Text</term>
+          </search_terms>
+          <relationship>isMemberOfCollection</relationship>
+        </collection_policy>
+</foxml:xmlContent>
+</foxml:datastreamVersion>
+<foxml:datastreamVersion ID="COLLECTION_POLICY.1" LABEL="epistemetec:mag_collection" CREATED="2011-07-13T16:38:06.144Z" MIMETYPE="text/xml" SIZE="2048">
+<foxml:xmlContent>
+<collection_policy xmlns="http://www.islandora.ca" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="epistemetec:mag_collection" xsi:schemaLocation="http://www.islandora.ca http://syn.lib.umanitoba.ca/collection_policy.xsd">
+  <content_models>
+    <content_model dsid="ISLANDORACM" name="Immagine (JPG)" namespace="epistemetec:mag_img" pid="epistemetec:mag_img"></content_model>
+    <content_model dsid="ISLANDORACM" name="Immagine Alta Risoluzione (TIFF)" namespace="epistemetec:mag_big_img" pid="epistemetec:mag_big_img"></content_model>
+    <content_model dsid="ISLANDORACM" name="Documento (PDF)" namespace="epistemetec:mag_doc" pid="epistemetec:mag_doc"></content_model>
+    <content_model dsid="ISLANDORACM" name="Libro (TIFF)" namespace="epistemetec:mag_book" pid="epistemetec:mag_book"></content_model>
+    <content_model dsid="ISLANDORACM" name="Audio (MP3)" namespace="epistemetec:mag_audio" pid="epistemetec:mag_audio"></content_model>
+    <content_model dsid="ISLANDORACM" name="Video (FLV,MP4,AVI,MPEG)" namespace="epistemetec:mag_video" pid="epistemetec:mag_video"></content_model>
+    <content_model dsid="ISLANDORACM" name="Sub-collezione" namespace="epistemetec:sub_collection" pid="epistemetec:sub_collection"></content_model>
+  </content_models>
+  <search_terms>
+    <term field="dc.title">dc.title</term>
+    <term field="dc.creator">dc.creator</term>
+    <term default="true" field="dc.description">dc.description</term>
+    <term field="dc.date">dc.date</term>
+    <term field="dc.identifier">dc.identifier</term>
+    <term field="dc.language">dc.language</term>
+    <term field="dc.publisher">dc.publisher</term>
+    <term field="dc.rights">dc.rights</term>
+    <term field="dc.subject">dc.subject</term>
+    <term field="dc.relation">dc.relation</term>
+    <term field="dcterms.temporal">dcterms.temporal</term>
+    <term field="dcterms.spatial">dcterms.spatial</term>
+    <term field="fgs.DS.first.text">Full Text</term>
+  </search_terms>
+  <relationship>isMemberOfCollection</relationship>
+</collection_policy>
+</foxml:xmlContent>
+</foxml:datastreamVersion>
+<foxml:datastreamVersion ID="COLLECTION_POLICY.2" LABEL="epistemetec:mag_collection" CREATED="2011-07-14T09:06:22.237Z" MIMETYPE="text/xml" SIZE="2046">
+<foxml:xmlContent>
+<collection_policy xmlns="http://www.islandora.ca" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="Cybersar Test Collection" xsi:schemaLocation="http://www.islandora.ca http://syn.lib.umanitoba.ca/collection_policy.xsd">
+  <content_models>
+    <content_model dsid="ISLANDORACM" name="Immagine (JPG)" namespace="epistemetec:mag_img" pid="epistemetec:mag_img"></content_model>
+    <content_model dsid="ISLANDORACM" name="Immagine Alta Risoluzione (TIFF)" namespace="epistemetec:mag_big_img" pid="epistemetec:mag_big_img"></content_model>
+    <content_model dsid="ISLANDORACM" name="Documento (PDF)" namespace="epistemetec:mag_doc" pid="epistemetec:mag_doc"></content_model>
+    <content_model dsid="ISLANDORACM" name="Libro (TIFF)" namespace="epistemetec:mag_book" pid="epistemetec:mag_book"></content_model>
+    <content_model dsid="ISLANDORACM" name="Audio (MP3)" namespace="epistemetec:mag_audio" pid="epistemetec:mag_audio"></content_model>
+    <content_model dsid="ISLANDORACM" name="Video (FLV,MP4,AVI,MPEG)" namespace="epistemetec:mag_video" pid="epistemetec:mag_video"></content_model>
+    <content_model dsid="ISLANDORACM" name="Sub-collezione" namespace="epistemetec:sub_collection" pid="epistemetec:sub_collection"></content_model>
+  </content_models>
+  <search_terms>
+    <term field="dc.title">dc.title</term>
+    <term field="dc.creator">dc.creator</term>
+    <term default="true" field="dc.description">dc.description</term>
+    <term field="dc.date">dc.date</term>
+    <term field="dc.identifier">dc.identifier</term>
+    <term field="dc.language">dc.language</term>
+    <term field="dc.publisher">dc.publisher</term>
+    <term field="dc.rights">dc.rights</term>
+    <term field="dc.subject">dc.subject</term>
+    <term field="dc.relation">dc.relation</term>
+    <term field="dcterms.temporal">dcterms.temporal</term>
+    <term field="dcterms.spatial">dcterms.spatial</term>
+    <term field="fgs.DS.first.text">Full Text</term>
+  </search_terms>
+  <relationship>isMemberOfCollection</relationship>
+</collection_policy>
+</foxml:xmlContent>
+</foxml:datastreamVersion>
+<foxml:datastreamVersion ID="COLLECTION_POLICY.3" LABEL="epistemetec:mag_collection" CREATED="2011-07-14T09:06:55.168Z" MIMETYPE="text/xml" SIZE="2048">
+<foxml:xmlContent>
+<collection_policy xmlns="http://www.islandora.ca" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="epistemetec:mag_collection" xsi:schemaLocation="http://www.islandora.ca http://syn.lib.umanitoba.ca/collection_policy.xsd">
+  <content_models>
+    <content_model dsid="ISLANDORACM" name="Immagine (JPG)" namespace="epistemetec:mag_img" pid="epistemetec:mag_img"></content_model>
+    <content_model dsid="ISLANDORACM" name="Immagine Alta Risoluzione (TIFF)" namespace="epistemetec:mag_big_img" pid="epistemetec:mag_big_img"></content_model>
+    <content_model dsid="ISLANDORACM" name="Documento (PDF)" namespace="epistemetec:mag_doc" pid="epistemetec:mag_doc"></content_model>
+    <content_model dsid="ISLANDORACM" name="Libro (TIFF)" namespace="epistemetec:mag_book" pid="epistemetec:mag_book"></content_model>
+    <content_model dsid="ISLANDORACM" name="Audio (MP3)" namespace="epistemetec:mag_audio" pid="epistemetec:mag_audio"></content_model>
+    <content_model dsid="ISLANDORACM" name="Video (FLV,MP4,AVI,MPEG)" namespace="epistemetec:mag_video" pid="epistemetec:mag_video"></content_model>
+    <content_model dsid="ISLANDORACM" name="Sub-collezione" namespace="epistemetec:sub_collection" pid="epistemetec:sub_collection"></content_model>
+  </content_models>
+  <search_terms>
+    <term field="dc.title">dc.title</term>
+    <term field="dc.creator">dc.creator</term>
+    <term default="true" field="dc.description">dc.description</term>
+    <term field="dc.date">dc.date</term>
+    <term field="dc.identifier">dc.identifier</term>
+    <term field="dc.language">dc.language</term>
+    <term field="dc.publisher">dc.publisher</term>
+    <term field="dc.rights">dc.rights</term>
+    <term field="dc.subject">dc.subject</term>
+    <term field="dc.relation">dc.relation</term>
+    <term field="dcterms.temporal">dcterms.temporal</term>
+    <term field="dcterms.spatial">dcterms.spatial</term>
+    <term field="fgs.DS.first.text">Full Text</term>
+  </search_terms>
+  <relationship>isMemberOfCollection</relationship>
+</collection_policy>
+</foxml:xmlContent>
+</foxml:datastreamVersion>
+<foxml:datastreamVersion ID="COLLECTION_POLICY.4" LABEL="epistemetec:mag_collection" CREATED="2011-09-02T11:17:46.145Z" MIMETYPE="text/xml" SIZE="2042">
+<foxml:xmlContent>
+<collection_policy xmlns="http://www.islandora.ca" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="epistemetec:mag_collection" xsi:schemaLocation="http://www.islandora.ca http://syn.lib.umanitoba.ca/collection_policy.xsd">
+  <content_models>
+    <content_model dsid="ISLANDORACM" name="Immagine (JPG)" namespace="epistemetec:mag_img" pid="epistemetec:mag_img"></content_model>
+    <content_model dsid="ISLANDORACM" name="Immagine Alta Risoluzione (TIFF)" namespace="epistemetec:mag_big_img" pid="epistemetec:mag_big_img"></content_model>
+    <content_model dsid="ISLANDORACM" name="Documento (PDF)" namespace="epistemetec:mag_doc" pid="epistemetec:mag_doc"></content_model>
+    <content_model dsid="ISLANDORACM" name="Libro (TIFF)" namespace="epistemetec:mag_book" pid="epistemetec:mag_book"></content_model>
+    <content_model dsid="ISLANDORACM" name="Audio (MP3)" namespace="epistemetec:mag_audio" pid="epistemetec:mag_audio"></content_model>
+    <content_model dsid="ISLANDORACM" name="Video (FLV,MP4,QT)" namespace="epistemetec:mag_video" pid="epistemetec:mag_video"></content_model>
+    <content_model dsid="ISLANDORACM" name="Sub-collezione" namespace="epistemetec:sub_collection" pid="epistemetec:sub_collection"></content_model>
+  </content_models>
+  <search_terms>
+    <term field="dc.title">dc.title</term>
+    <term field="dc.creator">dc.creator</term>
+    <term default="true" field="dc.description">dc.description</term>
+    <term field="dc.date">dc.date</term>
+    <term field="dc.identifier">dc.identifier</term>
+    <term field="dc.language">dc.language</term>
+    <term field="dc.publisher">dc.publisher</term>
+    <term field="dc.rights">dc.rights</term>
+    <term field="dc.subject">dc.subject</term>
+    <term field="dc.relation">dc.relation</term>
+    <term field="dcterms.temporal">dcterms.temporal</term>
+    <term field="dcterms.spatial">dcterms.spatial</term>
+    <term field="fgs.DS.first.text">Full Text</term>
+  </search_terms>
+  <relationship>isMemberOfCollection</relationship>
+</collection_policy>
+</foxml:xmlContent>
+</foxml:datastreamVersion>
+</foxml:datastream>
+<foxml:datastream ID="TN" STATE="A" CONTROL_GROUP="M" VERSIONABLE="true">
+<foxml:datastreamVersion ID="TN.0" LABEL="TN.jpg" CREATED="2011-07-14T09:28:42.335Z" MIMETYPE="image/jpeg" SIZE="-1">
+<foxml:contentLocation TYPE="INTERNAL_ID" REF="http://dl.e-pistemetec.net/fedora/get/epistemetec:mag_collection/TN/2011-07-14T09:28:42.335Z"/>
+</foxml:datastreamVersion>
+</foxml:datastream>
+<foxml:datastream ID="CHILD_SECURITY" STATE="A" CONTROL_GROUP="X" VERSIONABLE="true">
+<foxml:datastreamVersion ID="CHILD_SECURITY.0" LABEL="CHILD_SECURITY.xml" CREATED="2011-10-27T10:50:02.762Z" MIMETYPE="text/xml" SIZE="7760">
+<foxml:xmlContent>
+<Policy xmlns="urn:oasis:names:tc:xacml:1.0:policy" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" PolicyId="PurgeOnlyCybersarAndAdmins" RuleCombiningAlgId="urn:oasis:names:tc:xacml:1.0:rule-combining-algorithm:first-applicable">
+  <Description>This policy will allow users with the roles listed below to Purge objects into Cybersar Collection</Description>
+  <Target>
+    <Subjects>
+      <AnySubject></AnySubject>
+    </Subjects>
+    <Resources>
+      <AnyResource></AnyResource>
+    </Resources>
+    <Actions>
+      <Action>
+        <ActionMatch MatchId="urn:oasis:names:tc:xacml:1.0:function:string-equal">
+          <AttributeValue DataType="http://www.w3.org/2001/XMLSchema#string">urn:fedora:names:fedora:2.1:action:id-ingest</AttributeValue>
+          <ActionAttributeDesignator AttributeId="urn:fedora:names:fedora:2.1:action:id" DataType="http://www.w3.org/2001/XMLSchema#string"></ActionAttributeDesignator>
+        </ActionMatch>
+      </Action>
+      <Action>
+        <ActionMatch MatchId="urn:oasis:names:tc:xacml:1.0:function:string-equal">
+          <AttributeValue DataType="http://www.w3.org/2001/XMLSchema#string">urn:fedora:names:fedora:2.1:action:id-modifyDatastreamByReference</AttributeValue>
+          <ActionAttributeDesignator AttributeId="urn:fedora:names:fedora:2.1:action:id" DataType="http://www.w3.org/2001/XMLSchema#string"></ActionAttributeDesignator>
+        </ActionMatch>
+      </Action>
+      <Action>
+        <ActionMatch MatchId="urn:oasis:names:tc:xacml:1.0:function:string-equal">
+          <AttributeValue DataType="http://www.w3.org/2001/XMLSchema#string">urn:fedora:names:fedora:2.1:action:id-modifyDatastreamByValue</AttributeValue>
+          <ActionAttributeDesignator AttributeId="urn:fedora:names:fedora:2.1:action:id" DataType="http://www.w3.org/2001/XMLSchema#string"></ActionAttributeDesignator>
+        </ActionMatch>
+      </Action>
+      <Action>
+        <ActionMatch MatchId="urn:oasis:names:tc:xacml:1.0:function:string-equal">
+          <AttributeValue DataType="http://www.w3.org/2001/XMLSchema#string">urn:fedora:names:fedora:2.1:action:id-modifyDisseminator</AttributeValue>
+          <ActionAttributeDesignator AttributeId="urn:fedora:names:fedora:2.1:action:id" DataType="http://www.w3.org/2001/XMLSchema#string"></ActionAttributeDesignator>
+        </ActionMatch>
+      </Action>
+      <Action>
+        <ActionMatch MatchId="urn:oasis:names:tc:xacml:1.0:function:string-equal">
+          <AttributeValue DataType="http://www.w3.org/2001/XMLSchema#string">urn:fedora:names:fedora:2.1:action:id-modifyDisseminator</AttributeValue>
+          <ActionAttributeDesignator AttributeId="urn:fedora:names:fedora:2.1:action:id" DataType="http://www.w3.org/2001/XMLSchema#string"></ActionAttributeDesignator>
+        </ActionMatch>
+      </Action>
+      <Action>
+        <ActionMatch MatchId="urn:oasis:names:tc:xacml:1.0:function:string-equal">
+          <AttributeValue DataType="http://www.w3.org/2001/XMLSchema#string">urn:fedora:names:fedora:2.1:action:id-purgeObject</AttributeValue>
+          <ActionAttributeDesignator AttributeId="urn:fedora:names:fedora:2.1:action:id" DataType="http://www.w3.org/2001/XMLSchema#string"></ActionAttributeDesignator>
+        </ActionMatch>
+      </Action>
+      <Action>
+        <ActionMatch MatchId="urn:oasis:names:tc:xacml:1.0:function:string-equal">
+          <AttributeValue DataType="http://www.w3.org/2001/XMLSchema#string">urn:fedora:names:fedora:2.1:action:id-purgeDatastream</AttributeValue>
+          <ActionAttributeDesignator AttributeId="urn:fedora:names:fedora:2.1:action:id" DataType="http://www.w3.org/2001/XMLSchema#string"></ActionAttributeDesignator>
+        </ActionMatch>
+      </Action>
+      <Action>
+        <ActionMatch MatchId="urn:oasis:names:tc:xacml:1.0:function:string-equal">
+          <AttributeValue DataType="http://www.w3.org/2001/XMLSchema#string">urn:fedora:names:fedora:2.1:action:id-purgeDisseminator</AttributeValue>
+          <ActionAttributeDesignator AttributeId="urn:fedora:names:fedora:2.1:action:id" DataType="http://www.w3.org/2001/XMLSchema#string"></ActionAttributeDesignator>
+        </ActionMatch>
+      </Action>
+      <Action>
+        <ActionMatch MatchId="urn:oasis:names:tc:xacml:1.0:function:string-equal">
+          <AttributeValue DataType="http://www.w3.org/2001/XMLSchema#string">urn:fedora:names:fedora:2.1:action:id-setDatastreamState</AttributeValue>
+          <ActionAttributeDesignator AttributeId="urn:fedora:names:fedora:2.1:action:id" DataType="http://www.w3.org/2001/XMLSchema#string"></ActionAttributeDesignator>
+        </ActionMatch>
+      </Action>
+      <Action>
+        <ActionMatch MatchId="urn:oasis:names:tc:xacml:1.0:function:string-equal">
+          <AttributeValue DataType="http://www.w3.org/2001/XMLSchema#string">urn:fedora:names:fedora:2.1:action:id-setDisseminatorState</AttributeValue>
+          <ActionAttributeDesignator AttributeId="urn:fedora:names:fedora:2.1:action:id" DataType="http://www.w3.org/2001/XMLSchema#string"></ActionAttributeDesignator>
+        </ActionMatch>
+      </Action>
+      <Action>
+        <ActionMatch MatchId="urn:oasis:names:tc:xacml:1.0:function:string-equal">
+          <AttributeValue DataType="http://www.w3.org/2001/XMLSchema#string">urn:fedora:names:fedora:2.1:action:id-setDatastreamVersionable</AttributeValue>
+          <ActionAttributeDesignator AttributeId="urn:fedora:names:fedora:2.1:action:id" DataType="http://www.w3.org/2001/XMLSchema#string"></ActionAttributeDesignator>
+        </ActionMatch>
+      </Action>
+      <Action>
+        <ActionMatch MatchId="urn:oasis:names:tc:xacml:1.0:function:string-equal">
+          <AttributeValue DataType="http://www.w3.org/2001/XMLSchema#string">urn:fedora:names:fedora:2.1:action:id-addDatastream</AttributeValue>
+          <ActionAttributeDesignator AttributeId="urn:fedora:names:fedora:2.1:action:id" DataType="http://www.w3.org/2001/XMLSchema#string"></ActionAttributeDesignator>
+        </ActionMatch>
+      </Action>
+      <Action>
+        <ActionMatch MatchId="urn:oasis:names:tc:xacml:1.0:function:string-equal">
+          <AttributeValue DataType="http://www.w3.org/2001/XMLSchema#string">urn:fedora:names:fedora:2.1:action:id-addDisseminator</AttributeValue>
+          <ActionAttributeDesignator AttributeId="urn:fedora:names:fedora:2.1:action:id" DataType="http://www.w3.org/2001/XMLSchema#string"></ActionAttributeDesignator>
+        </ActionMatch>
+      </Action>
+    </Actions>
+  </Target>
+  <Rule Effect="Deny" RuleId="1">
+    <Condition FunctionId="urn:oasis:names:tc:xacml:1.0:function:not">
+      <Apply FunctionId="urn:oasis:names:tc:xacml:1.0:function:or">
+        <Apply FunctionId="urn:oasis:names:tc:xacml:1.0:function:string-at-least-one-member-of">
+          <SubjectAttributeDesignator AttributeId="fedoraRole" DataType="http://www.w3.org/2001/XMLSchema#string" MustBePresent="false"></SubjectAttributeDesignator>
+          <Apply FunctionId="urn:oasis:names:tc:xacml:1.0:function:string-bag">
+            <AttributeValue DataType="http://www.w3.org/2001/XMLSchema#string">DL administrator</AttributeValue>
+          </Apply>
+        </Apply>
+        <Apply FunctionId="urn:oasis:names:tc:xacml:1.0:function:string-at-least-one-member-of">
+          <SubjectAttributeDesignator AttributeId="urn:fedora:names:fedora:2.1:subject:loginId" DataType="http://www.w3.org/2001/XMLSchema#string" MustBePresent="false"></SubjectAttributeDesignator>
+          <Apply FunctionId="urn:oasis:names:tc:xacml:1.0:function:string-bag">
+            <AttributeValue DataType="http://www.w3.org/2001/XMLSchema#string">fedoraAdmin</AttributeValue>
+          </Apply>
+        </Apply>
+      </Apply>
+    </Condition>
+  </Rule>
+  <Rule Effect="Permit" RuleId="2"></Rule>
+</Policy>
+</foxml:xmlContent>
+</foxml:datastreamVersion>
+</foxml:datastream>
+</foxml:digitalObject>

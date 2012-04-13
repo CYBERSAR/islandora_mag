@@ -427,6 +427,7 @@
 											Iglesias</item>
 										<item>Archivio storico comunale di Iglesias</item>
 										<item>Archivio storico minerario - Igea spa</item>
+										<item>Bastia - Bibliothèque Tommaso Prelà</item>
 										<item>Biblioteca Civica Berio</item>
 										<item>Consorzio per il Parco Geominerario, Storico, Ambientale
 											della Sardegna</item>
@@ -465,6 +466,7 @@
 											Iglesias</item>
 										<item>Archivio storico comunale di Iglesias</item>
 										<item>Archivio storico minerario - Igea spa</item>
+										<item>Bastia - Bibliothèque Tommaso Prelà</item>
 										<item>Biblioteca Civica Berio</item>
 										<item>Consorzio per il Parco Geominerario, Storico, Ambientale
 											della Sardegna</item>
@@ -539,6 +541,19 @@
 									<item>Digitalizzazione incompleta</item>
 								</authoritative_list>
 							</element>
+							
+			 <element label="Licenza" name="metadigit][gen][mag:gen:usage"
+        type="select" lang="it">
+            <description>Descrive il tipo di licenza con la quale viene rilasciata la risorsa digitale.</description>
+            <authoritative_list>
+              <item>Attribution - CC BY</item>
+              <item>Attribution-ShareAlike - CC BY-SA</item>
+              <item>Attribution-NoDerivs - CC BY-ND</item>
+              <item>Attribution-NonCommercial - CC BY-NC</item>
+              <item>Attribution-NonCommercial-ShareAlike - CC BY-NC-SA</item>
+              <item>Attribution-NonCommercial-NoDerivs - CC BY-NC-ND</item>
+            </authoritative_list>
+          </element>
 							
 						</form_elements>
 					</ingest_form>

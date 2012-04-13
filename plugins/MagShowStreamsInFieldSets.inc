@@ -7,7 +7,7 @@ module_load_include('inc', 'fedora_repository', 'plugins/ShowStreamsInFieldSets'
  */
 class MagShowStreamsInFieldSets {
 	private $pid = NULL;
-	
+
 	function MagShowStreamsInFieldSets($pid) {
 		$this->pid = $pid;
 	}
@@ -27,6 +27,7 @@ class MagShowStreamsInFieldSets {
 
 	function showPDFPreview() {
 		global $base_url;
+		global $language;
 
 		$tabset = array();
 
@@ -42,8 +43,10 @@ class MagShowStreamsInFieldSets {
 		$tabset['my_tabset']['second_tab'] = array(
 	      '#type' => 'tabpage',
 	      '#title' => t('Read Online'),
-	      '#content' => "<iframe src=\"http://docs.google.com/viewer?url=". $base_url . '/fedora/repository/'. 
-			$this->pid . '/OBJ'. "&embedded=TRUE\" style=\"width:90%; height:auto;\" frameborder=\"0\"></iframe>"
+	      '#content' => '<iframe src="http://docs.google.com/viewer' .
+		                    '?url=' . $base_url . '/fedora/repository/' . $this->pid . '/OBJ/preview.pdf' .
+		                    '&embedded=TRUE&hl=' . $language->language .
+		                    '" style="width: 600px; height: 600px;" frameborder="0"></iframe>'
 		);
 
 		// Render the tabset.
@@ -91,12 +94,12 @@ class MagShowStreamsInFieldSets {
 		$qtparams = '';
 		$qtparams .= "'autostart', '" . ($pframe !== false ? 'true' : 'false') . "', ";
 		$init = <<<EOD
-    $(function() { 
+    $(function() {
        src = "$src";
        if(src.substring(0,4) != 'http') {
        src = 'http://' + location.host + src;
        }
-     	str = QT_GenerateOBJECTText_XHTML(src, "$width", ($height+15), '', 
+     	str = QT_GenerateOBJECTText_XHTML(src, "$width", ($height+15), '',
      	$qtparams
        		'postdomevents', 'true',
       		'EnableJavaScript', 'true',
@@ -104,7 +107,7 @@ class MagShowStreamsInFieldSets {
        		'controller', 'true',
        		'SCALE', 'aspect',
        		'LOOP', 'false'
-       	);		
+       	);
 	if($('.poster', '#$divid').length ==0) {
       	$('#$divid').append(str);
         } else {

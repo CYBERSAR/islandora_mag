@@ -430,6 +430,19 @@
 			</element>
 
 			<!-- IMG -->
+			  <element label="Licenza" name="metadigit][img][mag:img:usage"
+        type="select" lang="it">
+            <description>Descrive il tipo di licenza con la quale viene rilasciata la risorsa digitale.</description>
+            <authoritative_list>
+              <item>Attribution - CC BY</item>
+              <item>Attribution-ShareAlike - CC BY-SA</item>
+              <item>Attribution-NoDerivs - CC BY-ND</item>
+              <item>Attribution-NonCommercial - CC BY-NC</item>
+              <item>Attribution-NonCommercial-ShareAlike - CC BY-NC-SA</item>
+              <item>Attribution-NonCommercial-NoDerivs - CC BY-NC-ND</item>
+            </authoritative_list>
+          </element>
+          
 			<element label="Numero di sequenza" name="metadigit][img][mag:img:sequence_number"
 				type="textfield" lang="it">
 				<description>Ciascuna immagine descritta all'interno di MAG viene

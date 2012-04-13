@@ -1,0 +1,376 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<foxml:digitalObject VERSION="1.1" PID="epistemetec:sub_collection"
+xmlns:foxml="info:fedora/fedora-system:def/foxml#"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xsi:schemaLocation="info:fedora/fedora-system:def/foxml# http://www.fedora.info/definitions/1/0/foxml1-1.xsd">
+<foxml:objectProperties>
+<foxml:property NAME="info:fedora/fedora-system:def/model#state" VALUE="Active"/>
+<foxml:property NAME="info:fedora/fedora-system:def/model#label" VALUE="Sub-Collection"/>
+<foxml:property NAME="info:fedora/fedora-system:def/model#ownerId" VALUE="fedoraAdmin"/>
+<foxml:property NAME="info:fedora/fedora-system:def/model#createdDate" VALUE="2011-03-30T11:19:26.119Z"/>
+<foxml:property NAME="info:fedora/fedora-system:def/view#lastModifiedDate" VALUE="2011-09-02T11:17:22.143Z"/>
+</foxml:objectProperties>
+<foxml:datastream ID="AUDIT" STATE="A" CONTROL_GROUP="X" VERSIONABLE="false">
+<foxml:datastreamVersion ID="AUDIT.0" LABEL="Audit Trail for this object" CREATED="2011-03-30T11:19:26.119Z" MIMETYPE="text/xml" FORMAT_URI="info:fedora/fedora-system:format/xml.fedora.audit">
+<foxml:xmlContent>
+<audit:auditTrail xmlns:audit="info:fedora/fedora-system:def/audit#">
+<audit:record ID="AUDREC1">
+<audit:process type="Fedora API-M"/>
+<audit:action>ingest</audit:action>
+<audit:componentID></audit:componentID>
+<audit:responsibility>admin</audit:responsibility>
+<audit:date>2011-03-30T11:19:26.119Z</audit:date>
+<audit:justification>Fedora Object Ingested</audit:justification>
+</audit:record>
+<audit:record ID="AUDREC2">
+<audit:process type="Fedora API-M"/>
+<audit:action>ingest</audit:action>
+<audit:componentID></audit:componentID>
+<audit:responsibility>fedoraAdmin</audit:responsibility>
+<audit:date>2011-04-28T11:04:06.209Z</audit:date>
+<audit:justification>Ingested from local file /var/www/www.epistemetec.cyb/sites/all/modules/islandora_mag/foxml/SUB_COLLECTION.foxml</audit:justification>
+</audit:record>
+<audit:record ID="AUDREC3">
+<audit:process type="Fedora API-M"/>
+<audit:action>modifyDatastreamByValue</audit:action>
+<audit:componentID>ISLANDORACM</audit:componentID>
+<audit:responsibility>fedoraAdmin</audit:responsibility>
+<audit:date>2011-07-13T16:16:19.332Z</audit:date>
+<audit:justification></audit:justification>
+</audit:record>
+<audit:record ID="AUDREC4">
+<audit:process type="Fedora API-M"/>
+<audit:action>modifyDatastreamByValue</audit:action>
+<audit:componentID>ISLANDORACM</audit:componentID>
+<audit:responsibility>fedoraAdmin</audit:responsibility>
+<audit:date>2011-07-21T12:54:17.670Z</audit:date>
+<audit:justification></audit:justification>
+</audit:record>
+<audit:record ID="AUDREC5">
+<audit:process type="Fedora API-M"/>
+<audit:action>modifyDatastreamByValue</audit:action>
+<audit:componentID>COLLECTION_POLICY</audit:componentID>
+<audit:responsibility>fedoraAdmin</audit:responsibility>
+<audit:date>2011-09-02T11:17:22.143Z</audit:date>
+<audit:justification></audit:justification>
+</audit:record>
+</audit:auditTrail>
+</foxml:xmlContent>
+</foxml:datastreamVersion>
+</foxml:datastream>
+<foxml:datastream ID="DC" STATE="A" CONTROL_GROUP="X" VERSIONABLE="true">
+<foxml:datastreamVersion ID="DC1.0" LABEL="Dublin Core Record for this object" CREATED="2011-03-30T11:19:26.119Z" MIMETYPE="text/xml" FORMAT_URI="http://www.openarchives.org/OAI/2.0/oai_dc/" SIZE="406">
+<foxml:xmlContent>
+<oai_dc:dc xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+  <dc:title>epistemetec:sub_collectionn</dc:title>
+  <dc:identifier>epistemetec:sub_collection</dc:identifier>
+</oai_dc:dc>
+</foxml:xmlContent>
+</foxml:datastreamVersion>
+</foxml:datastream>
+<foxml:datastream ID="RELS-EXT" STATE="A" CONTROL_GROUP="X" VERSIONABLE="true">
+<foxml:datastreamVersion ID="RELS-EXT.0" LABEL="Fedora Object-to-Object Relationship Metadata" CREATED="2011-03-30T11:19:29.432Z" MIMETYPE="text/xml" SIZE="523">
+<foxml:xmlContent>
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+          <rdf:Description rdf:about="info:fedora/epistemetec:sub_collection">
+            <fedora-model:hasModel xmlns:fedora-model="info:fedora/fedora-system:def/model#" rdf:resource="info:fedora/islandora:collectionCModel"></fedora-model:hasModel>
+            <isMemberOfCollection xmlns="info:fedora/fedora-system:def/relations-external#" rdf:resource="info:fedora/islandora:top"></isMemberOfCollection>
+          </rdf:Description>
+        </rdf:RDF>
+</foxml:xmlContent>
+</foxml:datastreamVersion>
+</foxml:datastream>
+<foxml:datastream ID="COLLECTION_POLICY" STATE="A" CONTROL_GROUP="X" VERSIONABLE="true">
+<foxml:datastreamVersion ID="COLLECTION_POLICY.0" LABEL="epistemetec:sub_collection" CREATED="2011-03-30T11:19:30.525Z" MIMETYPE="text/xml" SIZE="2042">
+<foxml:xmlContent>
+<collection_policy xmlns="http://www.islandora.ca" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="epistemetec:sub_collection" xsi:schemaLocation="http://www.islandora.ca http://syn.lib.umanitoba.ca/collection_policy.xsd">
+          <content_models>
+            <content_model dsid="ISLANDORACM" name="MAG IMG" namespace="epistemetec:mag_img" pid="epistemetec:mag_img"></content_model>
+            <content_model dsid="ISLANDORACM" name="MAG BIG-IMG" namespace="epistemetec:mag_big_img" pid="epistemetec:mag_big_img"></content_model>
+            <content_model dsid="ISLANDORACM" name="MAG DOC" namespace="epistemetec:mag_doc" pid="epistemetec:mag_doc"></content_model>
+            <content_model dsid="ISLANDORACM" name="MAG BOOK" namespace="epistemetec:mag_book" pid="epistemetec:mag_book"></content_model>
+            <content_model dsid="ISLANDORACM" name="MAG AUDIO" namespace="epistemetec:mag_audio" pid="epistemetec:mag_audio"></content_model>
+            <content_model dsid="ISLANDORACM" name="MAG VIDEO" namespace="epistemetec:mag_video" pid="epistemetec:mag_video"></content_model>
+          </content_models>
+          <search_terms>
+            <term field="dc.title">dc.title</term>
+            <term field="dc.creator">dc.creator</term>
+            <term default="true" field="dc.description">dc.description</term>
+            <term field="dc.date">dc.date</term>
+            <term field="dc.identifier">dc.identifier</term>
+            <term field="dc.language">dc.language</term>
+            <term field="dc.publisher">dc.publisher</term>
+            <term field="dc.rights">dc.rights</term>
+            <term field="dc.subject">dc.subject</term>
+            <term field="dc.relation">dc.relation</term>
+            <term field="dcterms.temporal">dcterms.temporal</term>
+            <term field="dcterms.spatial">dcterms.spatial</term>
+            <term field="fgs.DS.first.text">Full Text</term>
+          </search_terms>
+          <relationship>isMemberOfCollection</relationship>
+        </collection_policy>
+</foxml:xmlContent>
+</foxml:datastreamVersion>
+<foxml:datastreamVersion ID="COLLECTION_POLICY.1" LABEL="epistemetec:sub_collection" CREATED="2011-09-02T11:17:22.143Z" MIMETYPE="text/xml" SIZE="2042">
+<foxml:xmlContent>
+<collection_policy xmlns="http://www.islandora.ca" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="epistemetec:sub_collection" xsi:schemaLocation="http://www.islandora.ca http://syn.lib.umanitoba.ca/collection_policy.xsd">
+  <content_models>
+    <content_model dsid="ISLANDORACM" name="Immagine (JPG)" namespace="epistemetec:mag_img" pid="epistemetec:mag_img"></content_model>
+    <content_model dsid="ISLANDORACM" name="Immagine Alta Risoluzione (TIFF)" namespace="epistemetec:mag_big_img" pid="epistemetec:mag_big_img"></content_model>
+    <content_model dsid="ISLANDORACM" name="Documento (PDF)" namespace="epistemetec:mag_doc" pid="epistemetec:mag_doc"></content_model>
+    <content_model dsid="ISLANDORACM" name="Libro (TIFF)" namespace="epistemetec:mag_book" pid="epistemetec:mag_book"></content_model>
+    <content_model dsid="ISLANDORACM" name="Audio (MP3)" namespace="epistemetec:mag_audio" pid="epistemetec:mag_audio"></content_model>
+    <content_model dsid="ISLANDORACM" name="Video (FLV,MP4,QT)" namespace="epistemetec:mag_video" pid="epistemetec:mag_video"></content_model>
+    <content_model dsid="ISLANDORACM" name="Sub-collezione" namespace="epistemetec:sub_collection" pid="epistemetec:sub_collection"></content_model>
+  </content_models>
+  <search_terms>
+    <term field="dc.title">dc.title</term>
+    <term field="dc.creator">dc.creator</term>
+    <term default="true" field="dc.description">dc.description</term>
+    <term field="dc.date">dc.date</term>
+    <term field="dc.identifier">dc.identifier</term>
+    <term field="dc.language">dc.language</term>
+    <term field="dc.publisher">dc.publisher</term>
+    <term field="dc.rights">dc.rights</term>
+    <term field="dc.subject">dc.subject</term>
+    <term field="dc.relation">dc.relation</term>
+    <term field="dcterms.temporal">dcterms.temporal</term>
+    <term field="dcterms.spatial">dcterms.spatial</term>
+    <term field="fgs.DS.first.text">Full Text</term>
+  </search_terms>
+  <relationship>isMemberOfCollection</relationship>
+</collection_policy>
+</foxml:xmlContent>
+</foxml:datastreamVersion>
+</foxml:datastream>
+<foxml:datastream ID="ISLANDORACM" STATE="A" CONTROL_GROUP="X" VERSIONABLE="true">
+<foxml:datastreamVersion ID="ISLANDORACM.0" LABEL="Sub-Collection" CREATED="2011-03-24T11:25:23.651Z" MIMETYPE="application/xml" SIZE="3550">
+<foxml:xmlContent>
+<content_model xmlns="http://www.islandora.ca" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="epistemetec:sub_collection" xsi:schemaLocation="http://www.islandora.ca http://localhost/islandoracm.xsd">
+  <mimetypes>
+    <type>image/jpeg</type>
+    <type>image/png</type>
+  </mimetypes>
+  <ingest_rules>
+      <rule>
+          <applies_to>image/jpeg</applies_to>
+          <applies_to>image/png</applies_to>
+          <ingest_methods>
+		        <ingest_method class="ImageManipulation" dsid="TN" file="plugins/ImageManipulation.inc" method="createThumbnail" modified_files_ext="jpg" module="fedora_repository">
+		          <parameters>
+		            <parameter name="width">100</parameter>
+		            <parameter name="height">120</parameter>
+		          </parameters>
+		        </ingest_method>
+            <ingest_method class="ImageManipulation" dsid="PRE" file="plugins/ImageManipulation.inc" method="createPreview" modified_files_ext="jpg" module="fedora_repository">
+              <parameters>
+                <parameter name="width">240</parameter>
+                <parameter name="height">300</parameter>
+              </parameters>
+            </ingest_method>
+            <ingest_method class="ImageManipulation" dsid="MEDIUM_SIZE" file="plugins/ImageManipulation.inc" method="manipulateImage" modified_files_ext="jpg" module="fedora_repository">
+              <parameters>
+                <parameter name="width">240</parameter>
+                <parameter name="height">300</parameter>
+              </parameters>
+            </ingest_method>
+		      </ingest_methods>
+      </rule>
+     </ingest_rules>
+  <datastreams>
+    <datastream dsid="MEDIUM_SIZE">
+      <display_method class="ShowDemoStreamsInFieldSets" file="plugins/ShowDemoStreamsInFieldSets.inc" method="showMediumSize" module="fedora_repository"></display_method>
+    </datastream>
+    <datastream dsid="OBJ">
+      <display_method class="MagShowStreamsInFieldSets" file="plugins/MagShowStreamsInFieldSets.inc" method="showMag" module="islandora_mag"></display_method>
+    </datastream>
+  </datastreams>
+  <ingest_form dsid="MAG" page="2">
+    <form_builder_method class="MagFormBuilder" file="plugins/MagFormBuilder.inc" handler="handleXMLForm" method="magBuildForm" module="islandora_mag"></form_builder_method>
+    <form_elements>
+      <element label="Title/Caption/Object Name" name="metadigit][bib][dc:title" required="true" type="textfield">
+        <description>The name given to the resource</description>
+      </element>
+      <element label="Autore/proprietario/creatore" name="metadigit][bib][dc:creator" type="textfield">
+        <description>An entity primarily responsible for making the content of the resource such as a person, organization or service.</description>
+      </element>
+      <element label="Description" name="metadigit][bib][dc:description" required="true" type="textarea">
+        <description>Examples include an abstract, table of contents, or free-text account of the content of the resource.</description>
+      </element>
+      <element label="Identifier" name="metadigit][bib][dc:identifier" type="hidden">
+        <description>A unique reference to the resource; In this instance, the accession number or collection number.</description>
+      </element>
+    </form_elements>
+  </ingest_form>
+  <edit_metadata_method class="MagFormBuilder" dsid="MAG" file="plugins/MagFormBuilder.inc" handler="magHandleEditMetadataForm" method="magBuildEditMetadataForm" module="islandora_mag"></edit_metadata_method>
+</content_model>
+</foxml:xmlContent>
+</foxml:datastreamVersion>
+<foxml:datastreamVersion ID="ISLANDORACM.1" LABEL="Sub-Collection" CREATED="2011-07-13T16:16:19.332Z" MIMETYPE="application/xml" SIZE="4580">
+<foxml:xmlContent>
+<content_model xmlns="http://www.islandora.ca" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="epistemetec:sub_collection" xsi:schemaLocation="http://www.islandora.ca http://localhost/islandoracm.xsd">
+  <mimetypes>
+    <type>image/jpeg</type>
+    <type>image/png</type>
+  </mimetypes>
+  <ingest_rules>
+    <rule>
+      <applies_to>image/jpeg</applies_to>
+      <applies_to>image/png</applies_to>
+      <ingest_methods>
+        <ingest_method class="ImageManipulation" dsid="TN" file="plugins/ImageManipulation.inc" method="createThumbnail" modified_files_ext="jpg" module="fedora_repository">
+          <parameters>
+            <parameter name="width">100</parameter>
+            <parameter name="height">120</parameter>
+          </parameters>
+        </ingest_method>
+        <ingest_method class="ImageManipulation" dsid="PRE" file="plugins/ImageManipulation.inc" method="createPreview" modified_files_ext="jpg" module="fedora_repository">
+          <parameters>
+            <parameter name="width">240</parameter>
+            <parameter name="height">300</parameter>
+          </parameters>
+        </ingest_method>
+        <ingest_method class="ImageManipulation" dsid="MEDIUM_SIZE" file="plugins/ImageManipulation.inc" method="manipulateImage" modified_files_ext="jpg" module="fedora_repository">
+          <parameters>
+            <parameter name="width">240</parameter>
+            <parameter name="height">300</parameter>
+          </parameters>
+        </ingest_method>
+      </ingest_methods>
+    </rule>
+  </ingest_rules>
+  <datastreams>
+    <datastream dsid="MEDIUM_SIZE">
+      <display_method class="ShowDemoStreamsInFieldSets" file="plugins/ShowDemoStreamsInFieldSets.inc" method="showMediumSize" module="fedora_repository"></display_method>
+    </datastream>
+    <datastream dsid="OBJ">
+      <display_method class="MagShowStreamsInFieldSets" file="plugins/MagShowStreamsInFieldSets.inc" method="showMag" module="islandora_mag"></display_method>
+    </datastream>
+  </datastreams>
+  <ingest_form dsid="MAG" page="2">
+    <form_builder_method class="MagFormBuilder" file="plugins/MagFormBuilder.inc" handler="handleXMLForm" method="magBuildForm" module="islandora_mag"></form_builder_method>
+    <form_elements>
+      <element label="Titolo" lang="it" name="metadigit][bib][dc:title" required="true" type="textfield">
+        <description>Un nome dato alla risorsa e con il quale tale risorsa è formalmente conosciuta.</description>
+      </element>
+      <element label="Title" lang="en" name="metadigit][bib][dc:title" required="true" type="textfield">
+        <description>The name given to the resource</description>
+      </element>
+      <element label="Creator" lang="en" name="metadigit][bib][dc:creator" type="textfield">
+        <description>An entity primarily responsible for making the content of the resource such as a person, organization or service.</description>
+      </element>
+      <element label="Creatore" lang="it" name="metadigit][bib][dc:creator" type="textfield">
+        <description>Un&apos;entità (una persona, un&apos;organizzazione o un servizio) che ha la responsabilità principale della produzione del contenuto della risorsa</description>
+      </element>
+      <element label="Description" lang="en" name="metadigit][bib][dc:description" required="true" type="textarea">
+        <description>Examples include an abstract, table of contents, or free-text account of the content of the resource.</description>
+      </element>
+      <element label="Descrizione" lang="it" name="metadigit][bib][dc:description" required="true" type="textarea">
+        <description>Una spiegazione del contenuto della risorsa. Può includere ma non è limitata solo a: un riassunto analitico, un indice, un riferimento al contenuto di una rappresentazione grafica o un testo libero del contenuto.</description>
+      </element>
+      <element label="Identifier" lang="en" name="metadigit][bib][dc:identifier" type="hidden">
+        <description>An unambiguous reference to the resource within a given context.</description>
+      </element>
+      <element label="Identificatore" lang="it" name="metadigit][bib][dc:identifier" type="hidden">
+        <description>Un riferimento univoco alla risorsa nell&apos;ambito di un dato contesto.</description>
+      </element>
+    </form_elements>
+  </ingest_form>
+  <edit_metadata_method class="MagFormBuilder" dsid="MAG" file="plugins/MagFormBuilder.inc" handler="magHandleEditMetadataForm" method="magBuildEditMetadataForm" module="islandora_mag"></edit_metadata_method>
+</content_model>
+</foxml:xmlContent>
+</foxml:datastreamVersion>
+<foxml:datastreamVersion ID="ISLANDORACM.2" LABEL="Sub-Collection" CREATED="2011-07-21T12:54:17.670Z" MIMETYPE="application/xml" SIZE="4943">
+<foxml:xmlContent>
+<content_model xmlns="http://www.islandora.ca" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="epistemetec:sub_collection" xsi:schemaLocation="http://www.islandora.ca http://localhost/islandoracm.xsd">
+  <mimetypes>
+    <type>image/jpeg</type>
+    <type>image/png</type>
+  </mimetypes>
+  <ingest_rules>
+    <rule>
+      <applies_to>image/jpeg</applies_to>
+      <applies_to>image/png</applies_to>
+      <ingest_methods>
+        <ingest_method class="ImageManipulation" dsid="TN" file="plugins/ImageManipulation.inc" method="createThumbnail" modified_files_ext="jpg" module="fedora_repository">
+          <parameters>
+            <parameter name="width">100</parameter>
+            <parameter name="height">120</parameter>
+          </parameters>
+        </ingest_method>
+        <ingest_method class="ImageManipulation" dsid="PRE" file="plugins/ImageManipulation.inc" method="createPreview" modified_files_ext="jpg" module="fedora_repository">
+          <parameters>
+            <parameter name="width">240</parameter>
+            <parameter name="height">300</parameter>
+          </parameters>
+        </ingest_method>
+        <ingest_method class="ImageManipulation" dsid="MEDIUM_SIZE" file="plugins/ImageManipulation.inc" method="manipulateImage" modified_files_ext="jpg" module="fedora_repository">
+          <parameters>
+            <parameter name="width">240</parameter>
+            <parameter name="height">300</parameter>
+          </parameters>
+        </ingest_method>
+      </ingest_methods>
+    </rule>
+  </ingest_rules>
+  <datastreams>
+    <datastream dsid="MEDIUM_SIZE">
+      <display_method class="ShowDemoStreamsInFieldSets" file="plugins/ShowDemoStreamsInFieldSets.inc" method="showMediumSize" module="fedora_repository"></display_method>
+    </datastream>
+    <datastream dsid="OBJ">
+      <display_method class="MagShowStreamsInFieldSets" file="plugins/MagShowStreamsInFieldSets.inc" method="showMag" module="islandora_mag"></display_method>
+    </datastream>
+  </datastreams>
+  <ingest_form dsid="MAG" page="2">
+    <form_builder_method class="MagFormBuilder" file="plugins/MagFormBuilder.inc" handler="handleXMLForm" method="magBuildForm" module="islandora_mag"></form_builder_method>
+    <form_elements>
+      <element label="Titolo" lang="it" name="metadigit][bib][dc:title" required="true" type="textfield">
+        <description>Un nome dato alla risorsa e con il quale tale risorsa è formalmente conosciuta.</description>
+      </element>
+      <element label="Title" lang="en" name="metadigit][bib][dc:title" required="true" type="textfield">
+        <description>The name given to the resource</description>
+      </element>
+      <element label="Creator" lang="en" name="metadigit][bib][dc:creator" type="textfield">
+        <description>An entity primarily responsible for making the content of the resource such as a person, organization or service.</description>
+      </element>
+      <element label="Creatore" lang="it" name="metadigit][bib][dc:creator" type="textfield">
+        <description>Un&apos;entità (una persona, un&apos;organizzazione o un servizio) che ha la responsabilità principale della produzione del contenuto della risorsa</description>
+      </element>
+      <element label="Subject" lang="en" name="metadigit][bib][dc:subject" type="select_taxonomies">
+        <description>The topic of the resource.</description>
+      </element>
+      <element label="Soggetto" lang="it" name="metadigit][bib][dc:subject" type="select_taxonomies">
+        <description>L’argomento della risorsa.</description>
+      </element>
+      <element label="Description" lang="en" name="metadigit][bib][dc:description" required="true" type="textarea">
+        <description>Examples include an abstract, table of contents, or free-text account of the content of the resource.</description>
+      </element>
+      <element label="Descrizione" lang="it" name="metadigit][bib][dc:description" required="true" type="textarea">
+        <description>Una spiegazione del contenuto della risorsa. Può includere ma non è limitata solo a: un riassunto analitico, un indice, un riferimento al contenuto di una rappresentazione grafica o un testo libero del contenuto.</description>
+      </element>
+      <element label="Identifier" lang="en" name="metadigit][bib][dc:identifier" type="hidden">
+        <description>An unambiguous reference to the resource within a given context.</description>
+      </element>
+      <element label="Identificatore" lang="it" name="metadigit][bib][dc:identifier" type="hidden">
+        <description>Un riferimento univoco alla risorsa nell&apos;ambito di un dato contesto.</description>
+      </element>
+      <element label="Licenza" name="metadigit][bib][mag:bib:usage" type="select" lang="it">
+            <description>Descrive il tipo di licenza con la quale viene rilasciata la risorsa digitale.</description>
+            <authoritative_list>
+              <item>-- Vedi Note Legali --</item>
+              <item>Creative Commons - Attribution - CC BY</item>
+              <item>Creative Commons - Attribution-ShareAlike - CC BY-SA</item>
+              <item>Creative Commons - Attribution-NoDerivs - CC BY-ND</item>
+              <item>Creative Commons - Attribution-NonCommercial - CC BY-NC</item>
+              <item>Creative Commons - Attribution-NonCommercial-ShareAlike - CC BY-NC-SA</item>
+              <item>Creative Commons - Attribution-NonCommercial-NoDerivs - CC BY-NC-ND</item>
+            </authoritative_list>
+          </element>
+    </form_elements>
+  </ingest_form>
+  <edit_metadata_method class="MagFormBuilder" dsid="MAG" file="plugins/MagFormBuilder.inc" handler="magHandleEditMetadataForm" method="magBuildEditMetadataForm" module="islandora_mag"></edit_metadata_method>
+</content_model>
+</foxml:xmlContent>
+</foxml:datastreamVersion>
+</foxml:datastream>
+</foxml:digitalObject>
