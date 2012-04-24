@@ -250,7 +250,7 @@ function MagBook_add_single_page_object($book_pid, $page_file, $page_num = 1, $p
 	$page_item = Fedora_Item::ingest_new_item($page_pid, 'A', $page_title);
 	$page_item->add_relationship('hasModel', 'epistemetec:mag_page', FEDORA_MODEL_URI);
 	$page_item->add_relationship('isMemberOf', $book_pid);
-	$page_item->add_datastream_from_file($page_file, 'TIFF', 'Archival TIFF', 'image/tiff', 'M');
+	$page_item->add_datastream_from_file($page_file, 'TIFF', 'Archival TIFF', 'image/tiff', 'M', null, true);
 
 	//create MAG: we need only a subset of elements, usefull to be merged with the book's MAG
 	$dom = new DomDocument("1.0", "UTF-8");
